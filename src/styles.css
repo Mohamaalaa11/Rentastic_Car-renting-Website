@@ -1,2 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
-@import "node_modules/bootstrap/dist/css/bootstrap.min.css";
+/* You can add global styles to this file, and also import other style files */ 
+ :root {
+    --red-color: #9a3333;
+  }
+body {
+    font-family: "Poppins", sans-serif;
+  }
+
+
+.red {
+    color: #9a3333;
+  }
+  .btn:hover {
+    color: var(--red-color) !important;
+    background-color: #fff;
+    border: 1px solid var(--red-color);
+  }
+
+  
+  .red-color {
+    color: var(--red-color);
+  }
+  
+  .bg-red-color {
+    background-color: var(--red-color);
+  }
