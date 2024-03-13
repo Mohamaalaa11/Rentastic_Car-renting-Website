@@ -8,6 +8,7 @@ import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { HeroComponent } from './Home/hero/hero.component';
 import { FilterComponent } from './Home/filter/filter.component';
 import { SiteInfoComponent } from './Home/site-info/site-info.component';
+import { CardComponent } from './Components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SiteInfoComponent } from './Home/site-info/site-info.component';
     NavBarComponent,
     HeroComponent,
     FilterComponent,
-    SiteInfoComponent
+    SiteInfoComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
