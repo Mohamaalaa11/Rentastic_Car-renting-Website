@@ -9,6 +9,7 @@ import { HeroComponent } from './Home/hero/hero.component';
 import { FilterComponent } from './Home/filter/filter.component';
 import { SiteInfoComponent } from './Home/site-info/site-info.component';
 import { CardComponent } from './Components/card/card.component';
+import { LoginComponent } from './auth/components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,11 @@ import { CardComponent } from './Components/card/card.component';
     HeroComponent,
     FilterComponent,
     SiteInfoComponent,
-    CardComponent
+    CardComponent,
+    LoginComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

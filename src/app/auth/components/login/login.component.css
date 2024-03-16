@@ -1,0 +1,105 @@
+body {
+  height: 100vh;
+}
+
+h1 {
+  color: #000;
+  font-weight: 600;
+  margin-top: 120px;
+}
+
+p {
+  color: var(--grey-color);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.img-container {
+  position: relative;
+  display: inline-block;
+}
+
+img {
+  width: 100%;
+}
+
+.overlay-content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.57);
+}
+
+.logo h3 {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 800 !important;
+}
+
+.social .circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+  border-radius: 21.533px;
+  background: #f4f3ff;
+  cursor: pointer;
+}
+
+.login-container {
+  padding-left: 90px;
+  padding-right: 80px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  accent-color: #000;
+  background-color: green;
+}
+
+.checkbox {
+  display: flex;
+}
+
+.checkbox span {
+  color: #000;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration-line: underline;
+  text-transform: capitalize;
+}
+
+/* 
+.method {
+  position: relative;
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.method::before,
+.method::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  background: #e5e5e5;
+  height: 1px;
+  width: 50%;
+}
+
+.method::before {
+  left: 0;
+  transform: translateX(-20%);
+}
+
+.method::after {
+  right: 0;
+  transform: translateX(20%);
+} */

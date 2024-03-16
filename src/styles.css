@@ -1,29 +1,105 @@
-/* You can add global styles to this file, and also import other style files */ 
- :root {
-    --red-color: #9a3333;
-  }
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --red-color: #9a3333;
+  --black-color: #000;
+  --grey-color: #aaa9a9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 body {
-    font-family: "Poppins", sans-serif;
-  }
-  
-  .text-red{
-    color: #9A3333;
+  font-family: "Poppins", sans-serif;
+}
+
+.red-color {
+  color: var(--red-color);
+}
+
+.bg-red {
+  background-color: #9a3333;
+}
+
+.text-red {
+  color: var(--red-color);
 }
 
 .red {
-    color: #9a3333;
-  }
-  .btn:hover {
-    color: var(--red-color) !important;
-    background-color: #fff;
-    border: 1px solid var(--red-color);
-  }
+  color: var(--red-color);
+}
 
-  
-  .red-color {
-    color: var(--red-color);
-  }
-  
-  .bg-red-color {
-    background-color: var(--red-color);
-  }
+/* .btn:hover {
+  color: var(--red-color) !important;
+  background-color: #fff;
+  border: 1px solid var(--red-color);
+} */
+
+/******************************** Auth Module ********************************/
+.separator {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  color: #8b8e98;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.separator .line {
+  display: block;
+  width: 33%;
+  height: 1px;
+  border: 0;
+  background: #e5e5e5;
+}
+
+.btn-google {
+  background-color: #333333 !important;
+  color: #fff !important;
+  border: none;
+  height: 50px;
+  padding: 10px 16px;
+  border-radius: 6px;
+}
+
+.btn-auth {
+  height: 50px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  background: #000;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+}
+
+.form-input {
+  border-radius: 10px;
+  border: 0.5px solid #e5e5e5;
+  background: #f2f2f2;
+  padding: 18px 16px;
+  display: block;
+}
+
+.form-label {
+  color: #6b7280 !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.ask {
+  color: #aaa9a9;
+  text-align: center;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.ask a {
+  color: #000 !important;
+  font-weight: 700 !important;
+  text-decoration-line: underline !important;
+}
