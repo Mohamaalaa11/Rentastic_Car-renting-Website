@@ -7,6 +7,6 @@ import {Car} from '../../Car'
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  cars :Car[]=[{id:1,name:"Nissan",brand:"Sunny",modelYear:"2022",color:"silver",category:"Luxury",seatCount:4,pricePerDay:250,image:"../../assets/imgs/car1.png",isCondition:true,gear:"Manual"}]
+  cars :Car[]=[{id:1,name:"Nissan",brand:"Sunny",modelYear:"2022",description:"",color:"silver",category:"Luxury",seatCount:4,pricePerDay:250,image:"../../assets/imgs/car1.png",isCondition:true,gear:"Manual"}]
   
 }
