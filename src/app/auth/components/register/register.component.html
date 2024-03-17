@@ -1,1 +1,119 @@
-<p>register works!</p>
+<div class="row">
+  <div class="col-6 img-container">
+    <img class="" src="../../../../assets/imgs/register.png" alt="" />
+
+    <!-------------------------- Overlay Content -------------------------->
+    <div
+      class="overlay-content d-flex flex-column justify-content-evenly align-items-center"
+    >
+      <div
+        class="logo d-flex flex-column justify-content-center align-items-center"
+      >
+        <div class="w-50">
+          <img
+            class="img-fluid"
+            src="../../../../assets/imgs/white-logo.png"
+            alt=""
+          />
+        </div>
+        <h3 class="mt-3">RENTASTIC</h3>
+      </div>
+      <div class="overlay-content-down">
+        <p class="text-center text-white header">
+          Unlock Your Journey with Rentastic
+        </p>
+        <p class="text-center content px-3">
+          we're dedicated to delivering exceptional journeys that elevate your
+          experience every time you get behind the wheel.
+        </p>
+
+        <div class="social d-flex justify-content-center align-items-center">
+          <div class="circle me-2">
+            <i class="fa-brands fa-facebook-f fs-5"></i>
+          </div>
+          <div class="circle me-2">
+            <i class="fa-brands fa-instagram fs-5"></i>
+          </div>
+          <div class="circle"><i class="fa-brands fa-twitter fs-5"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-container col-6 d-flex flex-column">
+    <h1>Nice to see you again</h1>
+    <p>Select a method to login</p>
+
+    <button class="btn-google">
+      <i class="fab fa-google mr-2"></i> sign in with Google
+    </button>
+
+    <!-- <p class="text-center method">Or continue with Email</p> -->
+
+    <div class="separator">
+      <hr class="line" />
+      <span>Or continue with Email</span>
+      <hr class="line" />
+    </div>
+
+    <!-------------------------- Form -------------------------->
+    <form class="d-flex flex-column">
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3 d-flex flex-column">
+            <label class="form-label">Username</label>
+            <input
+              class="form-input"
+              type="text"
+              placeholder="Enter Your Username"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3 d-flex flex-column">
+            <label class="form-label">Email Address</label>
+            <input
+              class="form-input"
+              type="email"
+              placeholder="Enter Your Email Address"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3 d-flex flex-column">
+        <label class="form-label" for="phone">Phone Number</label>
+        <input
+          class="form-input"
+          type="tel"
+          id="phone"
+          name="phone"
+          pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+          placeholder="Enter your phone number"
+        />
+      </div>
+
+      <div class="mb-3 d-flex flex-column">
+        <label class="form-label" for="phone">ID Card Number</label>
+        <input
+          class="form-input"
+          type="number"
+          placeholder="Enter your Id card number"
+        />
+      </div>
+
+      <div class="mb-3 d-flex flex-column">
+        <label class="form-label">Password</label>
+        <input
+          class="form-input"
+          type="password"
+          placeholder="Enter Your Password"
+        />
+      </div>
+
+      <button type="submit" class="btn-auth">Sign in</button>
+    </form>
+
+    <p class="mt-5 ask">You have an account ?<a>Login</a></p>
+  </div>
+</div>
