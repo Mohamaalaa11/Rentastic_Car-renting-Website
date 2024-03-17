@@ -10,9 +10,13 @@ import { FilterComponent } from './home/filter/filter.component';
 import { SiteInfoComponent } from './home/site-info/site-info.component';
 import { CardComponent } from './Components/card/card.component';
 import { LoginComponent } from './auth/components/login/login.component';
+
 import { MyOrdersComponent } from './user/my-orders/my-orders.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { OrderCardComponent } from './user/my-orders/order-card/order-card.component';
+
+import { RegisterComponent } from './auth/components/register/register.component';
+
 
 @NgModule({
   declarations: [
@@ -23,8 +27,13 @@ import { OrderCardComponent } from './user/my-orders/order-card/order-card.compo
     FilterComponent,
     SiteInfoComponent,
     CardComponent,
-    LoginComponent,ProfileComponent,MyOrdersComponent,OrderCardComponent
+
+    LoginComponent,ProfileComponent,MyOrdersComponent,OrderCardComponent,
     
+
+    
+    RegisterComponent,
+
   ],
   imports: [BrowserModule, AppRoutingModule,],
   providers: [],
