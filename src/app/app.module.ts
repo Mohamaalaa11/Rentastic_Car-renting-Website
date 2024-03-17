@@ -10,6 +10,7 @@ import { FilterComponent } from './Home/filter/filter.component';
 import { SiteInfoComponent } from './Home/site-info/site-info.component';
 import { CardComponent } from './Components/card/card.component';
 import { LoginComponent } from './auth/components/login/login.component';
+import { RegisterComponent } from './auth/components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LoginComponent } from './auth/components/login/login.component';
     SiteInfoComponent,
     CardComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

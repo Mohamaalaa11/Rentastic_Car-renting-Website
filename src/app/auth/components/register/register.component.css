@@ -1,0 +1,95 @@
+body {
+  height: 100vh;
+}
+
+h1 {
+  color: #000;
+  font-weight: 600;
+  margin-top: 120px;
+}
+
+p {
+  color: var(--grey-color);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.img-container {
+  position: relative;
+  display: inline-block;
+  height: 100vh;
+  padding: 0;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay-content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.57);
+}
+
+.overlay-content .overlay-content-down .header {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.overlay-content .overlay-content-down .content {
+  color: #aaa9a9;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  opacity: 0.51;
+}
+
+.logo h3 {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 800 !important;
+}
+
+.social .circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+  border-radius: 21.533px;
+  background: #f4f3ff;
+  cursor: pointer;
+}
+
+.login-container {
+  padding-left: 90px;
+  padding-right: 80px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  accent-color: #000;
+  background-color: green;
+}
+
+.checkbox {
+  display: flex;
+}
+
+.checkbox span {
+  color: #000;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration-line: underline;
+  text-transform: capitalize;
+}

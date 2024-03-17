@@ -17,10 +17,14 @@ p {
 .img-container {
   position: relative;
   display: inline-block;
+  height: 100vh;
+  padding: 0;
 }
 
-img {
+.img-container img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .overlay-content {
@@ -31,6 +35,20 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.57);
+}
+
+.overlay-content .overlay-content-down .header {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.overlay-content .overlay-content-down .content {
+  color: #aaa9a9;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  opacity: 0.51;
 }
 
 .logo h3 {
