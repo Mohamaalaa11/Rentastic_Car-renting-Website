@@ -1,0 +1,35 @@
+
+.card{
+    margin-top: 25px;
+    overflow-x: hidden;
+}
+
+.img-cont{
+    height: 100%;
+}
+.img-cont img{
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.title-in-card{
+    
+}
+
+@media (max-width:500px){
+    .card{
+        display: block;
+    }
+    .img-cont{
+        height: 30%;
+    }
+    .img-cont img{
+
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+    }
+}
