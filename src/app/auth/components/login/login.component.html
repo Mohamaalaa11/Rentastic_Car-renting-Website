@@ -57,13 +57,14 @@
     </div>
 
     <!-------------------------- Form -------------------------->
-    <form class="d-flex flex-column">
+    <form [formGroup]="loginForm" class="d-flex flex-column">
       <div class="mb-3 d-flex flex-column">
         <label class="form-label">Username</label>
         <input
           class="form-input"
           type="text"
           placeholder="Enter Your Username"
+          formControlName="username"
         />
       </div>
 
@@ -73,6 +74,7 @@
           class="form-input"
           type="password"
           placeholder="Enter Your Password"
+          formControlName="password"
         />
       </div>
 
@@ -81,7 +83,7 @@
         <span class="ms-1">Remember me ?</span>
       </div>
 
-      <button type="submit" class="btn-auth">Sign in</button>
+      <button type="submit" class="btn-auth" (click)="login()">Sign in</button>
     </form>
 
     <p class="mt-5 ask">You don’t have an account ? <a>Sign Up</a></p>
