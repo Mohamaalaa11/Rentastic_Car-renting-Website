@@ -18,9 +18,6 @@ body {
   overflow-x: hidden;
 }
 
-.red-color {
-  color: var(--red-color);
-}
 
 .bg-red {
   background-color: #9a3333;
@@ -30,8 +27,9 @@ body {
   color: var(--red-color);
 }
 
-.red {
-  color: var(--red-color);
+.btn-red{
+ color: white !important;
+ background-color: var(--red-color) !important;
 }
 
 /* .btn:hover {

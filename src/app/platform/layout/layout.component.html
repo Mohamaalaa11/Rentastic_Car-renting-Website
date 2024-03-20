@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg">
+<div class="container mt-2">
+  <nav class="navbar navbar-expand-lg">
   <div class="container-fluid py-80">
     <a class="navbar-brand" href="#"
       ><img src="./assets/imgs/logo.png" alt=""
@@ -39,7 +40,7 @@
 
       <a
         type="button"
-        class="btn bg-red-color text-white py-2 px-5"
+        class="btn btn-red text-white py-2 px-5"
         [routerLink]="'auth/login'"
       >
         LOG IN
@@ -47,4 +48,7 @@
     </div>
   </div>
 </nav>
+
+</div>
 <router-outlet></router-outlet>
+
