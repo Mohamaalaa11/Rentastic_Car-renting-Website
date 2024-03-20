@@ -48,8 +48,6 @@
       <i class="fab fa-google mr-2"></i> sign in with Google
     </button>
 
-    <!-- <p class="text-center method">Or continue with Email</p> -->
-
     <div class="separator">
       <hr class="line" />
       <span>Or continue with Email</span>
@@ -57,7 +55,7 @@
     </div>
 
     <!-------------------------- Form -------------------------->
-    <form class="d-flex flex-column">
+    <form class="d-flex flex-column" [formGroup]="registerForm">
       <div class="row">
         <div class="col-6">
           <div class="mb-3 d-flex flex-column">
@@ -66,6 +64,7 @@
               class="form-input"
               type="text"
               placeholder="Enter Your Username"
+              formControlName="username"
             />
           </div>
         </div>
@@ -76,6 +75,7 @@
               class="form-input"
               type="email"
               placeholder="Enter Your Email Address"
+              formControlName="email"
             />
           </div>
         </div>
@@ -90,6 +90,7 @@
           name="phone"
           pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
           placeholder="Enter your phone number"
+          formControlName="phoneNumber"
         />
       </div>
 
@@ -97,8 +98,9 @@
         <label class="form-label" for="phone">ID Card Number</label>
         <input
           class="form-input"
-          type="number"
+          type="text"
           placeholder="Enter your Id card number"
+          formControlName="idNumber"
         />
       </div>
 
@@ -108,12 +110,17 @@
           class="form-input"
           type="password"
           placeholder="Enter Your Password"
+          formControlName="password"
         />
       </div>
 
-      <button type="submit" class="btn-auth">Sign in</button>
+      <button type="submit" class="btn-auth" (click)="register()">
+        Sign Up
+      </button>
     </form>
 
-    <p class="mt-5 ask">You have an account ?<a>Login</a></p>
+    <p class="mt-4 ask mb-0">
+      You have an account ?<a [routerLink]="'/auth/login'">Login</a>
+    </p>
   </div>
 </div>

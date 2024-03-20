@@ -48,8 +48,6 @@
       <i class="fab fa-google mr-2"></i> sign in with Google
     </button>
 
-    <!-- <p class="text-center method">Or continue with Email</p> -->
-
     <div class="separator">
       <hr class="line" />
       <span>Or continue with Email</span>
@@ -86,6 +84,8 @@
       <button type="submit" class="btn-auth" (click)="login()">Sign in</button>
     </form>
 
-    <p class="mt-5 ask">You don’t have an account ? <a>Sign Up</a></p>
+    <p class="mt-5 ask">
+      You don’t have an account ? <a [routerLink]="'/auth/register'">Sign Up</a>
+    </p>
   </div>
 </div>

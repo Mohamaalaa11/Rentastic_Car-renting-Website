@@ -21,16 +21,20 @@ export class LoginComponent {
   });
 
   login() {
-    const MODEL: Login = {
+    const model: Login = {
       username: this.loginForm.value.username!,
       password: this.loginForm.value.password!,
     };
-    this.authService.login(MODEL).subscribe(
-      (res) => {
+    this.authService.login(model).subscribe({
+      next: (res: any) => {
         console.log(res);
+        localStorage.setItem('token', res.token);
         this.router.navigate(['/home/main']);
       },
-      (error) => {}
-    );
+
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
