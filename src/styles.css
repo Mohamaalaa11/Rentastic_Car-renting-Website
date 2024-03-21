@@ -31,7 +31,9 @@ body {
  color: white !important;
  background-color: var(--red-color) !important;
 }
-
+.bg-pink{
+  background-color: #FFF6F6;
+}
 /* .btn:hover {
   color: var(--red-color) !important;
   background-color: #fff;

@@ -12,6 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import { CardComponent } from '../shared/components/card/card.component';
+
 
 
 @NgModule({
@@ -19,8 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MainComponent,
     HeroComponent,
     FilterComponent,
-    SiteInfoComponent,
+    SiteInfoComponent,CardComponent
   ],
-  imports: [CommonModule, HomeRoutingModule,MatNativeDateModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, HomeRoutingModule,MatNativeDateModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,FormsModule,ReactiveFormsModule],
 })
 export class HomeModule {}
