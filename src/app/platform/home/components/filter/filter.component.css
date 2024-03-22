@@ -1,28 +1,7 @@
+
 .mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align::before{
     display: none !important;
 }
 .mat-mdc-form-field-subscript-wrapper{
     display: none !important;
 }
-/* .contee{
-    width: 100% !important;
-}
-
-.filt{
-    width: 100% !important;
-}
-form{
-
-    width: 100%;
-} */
-
-/* .mat-mdc-form-field-bottom-align::before{
-    display: none !important;
-}
-form > div > div:nth-child(2) > div > mat-form-field > div.mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align{
-    display: none !important;
-}
-
-.example-full-width .mat-mdc-form-field-subscript-wrapper{
-    display: none;
-} */
