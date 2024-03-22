@@ -29,7 +29,7 @@ export class LoginComponent {
       next: (res: any) => {
         console.log(res);
         localStorage.setItem('token', res.token);
-        this.router.navigate(['/home/main']);
+        this.router.navigate(['']);
       },
 
       error: (err) => {
