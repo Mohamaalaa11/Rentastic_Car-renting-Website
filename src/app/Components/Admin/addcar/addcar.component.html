@@ -1,40 +1,60 @@
-<form (ngSubmit)="onSubmit()">
-  <h3 class="headform">Add Car</h3>
-    <label>Brand </label>
-    <input type="text" [(ngModel)]="car.brand" name="brand" required><br>
-    <label>Name </label>
-    <input type="text" [(ngModel)]="car.name" name="name" required><br>
-    <label>Model Year </label>
-    <input type="text" [(ngModel)]="car.modelYear" name="modelYear" required><br>
-    <label>Color </label>
-    <input type="text" [(ngModel)]="car.color" name="color" required><br>
-    <label>Category </label>
-    <select [(ngModel)]="car.category" name="category" required>
-      <option value="">Select Category</option>
-      <option value="SUV">SUV</option>
-      <option value="Sedan">Sedan</option>
-      <option value="Hatchback">Hatchback</option>
-      <option value="Convertible">Convertible</option>
-      <option value="Coupe">Coupe</option>
-      <option value="Truck">Truck</option>
-    </select><br>
-    
-    <label>Discription </label>
-    <textarea [(ngModel)]="car.description" name="description" required> </textarea><br>
-    <label>seat Number </label>
-    <input type="number" [(ngModel)]="car.seatCount" name="seatCount" required><br>
-    <label>Gear </label>
-    <input type="text" [(ngModel)]="car.gear" name="gear" required><br>
-    <label>price </label>
-    <input type="number" [(ngModel)]="car.pricePerDay" name="pricePerDay" required id="pricePerDay"><br>
-    <label for="isCondition">Air Condition:</label>
-    <select id="isCondition" name="isCondition" [(ngModel)]="car.isCondition" required>
-      <option value="Yes">Yes</option>
-       <option value="No">No</option>
-       </select><br>
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+  <label for="brand">Brand <span class="required">*</span></label>
+  <input type="text" formControlName="brand" id="brand" required >
+  <div *ngIf="carForm.get('brand')?.invalid && carForm.get('brand')?.touched" class="error">Brand is required</div>
 
-    <label>Image URL </label>
-    <input type="text" [(ngModel)]="car.image" name="image" required><br>
-    <button type="submit">Add</button>
-  </form>
- 
+  <label for="name">Name <span class="required">*</span></label>
+  <input type="text" formControlName="name" id="name" required>
+  <div *ngIf="carForm.get('name')?.invalid && carForm.get('name')?.touched" class="error">Name is required</div>
+
+  <label for="modelYear">Model Year <span class="required">*</span></label>
+  <input type="text" formControlName="modelYear" id="modelYear" required>
+  <div *ngIf="carForm.get('modelYear')?.invalid && carForm.get('modelYear')?.touched" class="error">Model Year is required</div>
+
+  <label for="color">Color <span class="required">*</span></label>
+  <input type="text" formControlName="color" required id="color">
+  <div *ngIf="carForm.get('color')?.invalid && carForm.get('color')?.touched" class="error">Color is required</div>
+
+  <label for="category">Category <span class="required">*</span></label>
+  <select formControlName="category" required id="category">
+    <option value="">Select Category</option>
+    <option value="SUV">SUV</option>
+    <option value="Sedan">Sedan</option>
+    <option value="Hatchback">Hatchback</option>
+    <option value="Convertible">Convertible</option>
+    <option value="Coupe">Coupe</option>
+    <option value="Truck">Truck</option>
+  </select>
+  <div *ngIf="carForm.get('category')?.invalid && carForm.get('category')?.touched" class="error">Category is required</div>
+
+  <label for="description">Description <span class="required">*</span></label>
+  <textarea formControlName="description" required id="description"></textarea>
+  <div *ngIf="carForm.get('description')?.invalid && carForm.get('description')?.touched" class="error">Description is required</div>
+
+  <label for="seatCount">Seat Count <span class="required">*</span></label>
+  <input type="number" formControlName="seatCount" required id="seatCount">
+  <div *ngIf="carForm.get('seatCount')?.invalid && carForm.get('seatCount')?.touched" class="error">Seat Count is required</div>
+
+  <label for="gear">Gear <span class="required">*</span></label>
+  <input type="text" formControlName="gear" required id="gear">
+  <div *ngIf="carForm.get('gear')?.invalid && carForm.get('gear')?.touched" class="error">Gear is required</div>
+
+  <label for="pricePerDay">Price Per Day <span class="required">*</span></label>
+  <input type="number" formControlName="pricePerDay" required id="pricePerDay">
+  <div *ngIf="carForm.get('pricePerDay')?.invalid && carForm.get('pricePerDay')?.touched" class="error">Price Per Day is required</div>
+
+  <label for="isCondition">Air Condition: <span class="required">*</span></label>
+  <select formControlName="isCondition" required id="isCondition">
+    <option value="">Select Air Condition</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+  <div *ngIf="carForm.get('isCondition')?.invalid && carForm.get('isCondition')?.touched" class="error">Air Condition is required</div>
+
+  <label for="image">Image URL <span class="required">*</span></label>
+  <input type="text" formControlName="image" required id="image">
+  <div *ngIf="carForm.get('image')?.invalid && carForm.get('image')?.touched" class="error">Image URL is required</div>
+
+  <button type="submit" [disabled]="!carForm.valid">Add</button>
+</form>
+

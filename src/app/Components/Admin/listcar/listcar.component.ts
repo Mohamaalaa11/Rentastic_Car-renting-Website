@@ -19,7 +19,7 @@ export class ListcarComponent implements OnInit {
   filteredCars: Car[] = [];
   searchTerm = '';
   searchCategory: string = '';
-  itemsPerPage = 13;
+  itemsPerPage = 10;
   currentPage = 1;
 
 
@@ -96,7 +96,7 @@ generatePages() {
 
 addCar() {
   this.router.navigateByUrl('/addcar');
-  
+
 }
 openEditCar(car: Car) {
  

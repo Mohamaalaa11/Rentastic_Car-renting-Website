@@ -36,3 +36,28 @@ form {
     color:#751f1f;
     text-align: center;
   }
+  label {
+    color: gray;
+    position: relative;
+  }
+  
+  label span {
+    color: red;
+    position: absolute;
+    right: -10px;
+  }
+  
+  input:invalid + span {
+    content: '*';
+    color: red;
+  }
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+  
+  .form-control.invalid {
+    border-color: red;
+  }
+  
+  

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Car } from '../../../Car';
 import { CarentalServiceService } from '../../../Services/carental-service.service';
 import { Router } from '@angular/router';
@@ -13,32 +13,32 @@ import { prod } from '../../../prod';
 })
 export class AddcarComponent {
  
-  car: Car = {
-    id: 0,
-    name: '',
-    brand: '',
-    modelYear: '',
-    description:'',
-    color: '',
-    category: '',
-    seatCount: 0,
-    pricePerDay: 0,
-    image: '',
-    isCondition:false,
-    gear:''
-  };
+  carForm: FormGroup;
  
 
-  constructor(private carService: CarentalServiceService, private router: Router) { 
-    
+  constructor(private formBuilder: FormBuilder, private carService: CarentalServiceService, private router: Router) {
+    this.carForm = this.formBuilder.group({
+      brand: ['', Validators.required],
+      name: ['', Validators.required],
+      modelYear: ['', Validators.required],
+      color: ['', Validators.required],
+      category: ['', Validators.required],
+      description: ['', Validators.required],
+      seatCount: ['', Validators.required],
+      gear: ['', Validators.required],
+      pricePerDay: ['', Validators.required],
+      isCondition: ['', Validators.required],
+      image: ['', Validators.required]
+    });
   }
 
-  onSubmit():void {
+  onSubmit(): void {
+    if (this.carForm.valid) {
     
-    this.carService.addCar(this.car).subscribe(() => {
-    
-      this.router.navigateByUrl('/car');
-    });
+      this.carService.addCar(this.carForm.value).subscribe(() => {
+        this.router.navigateByUrl('/car');
+      });
+    }
   }
 
   
