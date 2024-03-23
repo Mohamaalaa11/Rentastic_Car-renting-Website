@@ -13,7 +13,7 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   loginForm = new FormGroup({
-    username: new FormControl<string>('', [Validators.required]),
+    email: new FormControl<string>('', [Validators.required]),
     password: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(3),
@@ -22,7 +22,7 @@ export class LoginComponent {
 
   login() {
     const model: Login = {
-      username: this.loginForm.value.username!,
+      email: this.loginForm.value.email!,
       password: this.loginForm.value.password!,
     };
     this.authService.login(model).subscribe({
