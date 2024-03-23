@@ -1,0 +1,236 @@
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    padding-top: 10px;
+  }
+  
+  .dis {
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+  }
+  .dis input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9; 
+    border-radius: 5px;
+    margin: 10px;
+  }
+  th,
+  td {
+    text-align: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: white;
+  }
+  
+  tr:hover {
+    background-color: #eeeeee;
+  }
+  
+  td img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .pagination {
+    margin-top: 20px;
+    text-align: right;
+    float: right;
+  }
+  
+  .page-number button {
+    background-color: white;
+    color: gray;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 2px;
+  }
+  
+  .page-number button.active {
+    background-color: #9a3333;
+    color: white;
+  }
+  
+  .pagebutton {
+    background-color: white;
+    color: gray;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .pagebutton img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .page-number {
+    display: inline-block;
+    margin: 0 3px;
+  }
+  
+  .pagebutton:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .Addbutton {
+    background-color: #9a3333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    margin-right: 200px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+ 
+
+.Addbutton img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.Addbutton:hover {
+    background-color: #751f1f;
+}
+
+  
+ 
+  .head{
+   display: flex;
+   justify-content: space-between;
+  }
+  h4{
+    color: #6B7280;
+    padding-left: 140px;
+    padding-top: 30px;
+  }
+  .navbar {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+   
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 40px; 
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .logo span {
+    font-weight: bold;
+    color: black;
+  }
+  
+  .nav-links {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-links a {
+    color: gray;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 16px;
+  }
+  
+  .nav-links a:hover {
+    color: black;
+  }
+  .nav-links a.active {
+    color: black;
+    
+    
+  }
+  
+  
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  
+    .nav-links {
+      justify-content: flex-start;
+      margin-top: 10px;
+    }
+  
+    .nav-links a {
+      margin: 0 10px;
+    }
+  
+  
+ 
+
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+
+  th, td {
+    white-space: nowrap;
+  }
+
+  .dis input[type="text"] {
+    width: calc(100% - 20px); 
+    margin: 0 10px; 
+  }
+
+  .Addbutton {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px 10px; 
+    font-size: 14px; 
+  }
+  .head h4 {
+    font-size: 20px; 
+    padding-left: 20px; 
+    padding-top: 20px; 
+    margin-left: 10px;
+    margin-bottom: 20px;
+  }
+
+ 
+  .pagination {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+ 
+}
+
+   
+  

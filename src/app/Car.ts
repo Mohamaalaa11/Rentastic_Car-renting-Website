@@ -24,7 +24,8 @@ export class Car {
     pricePerDay: number,
     image: string,
     isCondition:boolean,
-    gear:string
+    gear:string,
+   
   ) {
     this.id = id;
     this.name = name;
@@ -38,5 +39,6 @@ export class Car {
     this.image = image;
     this.isCondition=isCondition;
     this.gear=gear;
+   
   }
 }

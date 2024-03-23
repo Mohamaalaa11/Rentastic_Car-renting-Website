@@ -1,0 +1,76 @@
+
+<nav class="navbar">
+  <div class="logo">
+    <img src="assets/imgs/Vector 1.png" alt="logo" >
+    <span>ENTASTIC</span>
+  </div>
+  <div class="nav-links">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/reservation" routerLinkActive="active">Reservations</a>
+    <a routerLink="/car" routerLinkActive="active">Car</a>
+  </div>
+</nav>
+
+
+
+<div class="head">
+    <h4>Car Mangment</h4>
+    <div>
+    <button class="Addbutton" (click)="addCar()">
+        <img src="assets/imgs/Group.png" alt="ADD Image">
+        Add Car
+    </button>
+</div>
+</div>
+    
+  
+  <div class ="dis">
+  
+    <input type="text" [(ngModel)]="searchCategory" placeholder="Search by name...">
+
+    
+    
+    
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Brand</th>
+      <th>Name</th>
+      <th>Model Year</th>
+      <th>Color</th>
+      <th> </th>
+    </tr>
+    <tr *ngFor="let car of displayedCars">
+      <td>{{car.id}}</td>
+      <td>{{car.price}}</td>
+      <td>{{car.category}}</td>
+      <td>{{car.price}}</td>
+      <td>{{car.id}}</td>
+      <td>
+        <img src="assets/imgs/edit.png" alt="edit Image" (click)="openEditCar(car)">
+        <img src="assets/imgs/delete.png" alt="delete Image" (click)="showDeleteConfirmation(car)">
+      </td>
+    </tr>
+  </table>
+  
+  <div class="pagination">
+    <button *ngIf="currentPage > 1" (click)="changePage(currentPage - 1)" class="pagebutton">
+      <img src="assets/imgs/Vector.png" alt="previous" >
+    </button>
+    <div *ngFor="let page of pages" class="page-number">
+      <button [class.active]="page === currentPage" (click)="changePage(page)" class="pagebutton">{{ page }}</button>
+    </div>
+    <button *ngIf="currentPage < totalPages" (click)="changePage(currentPage + 1)" class="pagebutton">
+      <img src="assets/imgs/chevron-right.png" alt="Next">
+    </button>
+  </div>
+  
+  </div>
+  <app-delete-confirmation-component *ngIf="showConfirmation" 
+  (deleteCar)="deleteCar(carToDelete!)" 
+  (cancelDelete)="cancelDelete()">
+  </app-delete-confirmation-component>
+  
+
+  
+  

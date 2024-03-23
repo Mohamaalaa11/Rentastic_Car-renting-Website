@@ -1,0 +1,40 @@
+<form (ngSubmit)="onSubmit()">
+  <h3 class="headform">Add Car</h3>
+    <label>Brand </label>
+    <input type="text" [(ngModel)]="car.brand" name="brand" required><br>
+    <label>Name </label>
+    <input type="text" [(ngModel)]="car.name" name="name" required><br>
+    <label>Model Year </label>
+    <input type="text" [(ngModel)]="car.modelYear" name="modelYear" required><br>
+    <label>Color </label>
+    <input type="text" [(ngModel)]="car.color" name="color" required><br>
+    <label>Category </label>
+    <select [(ngModel)]="car.category" name="category" required>
+      <option value="">Select Category</option>
+      <option value="SUV">SUV</option>
+      <option value="Sedan">Sedan</option>
+      <option value="Hatchback">Hatchback</option>
+      <option value="Convertible">Convertible</option>
+      <option value="Coupe">Coupe</option>
+      <option value="Truck">Truck</option>
+    </select><br>
+    
+    <label>Discription </label>
+    <textarea [(ngModel)]="car.description" name="description" required> </textarea><br>
+    <label>seat Number </label>
+    <input type="number" [(ngModel)]="car.seatCount" name="seatCount" required><br>
+    <label>Gear </label>
+    <input type="text" [(ngModel)]="car.gear" name="gear" required><br>
+    <label>price </label>
+    <input type="number" [(ngModel)]="car.pricePerDay" name="pricePerDay" required id="pricePerDay"><br>
+    <label for="isCondition">Air Condition:</label>
+    <select id="isCondition" name="isCondition" [(ngModel)]="car.isCondition" required>
+      <option value="Yes">Yes</option>
+       <option value="No">No</option>
+       </select><br>
+
+    <label>Image URL </label>
+    <input type="text" [(ngModel)]="car.image" name="image" required><br>
+    <button type="submit">Add</button>
+  </form>
+ 
