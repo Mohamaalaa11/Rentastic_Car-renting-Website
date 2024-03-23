@@ -14,15 +14,11 @@ import { jwtDecode } from 'jwt-decode';
 export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
-  errors: string = '';
-
   loginForm = new FormGroup({
-
-    email: new FormControl<string>('', [Validators.required, Validators.email]),
-
+    email: new FormControl<string>('', [Validators.required]),
     password: new FormControl<string>('', [
       Validators.required,
-      Validators.minLength(8),
+      Validators.minLength(3),
     ]),
   });
 
@@ -50,8 +46,8 @@ export class LoginComponent {
       },
 
       error: (err) => {
-        this.errors = err.error;
-        console.log(err.error);
+        console.log(err);
+        console.log(model);
       },
     });
   }

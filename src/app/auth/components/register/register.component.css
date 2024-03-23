@@ -1,7 +1,11 @@
+body {
+  height: 100vh;
+}
+
 h1 {
   color: #000;
   font-weight: 600;
-  font-size: 38px;
+  margin-top: 120px;
 }
 
 p {
@@ -12,6 +16,7 @@ p {
 
 .img-container {
   position: relative;
+  display: inline-block;
   height: 100vh;
   padding: 0;
 }
@@ -64,8 +69,9 @@ p {
   cursor: pointer;
 }
 
-.form-container {
-  padding: 30px 60px;
+.login-container {
+  padding-left: 90px;
+  padding-right: 80px;
 }
 
 input[type="checkbox"] {
@@ -86,14 +92,4 @@ input[type="checkbox"] {
   font-weight: 500;
   text-decoration-line: underline;
   text-transform: capitalize;
-}
-
-@media (max-width: 992px) {
-  h1 {
-    font-size: 24px;
-  }
-
-  p {
-    font-size: 16px;
-  }
 }

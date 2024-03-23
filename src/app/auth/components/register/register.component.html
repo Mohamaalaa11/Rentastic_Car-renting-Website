@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-6 d-none d-md-block img-container">
+  <div class="col-6 img-container">
     <img class="" src="../../../../assets/imgs/register.png" alt="" />
 
     <!-------------------------- Overlay Content -------------------------->
@@ -19,10 +19,10 @@
         <h3 class="mt-3">RENTASTIC</h3>
       </div>
       <div class="overlay-content-down">
-        <p class="text-center text-white header px-5">
+        <p class="text-center text-white header">
           Unlock Your Journey with Rentastic
         </p>
-        <p class="text-center content px-5">
+        <p class="text-center content px-3">
           we're dedicated to delivering exceptional journeys that elevate your
           experience every time you get behind the wheel.
         </p>
@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div class="form-container col-12 col-md-6 d-flex flex-column">
+  <div class="login-container col-6 d-flex flex-column">
     <h1>Nice to see you again</h1>
     <p>Select a method to login</p>
 
@@ -56,38 +56,19 @@
 
     <!-------------------------- Form -------------------------->
     <form class="d-flex flex-column" [formGroup]="registerForm">
-      <!-- Name -->
       <div class="row">
-        <div class="col-12 col-lg-6">
+        <div class="col-6">
           <div class="mb-3 d-flex flex-column">
-            <label class="form-label">Name</label>
+            <label class="form-label">Username</label>
             <input
               class="form-input"
               type="text"
-              placeholder="Enter Your Name"
-              formControlName="name"
+              placeholder="Enter Your Username"
+              formControlName="username"
             />
-
-            <!-- Validations Labels -->
-            <ng-container *ngIf="registerForm.controls.name.touched">
-              <label
-                class="text-danger mt-1"
-                style="font-size: 10px"
-                *ngIf="registerForm.controls.name.errors?.['required']"
-                >required</label
-              >
-
-              <label
-                class="text-danger mt-1"
-                style="font-size: 10px"
-                *ngIf="registerForm.controls.name.errors?.['minlength']"
-                >The Name should at least 3 character</label
-              >
-            </ng-container>
           </div>
         </div>
-        <!-- Email -->
-        <div class="col-12 col-lg-6">
+        <div class="col-6">
           <div class="mb-3 d-flex flex-column">
             <label class="form-label">Email Address</label>
             <input
@@ -96,27 +77,10 @@
               placeholder="Enter Your Email Address"
               formControlName="email"
             />
-
-            <!-- Validations Labels -->
-            <ng-container *ngIf="registerForm.controls.email.touched">
-              <label
-                class="text-danger mt-1"
-                style="font-size: 10px"
-                *ngIf="registerForm.controls.email.errors?.['required']"
-                >required</label
-              >
-
-              <label
-                class="text-danger mt-1"
-                style="font-size: 10px"
-                *ngIf="registerForm.controls.email.errors?.['email']"
-                >Enter a Valid Email</label
-              >
-            </ng-container>
           </div>
         </div>
       </div>
-      <!-- Phone Number -->
+
       <div class="mb-3 d-flex flex-column">
         <label class="form-label" for="phone">Phone Number</label>
         <input
@@ -124,31 +88,12 @@
           type="tel"
           id="phone"
           name="phone"
+          pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
           placeholder="Enter your phone number"
           formControlName="phoneNumber"
         />
-
-        <!-- Validations Labels -->
-        <ng-container *ngIf="registerForm.controls.phoneNumber.touched">
-          <label
-            class="text-danger mt-1"
-            style="font-size: 10px"
-            *ngIf="registerForm.controls.phoneNumber.errors?.['required']"
-            >required</label
-          >
-
-          <label
-            class="text-danger mt-1"
-            style="font-size: 10px"
-            *ngIf="
-            registerForm.controls.phoneNumber.errors?.['minlength'] 
-            || registerForm.controls.phoneNumber.errors?.['maxlength'] 
-            || registerForm.controls.phoneNumber.errors?.['pattern']"
-            >Enter A valid Egyption Number</label
-          >
-        </ng-container>
       </div>
-      <!-- ID Number -->
+
       <div class="mb-3 d-flex flex-column">
         <label class="form-label" for="phone">ID Card Number</label>
         <input
@@ -157,24 +102,8 @@
           placeholder="Enter your Id card number"
           formControlName="idNumber"
         />
-
-        <ng-container *ngIf="registerForm.controls.idNumber.touched">
-          <label
-            class="text-danger mt-1"
-            style="font-size: 10px"
-            *ngIf="registerForm.controls.idNumber.errors?.['required']"
-            >required</label
-          >
-
-          <label
-            class="text-danger mt-1"
-            style="font-size: 10px"
-            *ngIf="registerForm.controls.idNumber.errors?.['pattern']"
-            >Enter A valid Egyption National ID
-          </label>
-        </ng-container>
       </div>
-      <!-- Password -->
+
       <div class="mb-3 d-flex flex-column">
         <label class="form-label">Password</label>
         <input
@@ -183,22 +112,6 @@
           placeholder="Enter Your Password"
           formControlName="password"
         />
-
-        <ng-container *ngIf="registerForm.controls.password.touched">
-          <label
-            class="text-danger mt-1"
-            style="font-size: 10px"
-            *ngIf="registerForm.controls.password.errors?.['required']"
-            >required</label
-          >
-
-          <label
-            class="text-danger mt-1"
-            style="font-size: 10px"
-            *ngIf="registerForm.controls.password.errors?.['minlength']"
-            >The Password should at least 8 character</label
-          >
-        </ng-container>
       </div>
 
       <button type="submit" class="btn-auth" (click)="register()">
