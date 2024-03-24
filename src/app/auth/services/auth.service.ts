@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(model: Login) {
-    return this.http.post('https://localhost:44348/api/Account/login', model);
+    return this.http.post('https://localhost:7283/api/Account/login', model);
   }
 
   register(model: Register) {
