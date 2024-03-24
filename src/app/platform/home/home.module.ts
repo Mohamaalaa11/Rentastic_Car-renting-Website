@@ -14,16 +14,16 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { CardComponent } from '../shared/components/card/card.component';
-
-
+import { HowItWorkComponent } from './components/how-it-work/how-it-work.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     MainComponent,
     HeroComponent,
     FilterComponent,
-    SiteInfoComponent,CardComponent
+    SiteInfoComponent,CardComponent, HowItWorkComponent
   ],
-  imports: [CommonModule, HomeRoutingModule,MatNativeDateModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, SharedModule,HomeRoutingModule,MatNativeDateModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,FormsModule,ReactiveFormsModule],
 })
 export class HomeModule {}
