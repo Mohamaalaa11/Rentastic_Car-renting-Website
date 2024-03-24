@@ -51,7 +51,7 @@ export class EditcarComponent  implements OnInit{
       error: () => {
        
         console.log('Failed to edit car' );
-        this.router.navigateByUrl('/car');
+       
       }
     });
   }

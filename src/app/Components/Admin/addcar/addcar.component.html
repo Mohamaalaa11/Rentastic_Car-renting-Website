@@ -44,5 +44,8 @@
 
     <label>Image URL </label>
     <input type="text" [(ngModel)]="car.images" name="image"  required><br>
+    <div *ngIf="errorMessages">
+      <p *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</p>
+    </div>
     <button type="submit">Add</button>
   </form>

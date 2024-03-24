@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Car } from '../Car';
 import { Observable, catchError, throwError } from 'rxjs';
@@ -16,9 +16,18 @@ export class CarentalServiceService {
     return this.http.get<Car[]>(this.apiUrl);
   }
   
-  addCar(car: Car): Observable<Car> {
-    return this.http.post<Car>(this.apiUrl, car);
+  addCar(car: Car): Observable<any> {
+    return this.http.post<any>('https://localhost:44348/api/Cars', car).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400 && error.error.errors) {
+          return throwError(error.error.errors);
+        } else {
+          return throwError('An unknown error occurred.');
+        }
+      })
+    );
   }
+  
   editCar(carData: Car): Observable<Car> {
     const url = `${this.apiUrl}/${carData.id}`;
     return this.http.put<Car>(url, carData);

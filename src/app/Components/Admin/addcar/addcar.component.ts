@@ -28,25 +28,26 @@ export class AddcarComponent {
     isAutomatic: false ,
    
   };
+  errorMessages: string[] = [];
  
  
   constructor(private carService: CarentalServiceService, private router: Router) { }
  
-  onSubmit():void {
-   
+  onSubmit(): void {
     this.carService.addCar(this.car).subscribe({
-      next: (response) => {
-        console.log('Car Added Successfully', response);
+      next: () => {
         this.router.navigateByUrl('/');
       },
-      error: (error) => {
-        console.log('Error adding car:', error);
-        this.router.navigateByUrl('/');
+      error: (errors) => {
+        if (Array.isArray(errors)) {
+          this.errorMessages = errors.map((error: any) => error.errorMessage);
+        } else {
+          this.errorMessages = [errors];
+        }
       }
     });
-    
-    
-  };
+  }
+  
   }
   
  
