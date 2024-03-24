@@ -11,9 +11,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { PaymentComponent } from './payMob/payment/payment.component';
+import { PaypalComponent } from './paypal/paypal.component';
 
 @NgModule({
-  declarations: [AppComponent, PaymentComponent],
+  declarations: [AppComponent, PaymentComponent, PaypalComponent],
   imports: [
     BrowserModule,
     FormsModule,
