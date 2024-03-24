@@ -13,34 +13,41 @@ import { prod } from '../../../prod';
 })
 export class AddcarComponent {
  
-  carForm: FormGroup;
+  car: Car = {
+    id: 0,
+    name: '',
+    brand: '',
+    modelYear: '',
+    description:'',
+    color: '',
+    category: '',
+    seatCount: 0,
+    pricePerDay: 0,
+    images: '',
+    hasAirCondition:false,
+    isAutomatic: false ,
+   
+  };
  
-
-  constructor(private formBuilder: FormBuilder, private carService: CarentalServiceService, private router: Router) {
-    this.carForm = this.formBuilder.group({
-      brand: ['', Validators.required],
-      name: ['', Validators.required],
-      modelYear: ['', Validators.required],
-      color: ['', Validators.required],
-      category: ['', Validators.required],
-      description: ['', Validators.required],
-      seatCount: ['', Validators.required],
-      gear: ['', Validators.required],
-      pricePerDay: ['', Validators.required],
-      isCondition: ['', Validators.required],
-      image: ['', Validators.required]
+ 
+  constructor(private carService: CarentalServiceService, private router: Router) { }
+ 
+  onSubmit():void {
+   
+    this.carService.addCar(this.car).subscribe({
+      next: (response) => {
+        console.log('Car Added Successfully', response);
+        this.router.navigateByUrl('/');
+      },
+      error: (error) => {
+        console.log('Error adding car:', error);
+        this.router.navigateByUrl('/');
+      }
     });
-  }
-
-  onSubmit(): void {
-    if (this.carForm.valid) {
     
-      this.carService.addCar(this.carForm.value).subscribe(() => {
-        this.router.navigateByUrl('/car');
-      });
-    }
+    
+  };
   }
-
   
  
-}
+

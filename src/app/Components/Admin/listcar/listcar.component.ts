@@ -71,7 +71,7 @@ get endIndex(): number {
 
 get displayedCars(): any[] {
   return this.cars
-    .filter(car => car.category.toLowerCase().includes(this.searchCategory.toLowerCase()))
+    .filter(car => car.name.toLowerCase().includes(this.searchCategory.toLowerCase()))
     .slice(this.startIndex, this.endIndex + 1);
 }
 
@@ -85,7 +85,7 @@ changePage(page: number) {
 
 generatePages() {
   const filteredCarsLength = this.cars
-    .filter(car => car.category.toLowerCase().includes(this.searchCategory.toLowerCase()))
+    .filter(car => car.name.toLowerCase().includes(this.searchCategory.toLowerCase()))
     .length;
   this.pages = [];
   const totalPages = Math.ceil(filteredCarsLength / this.itemsPerPage);

@@ -8,9 +8,11 @@ export class Car {
   category: string;
   seatCount: number;
   pricePerDay: number;
-  image: string;
-  isCondition:boolean;
-  gear:string;
+  images: string;
+  hasAirCondition:boolean;
+  
+  isAutomatic : boolean ;
+  
 
   constructor(
     id: number,
@@ -22,9 +24,10 @@ export class Car {
     category: string,
     seatCount: number,
     pricePerDay: number,
-    image: string,
-    isCondition:boolean,
-    gear:string,
+    images: string,
+    hasAirCondition:boolean,
+    isAutomatic : boolean,
+   
    
   ) {
     this.id = id;
@@ -36,9 +39,10 @@ export class Car {
     this.category = category;
     this.seatCount = seatCount;
     this.pricePerDay = pricePerDay;
-    this.image = image;
-    this.isCondition=isCondition;
-    this.gear=gear;
+    this.images = images;
+    this.hasAirCondition=hasAirCondition;
+   
+    this.isAutomatic =isAutomatic
    
   }
 }

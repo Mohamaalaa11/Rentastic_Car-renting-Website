@@ -42,10 +42,10 @@
     </tr>
     <tr *ngFor="let car of displayedCars">
       <td>{{car.id}}</td>
-      <td>{{car.price}}</td>
-      <td>{{car.category}}</td>
-      <td>{{car.price}}</td>
-      <td>{{car.id}}</td>
+      <td>{{car.brand}}</td>
+      <td>{{car.name}}</td>
+      <td>{{car.modelYear}}</td>
+      <td>{{car.color}}</td>
       <td>
         <img src="assets/imgs/edit.png" alt="edit Image" (click)="openEditCar(car)">
         <img src="assets/imgs/delete.png" alt="delete Image" (click)="showDeleteConfirmation(car)">

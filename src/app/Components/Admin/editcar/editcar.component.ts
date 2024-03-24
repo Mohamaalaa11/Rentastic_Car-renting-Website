@@ -39,7 +39,7 @@ export class EditcarComponent  implements OnInit{
       });
     });
   }
-  car: Car = new Car(0, '', '', '', '', '', '', 0, 0, '', false, '');
+  car: Car = new Car(0, '', '', '', '', '', '', 0, 0, '', false,false);
  
   onSubmit() {
     this.carService.editCar(this.car).subscribe({
@@ -50,7 +50,8 @@ export class EditcarComponent  implements OnInit{
       },
       error: () => {
        
-        console.log('Failed to edit car');
+        console.log('Failed to edit car' );
+        this.router.navigateByUrl('/car');
       }
     });
   }

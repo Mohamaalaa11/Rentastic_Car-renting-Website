@@ -9,7 +9,7 @@ import { prod } from '../prod';
 })
 export class CarentalServiceService {
 
-  private apiUrl = 'https://fakestoreapi.com/products';
+  private apiUrl = 'https://localhost:44348/api/Cars';
   constructor(private http: HttpClient) { }
 
   getCars(): Observable<Car[]> {
