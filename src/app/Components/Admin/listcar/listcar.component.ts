@@ -58,8 +58,9 @@ get totalItems(): number {
 }
 
 get totalPages(): number {
-  return Math.ceil(this.totalItems / this.itemsPerPage);
+  return Math.ceil(this.filteredCars.length / this.itemsPerPage);
 }
+
 
 get startIndex(): number {
   return (this.currentPage - 1) * this.itemsPerPage;
@@ -84,15 +85,12 @@ changePage(page: number) {
 
 
 generatePages() {
-  const filteredCarsLength = this.cars
-    .filter(car => car.name.toLowerCase().includes(this.searchCategory.toLowerCase()))
-    .length;
   this.pages = [];
-  const totalPages = Math.ceil(filteredCarsLength / this.itemsPerPage);
-  for (let i = 1; i <= totalPages; i++) {
+  for (let i = 1; i <= this.totalPages; i++) {
     this.pages.push(i);
   }
 }
+
 
 addCar() {
   this.router.navigateByUrl('/addcar');
@@ -132,6 +130,9 @@ deleteCar(car: Car) {
 cancelDelete() {
   this.carToDelete = null;
   this.showConfirmation = false;
+}
+filterCars(): Car[] {
+  return this.cars.filter(car => car.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
 }
 
 

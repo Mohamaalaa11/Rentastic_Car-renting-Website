@@ -17,6 +17,7 @@ export class EditcarComponent  implements OnInit{
     private carService: CarentalServiceService,
     private currencyPipe: CurrencyPipe,
     private router : Router
+    
   ) {}
  
 
@@ -39,7 +40,10 @@ export class EditcarComponent  implements OnInit{
       });
     });
   }
+
   car: Car = new Car(0, '', '', '', '', '', '', 0, 0, '', false,false);
+  
+  errorMessages: string[] = [];
  
   onSubmit() {
     this.carService.editCar(this.car).subscribe({

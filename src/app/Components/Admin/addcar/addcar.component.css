@@ -41,23 +41,23 @@ form {
     position: relative;
   }
   
-  label span {
-    color: red;
-    position: absolute;
-    right: -10px;
-  }
   
-  input:invalid + span {
-    content: '*';
-    color: red;
-  }
-  .error {
+  
+
+  
+  
+
+.error-message {
     color: red;
     font-size: 14px;
   }
   
-  .form-control.invalid {
-    border-color: red;
+ 
+  .required-indicator::after {
+    content: '*';
+    color: red;
+    margin-left: 5px;
   }
+  
   
   
