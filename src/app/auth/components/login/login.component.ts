@@ -43,7 +43,7 @@ export class LoginComponent {
           ];
 
         if (role === 'Admin') {
-          this.router.navigate(['auth', 'register']);
+          this.router.navigate(['admin']);
         } else if (role === 'User') {
           this.router.navigate(['']);
         }

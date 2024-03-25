@@ -1,30 +1,36 @@
-<div *ngFor="let item of cars" class="card mx-5 ">
-    <img [src]="item.image" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h4 class="fw-bold card-title">{{item.name+" "+item.brand+" "+item.modelYear}}</h4>
+<div *ngFor="let item of cars" class="card mx-5">
+  <img [src]="item.images" class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h4 class="fw-bold card-title">
+      {{ item.name + " " + item.brand + " " + item.modelYear }}
+    </h4>
+  </div>
+  <!-- flex-wrap align-items-start -->
+  <div class="d-flex mx-3 flex-wrap align-items-start justify-content-between">
+    <div class="d-flex">
+      <img class="ico sp" src="../../assets/imgs/color.png" alt="" />
+      <p class="text-grey">{{ item.color }}</p>
     </div>
-    <!-- flex-wrap align-items-start -->
-    <div class="d-flex mx-3 flex-wrap align-items-start  justify-content-between  ">
-        <div class="d-flex ">
-            <img class="ico sp" src="../../assets/imgs/color.png" alt="">
-            <p class="text-grey">{{item.color}}</p>
-        </div>
-        <div class="d-flex align-items-start">
-            <img class="ico sp" src="../../assets/imgs/seats.png" alt="">
-            <p class="text-grey">{{item.seatCount}} Seats</p>
-        </div>
-        <div *ngIf="item.isCondition" class="d-flex align-items-start">
-            <img class="ico sp" src="../../assets/imgs/air.png" alt="">
-            <p class="text-grey">Air Condtioner</p>    
-        </div>
-        <div class="d-flex align-items-start">
-            <img class="ico sp" src="../../assets/imgs/manual.png" alt="">
-            <p class="text-grey">{{item.gear}}</p>    
-        </div>
+    <div class="d-flex align-items-start">
+      <img class="ico sp" src="../../assets/imgs/seats.png" alt="" />
+      <p class="text-grey">{{ item.seatCount }} Seats</p>
     </div>
-    <hr>
-    <div class=" d-flex p-3 justify-content-between">
-      <p class="fw-bold">{{item.pricePerDay}} <span class=" text-red">EGP/Day</span></p>
-      <a href="#" class="fw-bold text-red">Rent Now <i class="fa-solid fa-arrow-right text-red"></i></a>
+    <div *ngIf="item.hasAirCondition" class="d-flex align-items-start">
+      <img class="ico sp" src="../../assets/imgs/air.png" alt="" />
+      <p class="text-grey">Air Condtioner</p>
+    </div>
+    <div class="d-flex align-items-start" *ngIf="item.isAutomatic">
+      <img class="ico sp" src="../../assets/imgs/manual.png" alt="" />
+      <p class="text-grey">Automatic</p>
     </div>
   </div>
+  <hr />
+  <div class="d-flex p-3 justify-content-between">
+    <p class="fw-bold">
+      {{ item.pricePerDay }} <span class="text-red">EGP/Day</span>
+    </p>
+    <a href="#" class="fw-bold text-red"
+      >Rent Now <i class="fa-solid fa-arrow-right text-red"></i
+    ></a>
+  </div>
+</div>

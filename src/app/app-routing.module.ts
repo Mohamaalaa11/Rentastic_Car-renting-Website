@@ -9,24 +9,22 @@ import { AdminhomeComponent } from './Components/Admin/adminhome/adminhome.compo
 import { ReservationlistComponent } from './Components/Admin/reservationlist/reservationlist.component';
 
 const routes: Routes = [
- // {
-   // path: '',
-   // loadChildren: () =>
-    //  import('./platform/platform.module').then((m) => m.PlatformModule),
-  //},
+  {
+    path: '',
+    loadChildren: () =>
+      import('./platform/platform.module').then((m) => m.PlatformModule),
+  },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
-  { path: '', component: AdminhomeComponent },
+  // { path: '', component: AdminhomeComponent },
   { path: 'addcar', component: AddcarComponent },
-  { path: 'editcar/:id', component: EditcarComponent},
+  { path: 'editcar/:id', component: EditcarComponent },
   { path: 'deletecar/:id', component: DeletecarComponent },
   { path: 'home', component: AdminhomeComponent },
   { path: 'car', component: ListcarComponent },
-  {path:'reservation', component : ReservationlistComponent}
-
- 
+  { path: 'reservation', component: ReservationlistComponent },
 ];
 
 @NgModule({
