@@ -1,0 +1,51 @@
+<form (ngSubmit)="onSubmit()">
+  <h3 class="headform">Add Car</h3>
+    
+    <label>Name </label>
+    <input type="text" [(ngModel)]="car.name" name="name" required><br>
+    <label>Brand </label>
+    <input type="text" [(ngModel)]="car.brand" name="brand" required><br>
+    <label>Model Year </label>
+    <input type="text" [(ngModel)]="car.modelYear" name="modelYear" required><br>
+    <label>Color </label>
+    <input type="text" [(ngModel)]="car.color" name="color" required><br>
+    <label>Category </label>
+    <select [(ngModel)]="car.category" name="category" required>
+      <option value="">Select Category</option>
+      <option value="Economy">Economy</option>
+      <option value="Compact">Compact</option>
+      <option value="Standard">Standard</option>
+      <option value="Midsize">Midsize</option>
+      <option value="Fullsize">Fullsize</option>
+      <option value="premime">premime</option>
+      <option value="SUV">SUV</option>
+      <option value="Van">Van</option>
+      <option value="Truck">Truck</option>
+      
+    </select><br>
+   
+    <label>Discription </label>
+    <textarea [(ngModel)]="car.description" name="description" required> </textarea><br>
+    <label>seat Number </label>
+    <input type="number" [(ngModel)]="car.seatCount" name="seatCount" required><br>
+    
+    <label>price </label>
+    <input type="number" [(ngModel)]="car.pricePerDay" name="pricePerDay" required id="pricePerDay"><br>
+    <label for="hasAirCondition">Air Condition:</label>
+    <select id="hasAirCondition" name="hasAirCondition" [(ngModel)]="car.hasAirCondition" required>
+      <option [ngValue]="true">Yes </option>
+  <option [ngValue]="false">No </option>
+       </select><br>
+       <label >Is Automatic:</label>
+       <select id="isAutomatic" name="isAutomatic" [(ngModel)]="car.isAutomatic" required>
+        <option [ngValue]="true">Yes</option>
+         <option [ngValue]="false">No</option>
+         </select><br>
+
+    <label>Image URL </label>
+    <input type="text" [(ngModel)]="car.images" name="image"  required><br>
+    <div *ngIf="errorMessages">
+      <p *ngFor="let errorMessage of errorMessages">{{ errorMessage }}</p>
+    </div>
+    <button type="submit">Add</button>
+  </form>
