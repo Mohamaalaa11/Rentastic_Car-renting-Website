@@ -55,15 +55,39 @@
     </div>
 
     <!-------------------------- Form -------------------------->
+    <!-- Error Box -->
+    <ng-container *ngIf="errors !== ''">
+      <div class="alert alert-danger d-flex flex-column justify-content-start">
+        <h6 class="mb-0" style="font-size: 12px">Invalid Email or Password</h6>
+      </div>
+    </ng-container>
+
     <form [formGroup]="loginForm" class="d-flex flex-column">
       <div class="mb-3 d-flex flex-column">
-        <label class="form-label">Username</label>
+        <label class="form-label">Email</label>
         <input
           class="form-input"
           type="text"
-          placeholder="Enter Your Username"
-          formControlName="username"
+          placeholder="Enter Your Email"
+          formControlName="email"
         />
+
+        <!-- Validations Labels -->
+        <ng-container *ngIf="loginForm.controls.email.touched">
+          <label
+            class="text-danger mt-1"
+            style="font-size: 10px"
+            *ngIf="loginForm.controls.email.errors?.['required']"
+            >required</label
+          >
+
+          <label
+            class="text-danger mt-1"
+            style="font-size: 10px"
+            *ngIf="loginForm.controls.email.errors?.['email']"
+            >Enter a Valid Email</label
+          >
+        </ng-container>
       </div>
 
       <div class="mb-3 d-flex flex-column">
@@ -74,6 +98,16 @@
           placeholder="Enter Your Password"
           formControlName="password"
         />
+
+        <!-- Validations Labels -->
+        <ng-container *ngIf="loginForm.controls.password.touched">
+          <label
+            class="text-danger mt-1"
+            style="font-size: 10px"
+            *ngIf="loginForm.controls.password.errors?.['required']"
+            >required</label
+          >
+        </ng-container>
       </div>
 
       <div class="checkbox mb-3">

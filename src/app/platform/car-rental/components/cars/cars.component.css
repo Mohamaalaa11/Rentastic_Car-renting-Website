@@ -1,0 +1,54 @@
+.body {
+  padding-top: 32px;
+}
+
+.filter h6 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.btn-filter {
+  background-color: var(--red-color);
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.btn-filter-border-none {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.fa-chevron-down {
+  color: var(--red-color);
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--red-color);
+  border-radius: 4px;
+  outline: none;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--red-color);
+}
+
+input[type="search"] {
+  outline: none;
+}
+input[type="search"]:focus {
+  border: 2px solid var(--red-color);
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 400;
+}
