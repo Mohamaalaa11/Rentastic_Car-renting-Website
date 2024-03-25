@@ -12,8 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
-import { CardComponent } from '../shared/components/card/card.component';
+import { MatSelectModule } from '@angular/material/select';
 import { HowItWorkComponent } from './components/how-it-work/how-it-work.component';
 import { SharedModule } from '../shared/shared.module';
 
@@ -22,8 +21,20 @@ import { SharedModule } from '../shared/shared.module';
     MainComponent,
     HeroComponent,
     FilterComponent,
-    SiteInfoComponent,CardComponent, HowItWorkComponent
+    SiteInfoComponent,
+    HowItWorkComponent,
   ],
-  imports: [CommonModule, SharedModule,HomeRoutingModule,MatNativeDateModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,FormsModule,ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    HomeRoutingModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class HomeModule {}

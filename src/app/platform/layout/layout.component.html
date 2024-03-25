@@ -1,73 +1,81 @@
 <div class="container mt-2">
   <nav class="navbar navbar-expand-lg">
-  <div class="container-fluid py-80">
-    <a class="navbar-brand" href="#"
-      ><img src="./assets/imgs/logo.png" alt=""
-    /></a>
+    <div class="container-fluid py-80">
+      <a class="navbar-brand" href="#"
+        ><img src="./assets/imgs/logo.png" alt=""
+      /></a>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pad">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="''"
-            >Home</a
-          >
-        </li>
-
-        <li class="nav-item ps-3">
-          <a class="nav-link" [routerLink]="'car-rental/cars'">Our Cars</a>
-        </li>
-
-        <li class="nav-item ps-3">
-          <a class="nav-link" [routerLink]="'how-it-work'">How it work ?</a>
-        </li>
-
-        <li class="nav-item ps-3">
-          <a class="nav-link" href="#">About Us</a>
-        </li>
-      </ul>
-
-      <a
+      <button
+        class="navbar-toggler"
         type="button"
-        class="btn btn-red text-white py-2 px-5"
-        [routerLink]="'auth/login'"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        LOG IN
-      </a>
-    </div>
-  </div>
-</nav>
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pad">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="''"
+              >Home</a
+            >
+          </li>
+
+          <li class="nav-item ps-3">
+            <a class="nav-link" [routerLink]="'car-rental/cars'">Our Cars</a>
+          </li>
+
+          <li class="nav-item ps-3">
+            <a class="nav-link" [routerLink]="'how-it-work'">How it work ?</a>
+          </li>
+
+          <li class="nav-item ps-3">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+
+          <li class="nav-item ps-3">
+            <a class="nav-link" [routerLink]="['admin']">Home</a>
+          </li>
+
+          <li class="nav-item ps-3">
+            <a class="nav-link" [routerLink]="['admin', 'reservations']"
+              >Reservations</a
+            >
+          </li>
+
+          <li class="nav-item ps-3">
+            <a class="nav-link" [routerLink]="['admin', 'cars']">Cars</a>
+          </li>
+        </ul>
+
+        <a
+          type="button"
+          class="btn btn-red text-white py-2 px-5"
+          [routerLink]="'auth/login'"
+        >
+          LOG IN
+        </a>
+      </div>
+    </div>
+  </nav>
 </div>
 <router-outlet></router-outlet>
 
 <footer class="text-center text-lg-start bg-pink text-muted">
-<section class="py-3">
-    <div class="container  text-center text-md-start mt-5">
-      <!-- Grid row -->
+  <section class="py-3">
+    <div class="container text-center text-md-start mt-5">
       <div class="row mt-3">
-        <!-- Grid column -->
         <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
-          <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
             <a class="navbar-brand" href="#"
-            ><img src="./assets/imgs/logo.png" alt=""
-          /></a>
+              ><img src="./assets/imgs/logo.png" alt=""
+            /></a>
           </h6>
-          <p>
-            Get a car whatever and whenever you need it !
-          </p>
+          <p>Get a car whatever and whenever you need it !</p>
           <div>
             <a href="" class="me-4 text-reset">
               <i class="fab fa-facebook-f text-red fa-lg"></i>
@@ -83,14 +91,9 @@
             </a>
           </div>
         </div>
-        <!-- Grid column -->
 
-        <!-- Grid column -->
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase text-red fw-bold mb-3">
-            Rental
-          </h6>
+          <h6 class="text-uppercase text-red fw-bold mb-3">Rental</h6>
           <p>
             <a href="#!" class="text-reset">Economy</a>
           </p>
@@ -101,12 +104,9 @@
             <a href="#!" class="text-reset">Luxury</a>
           </p>
         </div>
-        <!-- Grid column -->
+
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase text-red fw-bold mb-3">
-            Cars Model
-          </h6>
+          <h6 class="text-uppercase text-red fw-bold mb-3">Cars Model</h6>
           <p>
             <a href="#!" class="text-reset">BMW</a>
           </p>
@@ -120,13 +120,9 @@
             <a href="#!" class="text-reset">Toyota</a>
           </p>
         </div>
-        <!-- Grid column -->
-        <!-- Grid column -->
+
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase text-red fw-bold mb-3">
-            COMPANY
-          </h6>
+          <h6 class="text-uppercase text-red fw-bold mb-3">COMPANY</h6>
           <p>
             <a href="#!" class="text-reset">About</a>
           </p>
@@ -134,12 +130,9 @@
             <a href="#!" class="text-reset">How it work</a>
           </p>
         </div>
-        <!-- Grid column -->
+
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase text-red fw-bold mb-3">
-            Legal
-          </h6>
+          <h6 class="text-uppercase text-red fw-bold mb-3">Legal</h6>
           <p>
             <a href="#!" class="text-reset">Claims</a>
           </p>
@@ -150,13 +143,9 @@
             <a href="#!" class="text-reset">Terms</a>
           </p>
         </div>
-        <!-- Grid column -->
       </div>
-      <!-- Grid row -->
     </div>
   </section>
-<hr>
-  <div class="text-center px-4 py-3  bg-pink" >
-    Copyright © 2024 Rentastic  </div>
+  <hr />
+  <div class="text-center px-4 py-3 bg-pink">Copyright © 2024 Rentastic</div>
 </footer>
-
