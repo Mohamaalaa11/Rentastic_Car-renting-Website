@@ -25,7 +25,7 @@ export class LoginComponent {
     ]),
   });
 
-  login() {
+  onLogin() {
     const model: Login = {
       email: this.loginForm.value.email!,
       password: this.loginForm.value.password!,
@@ -34,19 +34,24 @@ export class LoginComponent {
     this.authService.login(model).subscribe({
       next: (res: any) => {
         localStorage.setItem('token', res.token);
-        const token = jwtDecode(localStorage.getItem('token')!);
-        const decodedToken = JSON.parse(JSON.stringify(token));
-        console.log(decodedToken);
+
+        // Decode Token and pasre it to from (JSON) string into an object.
+        const decodedToken = jwtDecode(localStorage.getItem('token')!);
+        const parsedToken = JSON.parse(JSON.stringify(decodedToken));
         const role =
-          decodedToken[
+          parsedToken[
             'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
           ];
 
+        // Check Roles to direct
         if (role === 'Admin') {
           this.router.navigate(['admin']);
+          this.authService.isAdmin$.next(true);
         } else if (role === 'User') {
           this.router.navigate(['']);
         }
+        localStorage.setItem('role', role);
+        this.authService.isLoggedIn$.next(true);
       },
 
       error: (err) => {
