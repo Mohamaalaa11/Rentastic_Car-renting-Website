@@ -80,6 +80,13 @@ export class ListcarComponent implements OnInit {
     }
   }
 
+  // generatePages() {
+  //   this.pages = [];
+  //   for (let i = 1; i <= this.totalPages; i++) {
+  //     this.pages.push(i);
+  //   }
+  // }
+
   addCar() {
     this.router.navigateByUrl('/addcar');
   }
@@ -115,5 +122,11 @@ export class ListcarComponent implements OnInit {
   cancelDelete() {
     this.carToDelete = null;
     this.showConfirmation = false;
+  }
+
+  filterCars(): Car[] {
+    return this.cars.filter((car) =>
+      car.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 }

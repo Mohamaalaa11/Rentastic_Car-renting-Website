@@ -15,7 +15,7 @@ export class EditcarComponent implements OnInit {
     private route: ActivatedRoute,
     private carService: CarentalServiceService,
     private currencyPipe: CurrencyPipe,
-    private router: Router
+    private router : Router
   ) {}
 
   getFormattedPrice(price: number): { amount: string; currency: string } {
@@ -36,8 +36,10 @@ export class EditcarComponent implements OnInit {
       });
     });
   }
-  car: Car = new Car(0, '', '', '', '', '', '', 0, 0, '', false, false);
 
+  car: Car = new Car(0, '', '', '', '', '', '', 0, 0, '', false,false);
+  
+ 
   onSubmit() {
     this.carService.editCar(this.car).subscribe({
       next: () => {
