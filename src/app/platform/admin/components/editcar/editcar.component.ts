@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Car } from '../../../../Car';
-import { CarentalServiceService } from '../../../../Services/carental-service.service';
+import { CarentalServiceService } from '../../Services/carental-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 

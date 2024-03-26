@@ -20,6 +20,8 @@ import { ReservationlistComponent } from './platform/admin/components/reservatio
 import { MatSelectModule } from '@angular/material/select';
 import { PaymentComponent } from './payMob/payment/payment.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { SharedModule } from './platform/shared/shared.module';
+import { CarRentalModule } from './platform/car-rental/car-rental.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,7 @@ import { PaypalComponent } from './paypal/paypal.component';
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatSelectModule,
+    MatSelectModule,SharedModule,CarRentalModule
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

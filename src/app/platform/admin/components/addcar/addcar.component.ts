@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Car } from '../../../../Car';
-import { CarentalServiceService } from '../../../../Services/carental-service.service';
+import { CarentalServiceService } from '../../Services/carental-service.service';
 import { Router } from '@angular/router';
 import { prod } from '../../../../prod';
 

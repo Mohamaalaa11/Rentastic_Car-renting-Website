@@ -7,8 +7,11 @@
 ></app-header>
 
 <div class="row body px-4">
+ 
   <!-- Filter side-bar -->
-  <div class="col-lg-2 filter">
+<div class="col-lg-2 filter">
+    <form action="">
+    <div class="">
     <button
       class="btn-filter d-lg-none w-100 mb-3 d-flex align-items-center justify-content-center"
       type="button"
@@ -55,8 +58,123 @@
           </div>
         </div>
       </div>
+      <!-- price -->
+      <div>
+        <button
+          class="btn-filter-border-none w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsePrice"
+          aria-expanded="false"
+          aria-controls="collapsePrice"
+        >
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold">Price</h5>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </button>
+
+        <div class="collapse show" id="collapsePrice">
+          <div class="py-3">
+            <form class="brand">
+              <div
+                class="form-inline d-flex align-items-center py-1"
+              >
+                <input class="form-input" type="text" placeholder="From"/>
+                
+              </div>
+              <div
+                class="form-inline d-flex align-items-center py-1"
+              >
+                <input class="form-input" type="text" placeholder="To"/>
+                
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- styleeeeeeeeeeeeeee -->
+      <div>
+        <button
+          class="btn-filter-border-none w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseStyle"
+          aria-expanded="false"
+          aria-controls="collapseStyle"
+        >
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold">Style</h5>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </button>
+
+        <div class="collapse show" id="collapseStyle">
+          <div class="py-3">
+            <form class="brand">
+              <div
+                class="form-inline d-flex align-items-center py-1"
+                
+              >
+                <input type="checkbox" />
+                <label class="ps-3">Economy</label>
+              </div>
+              <div
+                class="form-inline d-flex align-items-center py-1"
+                
+              >
+                <input type="checkbox" />
+                <label class="ps-3">Business</label>
+              </div>
+              <div
+                class="form-inline d-flex align-items-center py-1"
+                
+              >
+                <input type="checkbox" />
+                <label class="ps-3">Luxury</label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- collloooors -->
+      <div>
+        <button
+          class="btn-filter-border-none w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseColor"
+          aria-expanded="false"
+          aria-controls="collapseColor"
+        >
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold">Colors</h5>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </button>
+
+        <div class="collapse show" id="collapseColor">
+          <div class="py-3">
+            <form class="brand">
+              <div
+                class="form-inline d-flex align-items-center py-1"
+                *ngFor="let color of colors"
+              >
+                <input type="checkbox" />
+                <label class="ps-3">{{ color }}</label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  </form>
+</div>
+
+
+  
 
   <!-- Cars Section -->
   <div class="col-lg-10">
@@ -75,14 +193,18 @@
 
       <!-- Sort -->
       <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-        <select class="w-100 form-input" name="" id=""></select>
+        <select class="w-100 form-input" name="" id="">
+          <option class="dropdown-item" value="">Price : Low to High</option>
+          <option class="dropdown-item" value="">Price : High to Low</option>
+          <option class="dropdown-item" value="">Rating</option>
+        </select>
       </div>
     </div>
 
     <!-- Cars -->
-    <div class="row">
+    <div class="row gy-4 mt-5 mb-5">
       <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of cars">
-        <app-card></app-card>
+        <app-card ></app-card>
       </div>
     </div>
   </div>

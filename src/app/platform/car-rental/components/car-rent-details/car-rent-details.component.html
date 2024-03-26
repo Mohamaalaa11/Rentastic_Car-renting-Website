@@ -1,0 +1,40 @@
+<div class="details">
+    <div class="car-details">
+        <div>
+            <img class="w-100" [src]="car.images" alt="Car Image">
+
+        </div>
+      <div class="details-text">
+        <h2>{{ car.name }}</h2>
+        <p><span style="color: #751f1f; " >{{ car.pricePerDay }} </span> <span style="font-size: 12px;"> EGP</span>/ Day</p>
+
+          
+        <p><strong>Description </strong></p>
+        <p class="data">{{ car.description }}</p>
+        <p><strong>Category </strong></p>
+        <p class="data">{{ car.category }}</p>
+        <div class="otherdetails">
+        <div>
+            <img src="assets/imgs/colorlogo.png" alt="color logo">
+            <span>{{car.color}}</span>
+          </div>
+          <div>
+            <img src="assets/imgs/seatlogo.png" alt="seat logo">
+            <span>{{car.seatCount}} seats </span>
+          </div>
+        <ng-container *ngIf="car.hasAirCondition">
+          <div>
+            <img src="assets/imgs/aircondition.png" alt="Air Condition Logo">
+            <span>Air Condition</span>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="car.isAutomatic">
+          <div>
+            <img src="assets/imgs/manual.png" alt="Manual Logo">
+            <span>Manual</span>
+          </div>
+        </ng-container>
+    </div>
+      </div>
+    </div>
+</div>

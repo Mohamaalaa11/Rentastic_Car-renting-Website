@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Car } from '../../../../Car';
-import { CarentalServiceService } from '../../../../Services/carental-service.service';
+import { CarentalServiceService } from '../../Services/carental-service.service';
 import { Router } from '@angular/router';
 import { prod } from '../../../../prod';
 
