@@ -18,6 +18,7 @@ export class ListcarComponent implements OnInit {
   searchCategory: string = '';
   itemsPerPage = 10;
   currentPage = 1;
+  
 
   constructor(
     private carservices: CarentalServiceService,
