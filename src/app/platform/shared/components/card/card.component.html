@@ -1,4 +1,4 @@
-<div *ngFor="let item of cars" class="card m-5" style="width: 18rem;">
+<div *ngFor="let item of cars" class="card mx-5 ">
     <img [src]="item.image" class="card-img-top" alt="...">
     <div class="card-body">
       <h4 class="fw-bold card-title">{{item.name+" "+item.brand+" "+item.modelYear}}</h4>
@@ -25,6 +25,6 @@
     <hr>
     <div class=" d-flex p-3 justify-content-between">
       <p class="fw-bold">{{item.pricePerDay}} <span class=" text-red">EGP/Day</span></p>
-      <a href="#" class="fw-bold text-red">Rent Now</a>
+      <a href="#" class="fw-bold text-red">Rent Now <i class="fa-solid fa-arrow-right text-red"></i></a>
     </div>
   </div>
