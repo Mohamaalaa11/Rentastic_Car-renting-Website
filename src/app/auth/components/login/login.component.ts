@@ -17,7 +17,6 @@ export class LoginComponent {
   errors: string = '';
 
   loginForm = new FormGroup({
-
     email: new FormControl<string>('', [Validators.required, Validators.email]),
 
     password: new FormControl<string>('', [
@@ -37,13 +36,14 @@ export class LoginComponent {
         localStorage.setItem('token', res.token);
         const token = jwtDecode(localStorage.getItem('token')!);
         const decodedToken = JSON.parse(JSON.stringify(token));
+        console.log(decodedToken);
         const role =
           decodedToken[
             'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
           ];
 
         if (role === 'Admin') {
-          this.router.navigate(['auth', 'register']);
+          this.router.navigate(['admin']);
         } else if (role === 'User') {
           this.router.navigate(['']);
         }
