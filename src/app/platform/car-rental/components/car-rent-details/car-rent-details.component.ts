@@ -8,10 +8,10 @@ import { Car } from '../../types/car';
 export class CarRentDetailsComponent {
   car: Car={
     id: 1,
-    name: 'Nissan',
-    brand: 'Sunny',
+    name: 'Sunny',
+    brand: 'Nissan',
     modelYear: '2022',
-    description: '',
+    description: 'Lörem ipsum neskade nölingar ronar emedan pogon huruvida vittneslitteratur. Polyk obel, manera innan antenat.',
     color: 'silver',
     category: 'Luxury',
     seatCount: 4,
