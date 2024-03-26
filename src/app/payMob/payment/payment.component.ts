@@ -16,9 +16,8 @@ export class PaymentComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   async ngOnInit() {
-    const token = await this.getAuthenticationToken();
-
-    this.createPaymentLink(token);
+    // const token = await this.getAuthenticationToken();
+    // this.createPaymentLink(token);
   }
 
   // async getPaymentKey(amount: number) {
