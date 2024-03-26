@@ -53,7 +53,7 @@
     </tr>
   </table>
   
-  <div class="pagination">
+  <div class="pagination" *ngIf="totalPages > 1">
     <button *ngIf="currentPage > 1" (click)="changePage(currentPage - 1)" class="pagebutton">
       <img src="assets/imgs/Vector.png" alt="previous" >
     </button>
