@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CarentalServiceService } from '../../../../Services/carental-service.service';
+import { CarentalServiceService } from '../../Services/carental-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from '../../../../Car';
 

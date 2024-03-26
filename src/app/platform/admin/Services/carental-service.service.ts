@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Car } from '../Car';
+import { Car } from '../../../Car';
 import { Observable, catchError, throwError } from 'rxjs';
-import { prod } from '../prod';
+import { prod } from '../../../prod';
 
 @Injectable({
   providedIn: 'root'

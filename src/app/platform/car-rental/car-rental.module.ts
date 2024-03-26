@@ -6,14 +6,18 @@ import { ReviewCardComponent } from './components/review-card/review-card.compon
 import { CarsComponent } from './components/cars/cars.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { CarRentDetailsComponent } from './components/car-rent-details/car-rent-details.component';
 
 @NgModule({
-  declarations: [ReviewCardComponent, CarsComponent],
+  declarations: [ReviewCardComponent, CarsComponent, CarRentDetailsComponent],
   imports: [
     CommonModule,
     CarRentalRoutingModule,
     HttpClientModule,
-    SharedModule,
+    SharedModule
   ],
+  exports:[
+    CarRentDetailsComponent
+  ]
 })
 export class CarRentalModule {}

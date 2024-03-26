@@ -12,6 +12,7 @@ export class CarsComponent implements OnInit {
 
   cars: Car[] = [];
   models: string[] = [];
+  colors:string[]=[];
 
   ngOnInit(): void {
     this.getCars();
@@ -22,6 +23,7 @@ export class CarsComponent implements OnInit {
       next: (res) => {
         this.cars = JSON.parse(JSON.stringify(res));
         this.getModels();
+        this.getColors();
         console.log(this.models);
       },
     });
@@ -30,4 +32,9 @@ export class CarsComponent implements OnInit {
   getModels() {
     this.models = Array.from(new Set(this.cars.map((car) => car.brand)));
   }
+  getColors(){
+    this.colors = Array.from(new Set(this.cars.map((car) => car.color)));
+
+  }
+
 }

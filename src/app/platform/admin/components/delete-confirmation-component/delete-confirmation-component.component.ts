@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CarentalServiceService } from '../../../../Services/carental-service.service';
+import { CarentalServiceService } from '../../Services/carental-service.service';
 import { Car } from '../../../../Car';
 
 @Component({
