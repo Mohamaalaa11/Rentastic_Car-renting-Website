@@ -45,6 +45,20 @@ button {
     justify-content: space-between;
 }
 
+.otherdetails > div {
+    display: flex;
+    align-items: center;
+}
+
+.otherdetails > div img {
+    margin-right: 3px; 
+    margin-left: 10px;
+}
+
+.otherdetails > div span {
+    margin-left: 3px; }
+
+
 .butt {
     display: flex;
     justify-content: space-between;
@@ -186,6 +200,10 @@ hr {
     margin-bottom: 50px;
     color: #aaa;
 }
+.de{
+    display: flex;
+    justify-content: flex-start;
+}
 
 @media only screen and (max-width: 768px) {
     .modal {
@@ -204,10 +222,42 @@ hr {
       .car-details img {
         margin-right: 0;
         margin-bottom: 20px;
+       
       }
 
     .nameofcar {
         margin-left: 0;
         text-align: center;
     }
+    .otherdetails {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .otherdetails > div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px; 
+        flex-basis: 48%; 
+    }
+    
+    .otherdetails > div img {
+        margin-right: 5px; 
+        margin-left: 5px; 
+        max-width: 20px; 
+        margin-top: 15px;
+    }
+    
+    .otherdetails > div span {
+        margin-left: 5px; 
+       
+      
+    }
+    .details{
+        margin: 10px;
+    }
+    
+    
+    
 }
