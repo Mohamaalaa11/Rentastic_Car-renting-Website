@@ -12,4 +12,8 @@ export class CarService {
   getCars(): Observable<Car[]> {
     return this.http.get<Car[]>('https://localhost:7283/api/Cars');
   }
+
+  getCar(id: string): Observable<Car> {
+    return this.http.get<Car>(`https://localhost:7283/api/Cars/${id}`);
+  }
 }

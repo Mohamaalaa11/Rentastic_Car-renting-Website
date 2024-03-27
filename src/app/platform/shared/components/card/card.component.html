@@ -66,7 +66,9 @@
     <p class="fw-bold">
       {{ car?.PricePerDay }} <span class="text-red">EGP/Day</span>
     </p>
-    <a href="#" class="fw-bold text-red"
+    <a
+      [routerLink]="['/car-rental', 'car-details', car?.Id]"
+      class="fw-bold text-red"
       >Rent Now <i class="fa-solid fa-arrow-right text-red"></i
     ></a>
   </div>

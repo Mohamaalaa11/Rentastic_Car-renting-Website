@@ -7,5 +7,5 @@ import { Car } from '../../../car-rental/types/car';
   styleUrl: './card.component.css',
 })
 export class CardComponent {
-  @Input() car?: Car;
+  @Input({}) car?: Car;
 }
