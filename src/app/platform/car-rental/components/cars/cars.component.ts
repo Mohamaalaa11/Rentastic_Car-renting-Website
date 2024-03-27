@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Car } from '../../types/car';
 import { CarService } from '../../services/car.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cars',
@@ -12,7 +13,7 @@ export class CarsComponent implements OnInit {
 
   cars: Car[] = [];
   models: string[] = [];
-  colors:string[]=[];
+  colors: string[] = [];
 
   ngOnInit(): void {
     this.getCars();
@@ -21,20 +22,19 @@ export class CarsComponent implements OnInit {
   getCars() {
     this.carServices.getCars().subscribe({
       next: (res) => {
-        this.cars = JSON.parse(JSON.stringify(res));
+        this.cars = res;
+        console.log(this.cars);
         this.getModels();
-        this.getColors();
         console.log(this.models);
+        this.getColors();
       },
     });
   }
 
   getModels() {
-    this.models = Array.from(new Set(this.cars.map((car) => car.brand)));
+    this.models = Array.from(new Set(this.cars.map((car) => car.Brand)));
   }
-  getColors(){
-    this.colors = Array.from(new Set(this.cars.map((car) => car.color)));
-
+  getColors() {
+    this.colors = Array.from(new Set(this.cars.map((car) => car.Color)));
   }
-
 }

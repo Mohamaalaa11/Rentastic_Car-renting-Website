@@ -25,19 +25,19 @@ export class CarRentDetailsComponent {
   });
 
   car: Car = {
-    id: 1,
-    name: 'Sunny',
-    brand: 'Nissan',
-    modelYear: '2022',
-    description:
+    Id: 1,
+    Name: 'Sunny',
+    Brand: 'Nissan',
+    ModelYear: '2022',
+    Description:
       'Lörem ipsum neskade nölingar ronar emedan pogon huruvida vittneslitteratur. Polyk obel, manera innan antenat.',
-    color: 'silver',
-    category: 'Luxury',
-    seatCount: 4,
-    pricePerDay: 250,
-    images: '../../assets/imgs/car1.png',
-    hasAirCondition: true,
-    isAutomatic: true,
+    Color: 'silver',
+    Category: 'Luxury',
+    SeatCount: 4,
+    PricePerDay: 250,
+    Images: '../../assets/imgs/car1.png',
+    HasAirCondition: true,
+    IsAutomatic: true,
   };
 
   dateValidator(): ValidatorFn {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Car } from '../../../car-rental/types/car';
 
 @Component({
@@ -7,20 +7,5 @@ import { Car } from '../../../car-rental/types/car';
   styleUrl: './card.component.css',
 })
 export class CardComponent {
-  cars: Car[] = [
-    {
-      id: 1,
-      name: 'Nissan',
-      brand: 'Sunny',
-      modelYear: '2022',
-      description: '',
-      color: 'silver',
-      category: 'Luxury',
-      seatCount: 4,
-      pricePerDay: 250,
-      images: '../../assets/imgs/car1.png',
-      hasAirCondition: true,
-      isAutomatic: true,
-    },
-  ];
+  @Input() car?: Car;
 }
