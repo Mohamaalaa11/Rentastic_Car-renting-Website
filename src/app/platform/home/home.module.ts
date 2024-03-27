@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { HowItWorkComponent } from './components/how-it-work/how-it-work.component';
 import { SharedModule } from '../shared/shared.module';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SharedModule } from '../shared/shared.module';
     FilterComponent,
     SiteInfoComponent,
     HowItWorkComponent,
+    AboutUsComponent,
   ],
   imports: [
     CommonModule,
