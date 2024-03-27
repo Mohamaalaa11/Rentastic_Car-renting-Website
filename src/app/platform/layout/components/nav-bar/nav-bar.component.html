@@ -58,6 +58,7 @@
           </ng-container>
         </ul>
 
+        <!-- Login And Logout -->
         <a
           type="button"
           class="btn btn-red text-white py-2 px-5"
@@ -67,9 +68,17 @@
           LOG IN
         </a>
 
-        <button class="" *ngIf="isLoggedIn" (click)="onLoggedOut()">
-          LogOut
-        </button>
+        <ng-container *ngIf="isLoggedIn">
+          <button class="logout-admin" *ngIf="!isAdmin" (click)="onLoggedOut()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <button class="logout-admin" *ngIf="isAdmin" (click)="onLoggedOut()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </ng-container>
       </div>
     </div>
   </nav>
