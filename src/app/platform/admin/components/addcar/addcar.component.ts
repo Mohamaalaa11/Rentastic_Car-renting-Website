@@ -39,7 +39,10 @@ export class AddcarComponent {
       brand: ['', Validators.required],
       modelYear: [
         '',
-        [Validators.required, Validators.pattern('^(1999|20[0-1][0-9]|2025)$')],
+        [
+          Validators.required,
+          Validators.pattern('^(19[0-9]{2}|20[0-1][0-9]|202[0-5])$'),
+        ],
       ],
       color: ['', Validators.required],
       category: ['', Validators.required],
