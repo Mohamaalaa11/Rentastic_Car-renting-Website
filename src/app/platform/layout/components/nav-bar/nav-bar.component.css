@@ -1,0 +1,6 @@
+.logout-admin {
+  border: none;
+  outline: none;
+  color: var(--red-color);
+  background-color: transparent;
+}

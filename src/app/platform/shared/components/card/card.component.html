@@ -1,11 +1,11 @@
-<div *ngFor="let item of cars" class="card mx-5">
+<div *ngFor="let item of cars" class="card">
   <img [src]="item.images" class="card-img-top" alt="..." />
   <div class="card-body">
     <h4 class="fw-bold card-title">
       {{ item.name + " " + item.brand + " " + item.modelYear }}
     </h4>
     <app-star-rating></app-star-rating>
-  </div>  
+  </div>
   <!-- flex-wrap align-items-start -->
   <div class="d-flex mx-3 flex-wrap align-items-start justify-content-between">
     <div class="d-flex">
