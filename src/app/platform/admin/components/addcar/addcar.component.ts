@@ -12,7 +12,6 @@ import { prod } from '../../../../prod';
   styleUrl: './addcar.component.css',
 })
 export class AddcarComponent {
- 
   car: Car = {
     id: 0,
     name: '',
@@ -38,15 +37,25 @@ export class AddcarComponent {
     this.carForm = this.formBuilder.group({
       name: ['', Validators.required],
       brand: ['', Validators.required],
-      modelYear: ['', [Validators.required, Validators.pattern('^(1999|20[0-1][0-9]|2025)$')]],
+      modelYear: [
+        '',
+        [Validators.required, Validators.pattern('^(1999|20[0-1][0-9]|2025)$')],
+      ],
       color: ['', Validators.required],
       category: ['', Validators.required],
-      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(500),
+        ],
+      ],
       seatCount: ['', [Validators.required, Validators.pattern(/^(2|4|6)$/)]],
       pricePerDay: ['', [Validators.required, Validators.min(0.01)]],
       hasAirCondition: [false, Validators.required],
       isAutomatic: [false, Validators.required],
-      images: ['', Validators.required]
+      images: ['', Validators.required],
     });
   }
 
@@ -54,7 +63,7 @@ export class AddcarComponent {
     if (this.carForm.valid) {
       this.carService.addCar(this.carForm.value).subscribe({
         next: () => {
-          this.router.navigateByUrl('/car');
+          this.router.navigate(['', 'admin', 'car']);
         },
         error: (errors) => {
           if (Array.isArray(errors)) {
@@ -62,17 +71,8 @@ export class AddcarComponent {
           } else {
             this.errorMessages = [errors];
           }
-        }
+        },
       });
     }
   }
-  
-  }
-
- 
-
-
-
-
-
- 
+}

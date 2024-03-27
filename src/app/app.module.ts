@@ -28,13 +28,10 @@ import { CarRentalModule } from './platform/car-rental/car-rental.module';
     AppComponent,
     PaymentComponent,
     PaypalComponent,
-    ListcarComponent,
-    AdminhomeComponent,
-    AddcarComponent,
+
     EditcarComponent,
     DeletecarComponent,
     DeleteConfirmationComponentComponent,
-    AdminhomeComponent,
     ReservationlistComponent,
   ],
 
@@ -48,7 +45,9 @@ import { CarRentalModule } from './platform/car-rental/car-rental.module';
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatSelectModule,SharedModule,CarRentalModule
+    MatSelectModule,
+    SharedModule,
+    CarRentalModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

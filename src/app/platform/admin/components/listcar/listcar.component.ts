@@ -88,7 +88,7 @@ export class ListcarComponent implements OnInit {
   // }
 
   addCar() {
-    this.router.navigateByUrl('/addcar');
+    this.router.navigate(['admin', 'add-car']);
   }
   openEditCar(car: Car) {
     this.router.navigateByUrl(`/editcar/${car.id}`);
