@@ -35,8 +35,10 @@ export class LoginComponent {
       next: (res: any) => {
         localStorage.setItem('token', res.token);
 
+        console.log(res.token);
         // Decode Token and pasre it to from (JSON) string into an object.
         const decodedToken = jwtDecode(localStorage.getItem('token')!);
+        console.log(decodedToken);
         const parsedToken = JSON.parse(JSON.stringify(decodedToken));
         const role =
           parsedToken[

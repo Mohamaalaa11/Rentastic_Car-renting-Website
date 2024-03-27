@@ -1,23 +1,23 @@
 export class Car {
-  id: number;
-  name: string;
-  brand: string;
-  modelYear: string;
-  description: string;
-  color: string;
-  category: string;
-  seatCount: number;
-  pricePerDay: number;
-  images: string;
-  hasAirCondition: boolean;
+  Id: number;
+  Name: string;
+  Brand: string;
+  ModelYear: string;
+  Description: string;
+  Color: string;
+  Category: string;
+  SeatCount: number;
+  PricePerDay: number;
+  Images: string;
+  HasAirCondition: boolean;
 
-  isAutomatic: boolean;
+  IsAutomatic: boolean;
 
   constructor(
     id: number,
     name: string,
     brand: string,
-    modelYear: string,
+    ModelYear: string,
     description: string,
     color: string,
     category: string,
@@ -27,18 +27,18 @@ export class Car {
     hasAirCondition: boolean,
     isAutomatic: boolean
   ) {
-    this.id = id;
-    this.name = name;
-    this.brand = brand;
-    this.modelYear = modelYear;
-    this.description = description;
-    this.color = color;
-    this.category = category;
-    this.seatCount = seatCount;
-    this.pricePerDay = pricePerDay;
-    this.images = images;
-    this.hasAirCondition = hasAirCondition;
+    this.Id = id;
+    this.Name = name;
+    this.Brand = brand;
+    this.ModelYear = ModelYear;
+    this.Description = description;
+    this.Color = color;
+    this.Category = category;
+    this.SeatCount = seatCount;
+    this.PricePerDay = pricePerDay;
+    this.Images = images;
+    this.HasAirCondition = hasAirCondition;
 
-    this.isAutomatic = isAutomatic;
+    this.IsAutomatic = isAutomatic;
   }
 }
