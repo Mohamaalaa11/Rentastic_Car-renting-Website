@@ -1,15 +1,29 @@
-.ico{
-    width: 28px;
-    height: 28px;
+.ico {
+  width: 28px;
+  height: 28px;
 }
-.sp{
-    margin-right: 9px;
-}
-
-.text-grey{
-    color: #6B7280;
+.sp {
+  margin-right: 9px;
 }
 
-a{
-    text-decoration: none;
+.text-grey {
+  color: #6b7280;
+}
+
+a {
+  text-decoration: none;
+}
+.card {
+  height: 560px;
+}
+
+.img-container {
+  /* height: 300px; */
+  overflow-y: hidden;
+}
+
+.img-container img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }

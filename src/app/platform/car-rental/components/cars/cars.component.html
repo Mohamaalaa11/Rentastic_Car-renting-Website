@@ -8,7 +8,7 @@
 
 <div class="row body px-4">
   <!-- Filter side-bar -->
-  <div class="col-lg-2 filter pe-5">
+  <div class="col-lg-2 filter pe-lg-5">
     <form action="">
       <div class="">
         <button
@@ -28,7 +28,7 @@
           <hr />
 
           <!-- Model -->
-          <div>
+          <div class="mt-2">
             <button
               class="btn-filter-border-none w-100"
               type="button"
@@ -38,7 +38,7 @@
               aria-controls="collapseExample"
             >
               <div class="d-flex justify-content-between align-items-center">
-                <h5 class="fw-bold">Model</h5>
+                <h5 class="fw-bold">Brand</h5>
                 <i class="fa-solid fa-chevron-down"></i>
               </div>
             </button>
@@ -58,7 +58,7 @@
             </div>
           </div>
           <!-- price -->
-          <div>
+          <div class="mt-4">
             <button
               class="btn-filter-border-none w-100"
               type="button"
@@ -96,7 +96,7 @@
           </div>
 
           <!-- styleeeeeeeeeeeeeee -->
-          <div>
+          <div class="mt-4">
             <button
               class="btn-filter-border-none w-100"
               type="button"
@@ -131,7 +131,7 @@
             </div>
           </div>
           <!-- collloooors -->
-          <div>
+          <div class="mt-4">
             <button
               class="btn-filter-border-none w-100"
               type="button"
@@ -193,7 +193,7 @@
     <!-- Cars -->
     <div class="row gy-5 gx-5 mt-5 mb-5">
       <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of cars">
-        <app-card></app-card>
+        <app-card [car]="car"></app-card>
       </div>
     </div>
   </div>
