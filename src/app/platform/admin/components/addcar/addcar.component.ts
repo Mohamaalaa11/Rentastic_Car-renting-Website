@@ -63,7 +63,7 @@ export class AddcarComponent {
     if (this.carForm.valid) {
       this.carService.addCar(this.carForm.value).subscribe({
         next: () => {
-          this.router.navigate(['', 'admin', 'car']);
+          this.router.navigate(['', 'admin', 'cars']);
         },
         error: (errors) => {
           if (Array.isArray(errors)) {
