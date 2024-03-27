@@ -10,6 +10,6 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 @NgModule({
   declarations: [HeaderComponent, CardComponent, ErrorPageComponent, StarRatingComponent],
   imports: [CommonModule, SharedRoutingModule],
-  exports: [HeaderComponent, CardComponent,ErrorPageComponent],
+  exports: [HeaderComponent, CardComponent,ErrorPageComponent,StarRatingComponent],
 })
 export class SharedModule {}
