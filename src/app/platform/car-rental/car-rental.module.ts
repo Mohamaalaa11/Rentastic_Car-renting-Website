@@ -7,14 +7,17 @@ import { CarsComponent } from './components/cars/cars.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
 import { CarRentDetailsComponent } from './components/car-rent-details/car-rent-details.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [ReviewCardComponent, CarsComponent, CarRentDetailsComponent],
   imports: [
     CommonModule,
     CarRentalRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModule
   ],
   exports:[
     CarRentDetailsComponent
