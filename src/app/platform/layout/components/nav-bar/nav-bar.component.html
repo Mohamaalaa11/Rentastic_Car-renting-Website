@@ -1,9 +1,9 @@
 <div class="container mt-2">
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid py-80">
-      <a class="navbar-brand" href="#"
-        ><img src="./assets/imgs/logo.png" alt=""
-      /></a>
+      <a class="navbar-brand" href="#">
+        <img src="./assets/imgs/logo.png" alt="">
+      </a>
 
       <button
         class="navbar-toggler"
@@ -22,9 +22,7 @@
           <!-- User Links -->
           <ng-container *ngIf="!isAdmin">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" [routerLink]="''"
-                >Home</a
-              >
+              <a class="nav-link active" aria-current="page" [routerLink]="''">Home</a>
             </li>
 
             <li class="nav-item ps-3">
@@ -47,9 +45,7 @@
             </li>
 
             <li class="nav-item ps-3">
-              <a class="nav-link" [routerLink]="['admin', 'reservations']"
-                >Reservations</a
-              >
+              <a class="nav-link" [routerLink]="['admin', 'reservations']">Reservations</a>
             </li>
 
             <li class="nav-item ps-3">
@@ -59,23 +55,25 @@
         </ul>
 
         <!-- Login And Logout -->
-        <a
-          type="button"
-          class="btn btn-red text-white py-2 px-5"
-          [routerLink]="'auth/login'"
-          *ngIf="!isLoggedIn"
-        >
-          LOG IN
-        </a>
-
-        <ng-container *ngIf="isLoggedIn">
-          <button class="logout-admin" *ngIf="!isAdmin" (click)="onLoggedOut()">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          </button>
+        <ng-container *ngIf="!isLoggedIn">
+          <a type="button" class="btn btn-red text-white py-2 px-5" [routerLink]="'auth/login'">LOG IN</a>
         </ng-container>
 
-        <ng-container *ngIf="isLoggedIn">
-          <button class="logout-admin" *ngIf="isAdmin" (click)="onLoggedOut()">
+        <!-- User Profile Dropdown -->
+        <ng-container *ngIf="isLoggedIn && !isAdmin">
+          <div class="dropdown">
+            <img src="../../../../../assets/imgs/user.png" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" alt="">
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" [routerLink]="['userprofile', 'profile']">Edit Profile</a></li>
+              <li><a class="dropdown-item" [routerLink]="['userprofile', 'my-orders']">My Orders</a></li>
+              <li><a class="dropdown-item" (click)="onLoggedOut()">Log Out</a></li>
+            </ul>
+          </div>
+        </ng-container>
+
+        <!-- Admin Logout Button -->
+        <ng-container *ngIf="isLoggedIn && isAdmin">
+          <button class="logout-admin" (click)="onLoggedOut()">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
         </ng-container>

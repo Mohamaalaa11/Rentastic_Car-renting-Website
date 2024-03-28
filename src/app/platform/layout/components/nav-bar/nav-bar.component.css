@@ -4,3 +4,7 @@
   color: var(--red-color);
   background-color: transparent;
 }
+.dropdown-menu .dropdown-item:hover {
+  background-color: var(--red-color) !important;
+  color: white;
+}
