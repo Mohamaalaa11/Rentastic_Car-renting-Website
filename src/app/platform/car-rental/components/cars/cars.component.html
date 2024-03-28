@@ -170,7 +170,14 @@
     <div class="row justify-content-between">
       <!-- Search bar -->
       <div class="col-12 col-lg-8">
-        <input class="w-100 form-input" type="search" placeholder="Search" />
+        <input
+          class="w-100 form-input"
+          type="text"
+          placeholder="Search By Name or Brand"
+          [(ngModel)]="carName"
+          [(ngModel)]="carModel"
+          (input)="onSearch()"
+        />
       </div>
 
       <!-- Sort Label -->
@@ -192,7 +199,7 @@
 
     <!-- Cars -->
     <div class="row gy-5 gx-5 mt-5 mb-5">
-      <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of cars">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of filteredCars">
         <app-card [car]="car"></app-card>
       </div>
     </div>
