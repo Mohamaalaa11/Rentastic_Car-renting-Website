@@ -1,47 +1,47 @@
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     <!-- IMG -->
     <div class="col-12 col-lg-6">
-      <img class="img-fluid w-100" [src]="car.Images" alt="" />
+      <img class="img-fluid w-100" [src]="car?.Images" alt="" />
     </div>
     <!-- Details -->
     <div class="col-12 col-lg-6 mt-5 mt-lg-0">
       <h2 class="fw-bold">
-        {{ car.Brand }} {{ car.Name }} {{ car.ModelYear }}
+        {{ car?.Brand }} {{ car?.Name }} {{ car?.ModelYear }}
       </h2>
       <p>
         <span class="text-red fw-bold" style="font-size: 24px"
-          >{{ car.PricePerDay }}
+          >{{ car?.PricePerDay }}
         </span>
         <span style="font-size: 12px"> EGP</span>/ Day
       </p>
 
       <div>
         <p class="mb-2"><strong>Description </strong></p>
-        <p class="">{{ car.Description }}</p>
+        <p class="">{{ car?.Description }}</p>
       </div>
 
       <div>
         <p class="mb-2"><strong>Category </strong></p>
-        <p class="">{{ car.Category }}</p>
+        <p class="">{{ car?.Category }}</p>
       </div>
       <!-- Icons -->
       <div class="d-flex flex-row">
         <div class="">
           <img src="assets/imgs/colorlogo.png" alt="color logo" />
-          <span class="mx-2">{{ car.Color }}</span>
+          <span class="mx-2">{{ car?.Color }}</span>
         </div>
         <div class="mx-5">
           <img src="assets/imgs/seatlogo.png" alt="seat logo" />
-          <span class="mx-2">{{ car.SeatCount }} seats </span>
+          <span class="mx-2">{{ car?.SeatCount }} seats </span>
         </div>
-        <ng-container class="mx-5" *ngIf="car.HasAirCondition">
+        <ng-container class="mx-5" *ngIf="car?.HasAirCondition">
           <div>
             <img src="assets/imgs/aircondition.png" alt="Air Condition Logo" />
             <span class="mx-2">Air Condition</span>
           </div>
         </ng-container>
-        <ng-container *ngIf="car.IsAutomatic">
+        <ng-container *ngIf="car?.IsAutomatic">
           <div class="mx-5">
             <img src="assets/imgs/manual.png" alt="Manual Logo" />
             <span class="mx-2">Manual</span>
@@ -50,12 +50,12 @@
       </div>
       <!-- Date & Button -->
       <form [formGroup]="rentForm">
-        <div class="d-flex flex-row mt-3">
+        <div class="row mt-3">
           <!-- Start Date -->
-          <div class="col-lg-6 mx-0 col-md-12">
+          <div class="col-12 col-lg-6">
             <div class="d-flex align-items-center alo justify-content-center">
               <i class="fa-solid fa-calendar-days m-2 text-red"></i>
-              <mat-form-field class="example-full-width">
+              <mat-form-field class="example-full-width w-100">
                 <mat-label>Pick-up date</mat-label>
                 <input
                   matInput
@@ -71,14 +71,17 @@
                   #pickupDatepicker
                   color="accent"
                 ></mat-datepicker>
+                <mat-error *ngIf="rentForm.get('startDate')?.errors">{{
+                  (rentForm.get("startDate")?.errors)!["invalidDate"]
+                }}</mat-error>
               </mat-form-field>
             </div>
           </div>
           <!-- End Date -->
-          <div class="col-lg-6 col-md-12">
+          <div class="col-12 col-lg-6">
             <div class="d-flex align-items-center justify-content-center">
               <i class="fa-solid fa-calendar-days m-2 text-red"></i>
-              <mat-form-field class="example-full-width">
+              <mat-form-field class="example-full-width w-100">
                 <mat-label>Return date</mat-label>
                 <input
                   matInput

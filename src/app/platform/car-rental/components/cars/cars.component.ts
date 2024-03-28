@@ -12,8 +12,11 @@ export class CarsComponent implements OnInit {
   constructor(private carServices: CarService) {}
 
   cars: Car[] = [];
+  filteredCars: Car[] = [];
   models: string[] = [];
   colors: string[] = [];
+  carName: string = '';
+  carModel: string = '';
 
   ngOnInit(): void {
     this.getCars();
@@ -23,9 +26,8 @@ export class CarsComponent implements OnInit {
     this.carServices.getCars().subscribe({
       next: (res) => {
         this.cars = res;
-        console.log(this.cars);
+        this.filteredCars = this.cars;
         this.getModels();
-        console.log(this.models);
         this.getColors();
       },
     });
@@ -36,5 +38,20 @@ export class CarsComponent implements OnInit {
   }
   getColors() {
     this.colors = Array.from(new Set(this.cars.map((car) => car.Color)));
+  }
+
+  onSearch() {
+    if (this.carName !== '' || this.carModel !== '') {
+      this.filteredCars = this.cars.filter((car) => {
+        return (
+          car.Name.toLocaleLowerCase().match(
+            this.carName.toLocaleLowerCase()
+          ) ||
+          car.Brand.toLocaleLowerCase().match(this.carModel.toLocaleLowerCase())
+        );
+      });
+    } else {
+      this.ngOnInit();
+    }
   }
 }
