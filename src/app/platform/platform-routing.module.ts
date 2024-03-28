@@ -32,6 +32,13 @@ const routes: Routes = [
             (m) => m.CarRentalModule
           ),
       },
+      {
+        path: 'userprofile',
+        loadChildren: () =>
+          import('./user/user.module').then(
+            (m) => m.UserModule
+          ),
+      }
     ],
   },
 ];
