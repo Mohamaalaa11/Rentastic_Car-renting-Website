@@ -10,7 +10,6 @@ export class Car {
   PricePerDay: number;
   Images: string;
   HasAirCondition: boolean;
-
   IsAutomatic: boolean;
 
   constructor(
@@ -38,7 +37,6 @@ export class Car {
     this.PricePerDay = pricePerDay;
     this.Images = images;
     this.HasAirCondition = hasAirCondition;
-
     this.IsAutomatic = isAutomatic;
   }
 }
