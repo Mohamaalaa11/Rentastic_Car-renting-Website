@@ -26,6 +26,7 @@ export class CarsComponent implements OnInit {
     this.carServices.getCars().subscribe({
       next: (res) => {
         this.cars = res;
+        console.log(res);
         this.filteredCars = this.cars;
         this.getModels();
         this.getColors();
@@ -52,6 +53,26 @@ export class CarsComponent implements OnInit {
       });
     } else {
       this.ngOnInit();
+    }
+  }
+
+  onSort(event: Event) {
+    let value = (event.target as HTMLInputElement).value;
+
+    if (value === 'all') {
+      this.getCars();
+    }
+
+    if (value === 'low') {
+      this.filteredCars = this.cars.sort(
+        // Ascending => 1, 2, 3
+        (a, b) => a.PricePerDay - b.PricePerDay
+      );
+    } else if (value === 'high') {
+      // Descending => 99, 98, 97
+      this.filteredCars = this.cars.sort(
+        (a, b) => b.PricePerDay - a.PricePerDay
+      );
     }
   }
 }

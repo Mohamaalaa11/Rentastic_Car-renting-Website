@@ -189,10 +189,13 @@
 
       <!-- Sort -->
       <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-        <select class="w-100 form-input" name="" id="">
-          <option class="dropdown-item" value="">Price : Low to High</option>
-          <option class="dropdown-item" value="">Price : High to Low</option>
-          <option class="dropdown-item" value="">Rating</option>
+        <select class="w-100 form-input" (change)="onSort($event)">
+          <option value="all">All</option>
+          <option class="dropdown-item" value="low">Price : Low to High</option>
+          <option class="dropdown-item" value="high">
+            Price : High to Low
+          </option>
+          <option class="dropdown-item" value="rate">Rating</option>
         </select>
       </div>
     </div>
