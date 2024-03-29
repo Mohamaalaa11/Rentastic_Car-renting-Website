@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../../services/car.service';
+import { CarRentingService } from '../../services/car-renting.service';
+import { CarAvailability } from '../../types/carAvailability';
 @Component({
   selector: 'app-car-rent-details',
   templateUrl: './car-rent-details.component.html',
@@ -16,11 +18,13 @@ import { CarService } from '../../services/car.service';
 })
 export class CarRentDetailsComponent implements OnInit {
   car: Car | undefined;
+  carAvailabilty: CarAvailability | undefined;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private carService: CarService
+    private carService: CarService,
+    private carRentingService: CarRentingService
   ) {}
 
   ngOnInit(): void {
@@ -36,9 +40,6 @@ export class CarRentDetailsComponent implements OnInit {
     });
   }
 
-  onReserve() {
-    throw new Error('Method not implemented.');
-  }
   rentForm = new FormGroup({
     startDate: new FormControl<Date>(new Date(), [
       Validators.required,
@@ -61,5 +62,38 @@ export class CarRentDetailsComponent implements OnInit {
         ? { invalidDate: 'You cannot use pervious dates' }
         : null;
     };
+  }
+
+  //  Add 5 hrs to Date to solve problem of getting the day before
+  setDate(date: Date) {
+    let d = date;
+    d.setHours(d.getHours() + 5);
+    d.setMinutes(d.getMinutes() + 30);
+    return new Date(d);
+  }
+
+  onReserve() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id')!;
+
+    if (!this.rentForm.invalid) {
+      this.carAvailabilty = {
+        carId: id,
+        startRentDate: this.setDate(
+          this.rentForm.controls.startDate.value!
+        ).toISOString(),
+        endRentDate: this.setDate(
+          this.rentForm.controls.endDate.value!
+        ).toISOString(),
+      };
+
+      this.carRentingService
+        .checkCarAvailability(this.carAvailabilty!)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+          },
+          error: (err) => {},
+        });
+    }
   }
 }
