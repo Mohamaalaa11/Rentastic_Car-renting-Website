@@ -7,6 +7,7 @@ import { DeletecarComponent } from './platform/admin/components/deletecar/delete
 import { HeroComponent } from './platform/home/components/hero/hero.component';
 import { AdminhomeComponent } from './platform/admin/components/adminhome/adminhome.component';
 import { ReservationlistComponent } from './platform/admin/components/reservationlist/reservationlist.component';
+import { FilterComponent } from './platform/home/components/filter/filter.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'home', component: AdminhomeComponent },
   { path: 'car', component: ListcarComponent },
   { path: 'reservation', component: ReservationlistComponent },
+  
 ];
 
 @NgModule({
