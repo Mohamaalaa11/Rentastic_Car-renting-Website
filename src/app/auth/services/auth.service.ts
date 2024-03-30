@@ -18,7 +18,11 @@ export class AuthService {
   }
 
   register(model: Register) {
-    return this.http.post('https://localhost:7283/api/Account/register', model);
+    return this.http.post(
+      'https://localhost:7283/api/Account/register',
+      model,
+      { responseType: 'text' }
+    );
   }
 
   logout() {
