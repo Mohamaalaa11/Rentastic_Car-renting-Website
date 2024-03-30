@@ -34,6 +34,7 @@ export class CarRentDetailsComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id')!;
 
+    this.startDate = new Date().toISOString();
     this.carService.getCar(id).subscribe({
       next: (res) => {
         this.car = res;
@@ -46,7 +47,6 @@ export class CarRentDetailsComponent implements OnInit {
 
   getStartDate(e: any) {
     this.startDate = this.setDate(e.value).toISOString();
-    return this.startDate;
   }
 
   rentForm = new FormGroup({
@@ -78,14 +78,15 @@ export class CarRentDetailsComponent implements OnInit {
 
   endDateValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      let day = this.startDate;
+      let startDate = this.startDate;
+      let returnDate = this.setDate(control.value).toISOString();
       if (!(control && control.value)) {
         // if there's no control or no value, that's ok
         return null;
       }
 
       // return null if there's no errors
-      return control.value.toISOString() < day
+      return returnDate < startDate
         ? { invalidDate: 'End date must be after pickup date' }
         : null;
     };
