@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../../types/car';
 import {
   AbstractControl,
+  FormBuilder,
   FormControl,
   FormGroup,
   ValidatorFn,
@@ -19,6 +20,9 @@ import { CarAvailability } from '../../types/carAvailability';
 export class CarRentDetailsComponent implements OnInit {
   car: Car | undefined;
   carAvailabilty: CarAvailability | undefined;
+  endDate!: string;
+  startDate!: String;
+  error: any = { isError: false, errorMessage: 'dsad' };
 
   constructor(
     private router: Router,
@@ -40,15 +44,23 @@ export class CarRentDetailsComponent implements OnInit {
     });
   }
 
+  getStartDate(e: any) {
+    this.startDate = this.setDate(e.value).toISOString();
+    return this.startDate;
+  }
+
   rentForm = new FormGroup({
     startDate: new FormControl<Date>(new Date(), [
       Validators.required,
-      this.dateValidator(),
+      this.startDateValidator(),
     ]),
-    endDate: new FormControl<Date>(new Date(), [Validators.required]),
+    endDate: new FormControl<Date>(new Date(), [
+      Validators.required,
+      this.endDateValidator(),
+    ]),
   });
 
-  dateValidator(): ValidatorFn {
+  startDateValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const today = new Date().getTime();
 
@@ -64,6 +76,42 @@ export class CarRentDetailsComponent implements OnInit {
     };
   }
 
+  endDateValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      let day = this.startDate;
+      if (!(control && control.value)) {
+        // if there's no control or no value, that's ok
+        return null;
+      }
+
+      // return null if there's no errors
+      return control.value.toISOString() < day
+        ? { invalidDate: 'End date must be after pickup date' }
+        : null;
+    };
+  }
+
+  getEndDate(e: any) {
+    this.endDate = this.setDate(e.value).toISOString();
+    return this.endDate;
+  }
+
+  // endDateValidator(): boolean {
+  //   if (this.rentForm.controls.startDate.value?.toISOString()! > this.endDate) {
+  //     this.error = {
+  //       isError: true,
+  //       errorMessage: "End Date can't before start date",
+  //     };
+  //     return false; // There is an error
+  //   }
+
+  //   this.error = {
+  //     isError: false,
+  //     errorMessage: '',
+  //   };
+  //   return false; // No error
+  // }
+
   //  Add 5 hrs to Date to solve problem of getting the day before
   setDate(date: Date) {
     let d = date;
@@ -74,7 +122,6 @@ export class CarRentDetailsComponent implements OnInit {
 
   onReserve() {
     const id = this.activatedRoute.snapshot.paramMap.get('id')!;
-
     if (!this.rentForm.invalid) {
       this.carAvailabilty = {
         carId: id,

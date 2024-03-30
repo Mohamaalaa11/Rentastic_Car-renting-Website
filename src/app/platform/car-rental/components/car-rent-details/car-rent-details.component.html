@@ -61,6 +61,8 @@
                   matInput
                   formControlName="startDate"
                   [matDatepicker]="pickupDatepicker"
+                  (dateChange)="getStartDate($event)"
+                  (dateChange)="endDateValidator()"
                 />
                 <mat-datepicker-toggle matIconSuffix [for]="pickupDatepicker">
                   <mat-icon matDatepickerToggleIcon
@@ -79,25 +81,37 @@
           </div>
           <!-- End Date -->
           <div class="col-12 col-lg-6">
-            <div class="d-flex align-items-center justify-content-center">
-              <i class="fa-solid fa-calendar-days m-2 text-red"></i>
-              <mat-form-field class="example-full-width w-100">
-                <mat-label>Return date</mat-label>
-                <input
-                  matInput
-                  formControlName="endDate"
-                  [matDatepicker]="returnDatepicker"
-                />
-                <mat-datepicker-toggle matIconSuffix [for]="returnDatepicker">
-                  <mat-icon matDatepickerToggleIcon
-                    ><img src="../../../assets/imgs/arrow.png" alt=""
-                  /></mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker
-                  #returnDatepicker
-                  color="accent"
-                ></mat-datepicker>
-              </mat-form-field>
+            <div class="d-flex flex-column">
+              <div class="d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-calendar-days m-2 text-red"></i>
+                <mat-form-field class="example-full-width w-100">
+                  <mat-label>Return date</mat-label>
+                  <input
+                    matInput
+                    formControlName="endDate"
+                    [matDatepicker]="returnDatepicker"
+                  />
+                  <mat-datepicker-toggle matIconSuffix [for]="returnDatepicker">
+                    <mat-icon matDatepickerToggleIcon
+                      ><img src="../../../assets/imgs/arrow.png" alt=""
+                    /></mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker
+                    #returnDatepicker
+                    color="accent"
+                  ></mat-datepicker>
+                  <mat-error *ngIf="rentForm.get('endDate')?.errors">{{
+                    (rentForm.get("endDate")?.errors)!["invalidDate"]
+                  }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <label
+                class="text-red"
+                style="font-size: 10px"
+                *ngIf="error.isError"
+                >{{ error.errorMessage }}</label
+              >
             </div>
           </div>
         </div>
