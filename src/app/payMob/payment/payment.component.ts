@@ -3,6 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Constants } from '../constants';
 import { Observable } from 'rxjs/internal/Observable';
 
+import { catchError, map, of } from 'rxjs';
+import { Order } from '../types/orderRequest';
+import { PaymentData } from '../types/paymentData';
+import { PayDataService } from '../../platform/car-rental/services/paydata.service';
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -10,14 +15,17 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class PaymentComponent implements OnInit {
   constants = new Constants();
-  authenticationToken: any;
-  paymentKey: any;
-  orderId: any;
-  constructor(private http: HttpClient) {}
+  authenticationToken!: string;
+  orderId!: number;
+
+  constructor(private http: HttpClient, private service: PayDataService) {}
 
   async ngOnInit() {
     // const token = await this.getAuthenticationToken();
     // this.createPaymentLink(token);
+    // this.getPaymentKey();
+    const paymentKey = this.service.paymentKey$;
+    console.log(paymentKey);
   }
 
   // async getPaymentKey(amount: number) {
@@ -28,9 +36,9 @@ export class PaymentComponent implements OnInit {
   // }
 
   // getAuthenticationToken() {
-  //   const requestBody = {
-  //     api_key: this.constants.apikey
-  //   };
+  // const requestBody = {
+  //   api_key: this.constants.apikey
+  // };
 
   //   this.http.post('https://accept.paymob.com/api/auth/tokens', JSON.stringify(requestBody), {
   //     headers: { 'Content-Type': 'application/json' }
@@ -150,7 +158,83 @@ export class PaymentComponent implements OnInit {
       });
   }
 
-  async getPaymentKey(amount: number, currency: string) {
-    // this.authenticationToken = await this.getAuthentcationKey();
-  }
+  // getPaymentKey() {
+  //   // Get Auth Key
+  //   const requestBody = {
+  //     api_key: this.constants.apikey,
+  //   };
+
+  //   this.service.getAuthToken(requestBody).subscribe({
+  //     next: async (res) => {
+  //       const parsedRes = await JSON.parse(JSON.stringify(res));
+  //       this.authenticationToken = parsedRes['token'];
+
+  //       // Get Order ID
+  //       const order: Order = {
+  //         auth_token: this.authenticationToken,
+  //         delivery_needed: 'false',
+  //         amount_cents: '1400',
+  //         currency: 'EGP',
+  //         items: [],
+  //       };
+
+  //       const headers = new HttpHeaders({
+  //         Authorization: `Bearer ${this.authenticationToken}`,
+  //         'Content-Type': 'application/json',
+  //       });
+
+  //       console.log(order.auth_token);
+  //       if (this.authenticationToken) {
+  //         this.service.getOrderId(order, headers).subscribe({
+  //           next: async (res) => {
+  //             const parsedRes = await JSON.parse(JSON.stringify(res));
+  //             this.orderId = parsedRes['id'];
+
+  //             // Get Payment Key
+  //             const paymentData: PaymentData = {
+  //               expiration: 3600,
+
+  //               auth_token: this.authenticationToken,
+  //               integration_id: this.constants.integrationId,
+  //               order_id: this.orderId.toString(),
+
+  //               amount_cents: '1400',
+  //               currency: 'EGP',
+
+  //               billing_data: {
+  //                 first_name: 'Clifford',
+  //                 last_name: 'Nicolas',
+  //                 email: 'claudette09@exa.com',
+  //                 phone_number: '+86(8)9135210487',
+
+  //                 apartment: 'NA',
+  //                 floor: 'NA',
+  //                 street: 'NA',
+  //                 building: 'NA',
+  //                 shipping_method: 'NA',
+  //                 postal_code: 'NA',
+  //                 city: 'NA',
+  //                 country: 'NA',
+  //                 state: 'NA',
+  //               },
+
+  //               lock_order_when_paid: 'false',
+  //             };
+
+  //             this.service.getPaymentKey(paymentData).subscribe({
+  //               next: async (res) => {
+  //                 const parsedRes = await JSON.parse(JSON.stringify(res));
+  //                 this.paymentKey = parsedRes['token'];
+  //                 console.log(`payment key  =  ${this.paymentKey}`);
+  //               },
+  //             });
+  //           },
+  //         });
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
 }

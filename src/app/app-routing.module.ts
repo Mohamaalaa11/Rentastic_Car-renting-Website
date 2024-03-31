@@ -7,6 +7,7 @@ import { DeletecarComponent } from './platform/admin/components/deletecar/delete
 import { HeroComponent } from './platform/home/components/hero/hero.component';
 import { AdminhomeComponent } from './platform/admin/components/adminhome/adminhome.component';
 import { ReservationlistComponent } from './platform/admin/components/reservationlist/reservationlist.component';
+import { PaymentComponent } from './payMob/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+
+  {
+    path: 'payment',
+    component: PaymentComponent,
   },
   // { path: '', component: AdminhomeComponent },
   // { path: 'addcar', component: AddcarComponent },
