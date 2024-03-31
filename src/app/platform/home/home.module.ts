@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { HowItWorkComponent } from './components/how-it-work/how-it-work.component';
 import { SharedModule } from '../shared/shared.module';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { TablefiltterComponent } from './components/home/tablefiltter/tablefiltter.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     SiteInfoComponent,
     HowItWorkComponent,
     AboutUsComponent,
+    TablefiltterComponent,
   ],
   imports: [
     CommonModule,

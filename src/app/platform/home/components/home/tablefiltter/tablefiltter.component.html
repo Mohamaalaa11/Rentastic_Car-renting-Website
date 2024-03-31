@@ -1,0 +1,25 @@
+
+<table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Brand</th>
+        <th>Name</th>
+        <th>price</th>
+        <th>Model Year</th>
+        <th>Color</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let car of filteredCars; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ car.Brand }}</td>
+          <td>{{ car.Name }}</td>
+          <td>{{ car.PricePerDay }}</td> 
+          <td>{{ car.ModelYear }}</td>
+          <td>{{ car.Color }}</td>
+        
+        </tr>
+      </tbody>
+  </table>
