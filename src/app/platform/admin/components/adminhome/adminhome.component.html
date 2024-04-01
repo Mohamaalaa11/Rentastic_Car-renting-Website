@@ -1,1 +1,44 @@
 <h1>Admin Home</h1>
+<div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Car Management</h5>
+        <p class="card-text">Total Cars: {{ cars.length }}</p>
+      </div>
+    </div>
+  
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Brand</th>
+          <th>Name</th>
+          <th>Model Year</th>
+          <th>Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of displayedCars.slice(0, 3)">
+          <td>{{ car.Id }}</td>
+          <td>{{ car.Brand }}</td>
+          <td>{{ car.Name }}</td>
+          <td>{{ car.ModelYear }}</td>
+          <td>{{ car.Color }}</td>
+          <td>
+            <img
+              src="assets/imgs/edit.png"
+              alt="edit Image"
+              (click)="openEditCar(car)"
+              style="cursor: pointer"
+            />
+            <img
+              src="assets/imgs/delete.png"
+              alt="delete Image"
+              (click)="showDeleteConfirmation(car)"
+              style="cursor: pointer"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

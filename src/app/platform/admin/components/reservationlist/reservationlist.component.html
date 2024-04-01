@@ -1,1 +1,69 @@
-<p>reservationlist works!</p>
+<div class="mb-5">
+    <div class="head">
+      <h4>Recent Reservations</h4>
+     
+  </div>
+    <div class="dis d-flex flex-column align-items-end justify-content-center">
+    
+  
+      <table>
+        <tr>
+          <th>#</th>
+          <th>UserId</th>
+          <th>CarId</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let resrvation of displayedreservation">
+            <td>1</td>
+          <td>{{ resrvation.UserSsn }}</td>
+          <td>{{ resrvation.CarId }}</td>
+          <td>{{ resrvation.StartRentTime }}</td>
+          <td>{{ resrvation.EndRentDate }}</td>
+         
+          <td>
+            
+            <img
+              src="assets/imgs/delete.png"
+              alt="delete Image"
+              (click)="showDeleteConfirmation(resrvation)"
+            />
+          </td>
+        </tr>
+      </table>
+  
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button
+          *ngIf="currentPage > 1"
+          (click)="changePage(currentPage - 1)"
+          class="pagebutton"
+        >
+          <img src="assets/imgs/Vector.png" alt="previous" />
+        </button>
+        <div *ngFor="let page of pages" class="page-number">
+          <button
+            [class.active]="page === currentPage"
+            (click)="changePage(page)"
+            class="pagebutton"
+          >
+            {{ page }}
+          </button>
+        </div>
+        <button
+          *ngIf="currentPage < totalPages"
+          (click)="changePage(currentPage + 1)"
+          class="pagebutton"
+        >
+          <img src="assets/imgs/chevron-right.png" alt="Next" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-delete-confirmation-component
+    *ngIf="showConfirmation"
+    (deleteCar)="deleteCar(carToDelete!)"
+    (cancelDelete)="cancelDelete()"
+  >
+  </app-delete-confirmation-component>
+  
