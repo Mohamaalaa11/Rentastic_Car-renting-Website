@@ -8,7 +8,7 @@ import { prod } from '../../../prod';
   providedIn: 'root',
 })
 export class CarentalServiceService {
-  private apiUrl = 'https://localhost:7283/api/Cars';
+  private apiUrl = 'https://localhost:44348/api/Cars';
   constructor(private http: HttpClient) {}
 
   getCars(): Observable<Car[]> {
@@ -16,7 +16,7 @@ export class CarentalServiceService {
   }
 
   addCar(car: Car): Observable<any> {
-    return this.http.post<any>('https://localhost:7283/api/Cars', car).pipe(
+    return this.http.post<any>('https://localhost:44348/api/Cars', car).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 400 && error.error.errors) {
           return throwError(error.error.errors);
@@ -27,9 +27,10 @@ export class CarentalServiceService {
     );
   }
 
-  editCar(carData: Car): Observable<Car> {
+
+  editCar(carData: any): Observable<any> {
     const url = `${this.apiUrl}/${carData.Id}`;
-    return this.http.put<Car>(url, carData);
+    return this.http.put<any>(url, carData);
   }
 
   deleteCar(carId: number): Observable<any> {

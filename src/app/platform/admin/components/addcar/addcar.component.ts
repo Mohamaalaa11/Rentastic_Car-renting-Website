@@ -12,7 +12,8 @@ import { prod } from '../../../../prod';
   styleUrl: './addcar.component.css',
 })
 export class AddcarComponent {
-  car: Car = {
+  car: any = {
+
     Id: 0,
     Name: '',
     Brand: '',
@@ -35,18 +36,18 @@ export class AddcarComponent {
     private router: Router
   ) {
     this.carForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      brand: ['', Validators.required],
-      modelYear: [
+      Name: ['', Validators.required],
+      Brand: ['', Validators.required],
+      ModelYear: [
         '',
         [
           Validators.required,
           Validators.pattern('^(19[0-9]{2}|20[0-1][0-9]|202[0-5])$'),
         ],
       ],
-      color: ['', Validators.required],
-      category: ['', Validators.required],
-      description: [
+      Color: ['', Validators.required],
+      Category: ['', Validators.required],
+      Description: [
         '',
         [
           Validators.required,
@@ -54,11 +55,11 @@ export class AddcarComponent {
           Validators.maxLength(500),
         ],
       ],
-      seatCount: ['', [Validators.required, Validators.pattern(/^(2|4|6)$/)]],
-      pricePerDay: ['', [Validators.required, Validators.min(0.01)]],
-      hasAirCondition: [false, Validators.required],
-      isAutomatic: [false, Validators.required],
-      images: ['', Validators.required],
+      SeatCount: ['', [Validators.required, Validators.pattern(/^(2|4|6)$/)]],
+      PricePerDay: ['', [Validators.required, Validators.min(0.01)]],
+      HasAirCondition: [false, Validators.required],
+      IsAutomatic: [false, Validators.required],
+      Images: ['', Validators.required],
     });
   }
 

@@ -10,7 +10,7 @@ import { prod } from '../../../../prod';
   styleUrl: './listcar.component.css',
 })
 export class ListcarComponent implements OnInit {
-  cars: Car[] = [];
+  cars: any[] = [];
   showConfirmation = false;
   carToDelete: Car | null = null;
   filteredCars: Car[] = [];
@@ -91,7 +91,8 @@ export class ListcarComponent implements OnInit {
   addCar() {
     this.router.navigate(['admin', 'add-car']);
   }
-  openEditCar(car: Car) {
+
+  openEditCar(car: any) {
     this.router.navigateByUrl(`/editcar/${car.Id}`);
   }
 
@@ -113,7 +114,8 @@ export class ListcarComponent implements OnInit {
     this.showConfirmation = true;
   }
 
-  deleteCar(car: Car) {
+
+  deleteCar(car: any) {
     this.carservices.deleteCar(car.Id).subscribe(() => {
       this.cars = this.cars.filter((c) => c !== car);
       this.showConfirmation = false;
