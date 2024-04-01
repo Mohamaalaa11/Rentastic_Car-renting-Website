@@ -10,7 +10,7 @@ import { prod } from '../../../../prod';
   styleUrl: './listcar.component.css',
 })
 export class ListcarComponent implements OnInit {
-  cars: Car[] = [];
+  cars: any[] = [];
   showConfirmation = false;
   carToDelete: Car | null = null;
   filteredCars: Car[] = [];
@@ -61,7 +61,7 @@ export class ListcarComponent implements OnInit {
   get displayedCars(): any[] {
     return this.cars
       .filter((car) =>
-        car.name.toLowerCase().includes(this.searchCategory.toLowerCase())
+        car.Name.toLowerCase().includes(this.searchCategory.toLowerCase())
       )
       .slice(this.startIndex, this.endIndex + 1);
   }
@@ -72,7 +72,7 @@ export class ListcarComponent implements OnInit {
 
   generatePages() {
     const filteredCarsLength = this.cars.filter((car) =>
-      car.name.toLowerCase().includes(this.searchCategory.toLowerCase())
+      car.Name.toLowerCase().includes(this.searchCategory.toLowerCase())
     ).length;
     this.pages = [];
     const totalPages = Math.ceil(filteredCarsLength / this.itemsPerPage);
@@ -91,8 +91,8 @@ export class ListcarComponent implements OnInit {
   addCar() {
     this.router.navigate(['admin', 'add-car']);
   }
-  openEditCar(car: Car) {
-    this.router.navigateByUrl(`/editcar/${car.id}`);
+  openEditCar(car: any) {
+    this.router.navigateByUrl(`/editcar/${car.Id}`);
   }
 
   editCar(carId: number) {
@@ -113,8 +113,8 @@ export class ListcarComponent implements OnInit {
     this.showConfirmation = true;
   }
 
-  deleteCar(car: Car) {
-    this.carservices.deleteCar(car.id).subscribe(() => {
+  deleteCar(car: any) {
+    this.carservices.deleteCar(car.Id).subscribe(() => {
       this.cars = this.cars.filter((c) => c !== car);
       this.showConfirmation = false;
     });

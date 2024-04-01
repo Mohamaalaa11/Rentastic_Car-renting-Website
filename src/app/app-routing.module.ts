@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   // { path: '', component: AdminhomeComponent },
   // { path: 'addcar', component: AddcarComponent },
-  // { path: 'editcar/:id', component: EditcarComponent },
+   { path: 'editcar/:Id', component: EditcarComponent },
   // { path: 'deletecar/:id', component: DeletecarComponent },
   // { path: 'home', component: AdminhomeComponent },
   // { path: 'car', component: ListcarComponent },
