@@ -5,4 +5,5 @@ export interface Register {
   phoneNumber: string;
   address: string;
   image: string;
+  nationalIdentityNumber: string;
 }

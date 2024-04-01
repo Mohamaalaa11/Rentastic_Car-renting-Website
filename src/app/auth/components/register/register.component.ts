@@ -42,15 +42,14 @@ export class RegisterComponent {
       name: this.registerForm.value.name!,
       email: this.registerForm.value.email!,
       phoneNumber: this.registerForm.value.phoneNumber!,
-      // idNumber: this.registerForm.value.idNumber!,
       password: this.registerForm.value.password!,
+      nationalIdentityNumber: this.registerForm.value.idNumber!,
       image: '',
-      address: 'saddsdddddddddddddd',
+      address: '',
     };
 
     this.authServices.register(model).subscribe({
       next: (res) => {
-        console.log(res);
         this.router.navigate(['auth', 'login']);
       },
       error: (err) => {

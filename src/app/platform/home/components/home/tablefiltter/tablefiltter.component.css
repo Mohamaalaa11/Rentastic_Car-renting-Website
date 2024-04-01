@@ -1,0 +1,49 @@
+table {
+    width: 100%;
+ 
+    border-collapse: collapse;
+    padding-top: 10px;
+   
+  }
+  
+ 
+  th,
+  td {
+    text-align: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: white;
+  }
+  
+  tr:hover {
+    background-color: #eeeeee;
+  }
+  
+  
+  
+  .head {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+   
+  
+    table {
+      width: 100%;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+  
+    th,
+    td {
+      white-space: nowrap;
+    }
+  
+    
+    
+  }

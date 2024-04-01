@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Car } from '../../../Car';
 import { Observable, catchError, throwError } from 'rxjs';
@@ -39,5 +39,14 @@ export class CarentalServiceService {
   getCarById(id: number): Observable<Car> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Car>(url);
+  }
+  getCarsAvailability(requestBody: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post<any>('https://localhost:44348/api/Cars/AvailabeDate', JSON.stringify(requestBody), httpOptions);
   }
 }
