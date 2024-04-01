@@ -58,7 +58,7 @@ export class EditcarComponent implements OnInit {
   showDeleteConfirmation = false;
 
   onDeleteConfirmed() {
-    this.carService.deleteCar(this.car.id).subscribe({
+    this.carService.deleteCar(this.car.Id).subscribe({
       next: () => {
         console.log('Car deleted successfully');
         this.router.navigateByUrl('/car');
