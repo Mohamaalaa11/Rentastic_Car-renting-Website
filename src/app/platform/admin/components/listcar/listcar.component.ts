@@ -61,7 +61,7 @@ export class ListcarComponent implements OnInit {
   get displayedCars(): any[] {
     return this.cars
       .filter((car) =>
-        car.name.toLowerCase().includes(this.searchCategory.toLowerCase())
+        car.Name.toLowerCase().includes(this.searchCategory.toLowerCase())
       )
       .slice(this.startIndex, this.endIndex + 1);
   }
@@ -72,7 +72,7 @@ export class ListcarComponent implements OnInit {
 
   generatePages() {
     const filteredCarsLength = this.cars.filter((car) =>
-      car.name.toLowerCase().includes(this.searchCategory.toLowerCase())
+      car.Name.toLowerCase().includes(this.searchCategory.toLowerCase())
     ).length;
     this.pages = [];
     const totalPages = Math.ceil(filteredCarsLength / this.itemsPerPage);
@@ -92,7 +92,7 @@ export class ListcarComponent implements OnInit {
     this.router.navigate(['admin', 'add-car']);
   }
   openEditCar(car: Car) {
-    this.router.navigateByUrl(`/editcar/${car.id}`);
+    this.router.navigateByUrl(`/editcar/${car.Id}`);
   }
 
   editCar(carId: number) {
@@ -114,7 +114,7 @@ export class ListcarComponent implements OnInit {
   }
 
   deleteCar(car: Car) {
-    this.carservices.deleteCar(car.id).subscribe(() => {
+    this.carservices.deleteCar(car.Id).subscribe(() => {
       this.cars = this.cars.filter((c) => c !== car);
       this.showConfirmation = false;
     });
@@ -127,7 +127,7 @@ export class ListcarComponent implements OnInit {
 
   filterCars(): Car[] {
     return this.cars.filter((car) =>
-      car.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      car.Name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 }

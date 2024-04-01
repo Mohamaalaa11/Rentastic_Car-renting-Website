@@ -13,18 +13,18 @@ import { prod } from '../../../../prod';
 })
 export class AddcarComponent {
   car: Car = {
-    id: 0,
-    name: '',
-    brand: '',
-    modelYear: '',
-    description: '',
-    color: '',
-    category: '',
-    seatCount: 0,
-    pricePerDay: 0,
-    images: '',
-    hasAirCondition: false,
-    isAutomatic: false,
+    Id: 0,
+    Name: '',
+    Brand: '',
+    ModelYear: '',
+    Description: '',
+    Color: '',
+    Category: '',
+    SeatCount: 0,
+    PricePerDay: 0,
+    Images: '',
+    HasAirCondition: false,
+    IsAutomatic: false,
   };
   carForm: FormGroup;
   errorMessages: string[] = [];

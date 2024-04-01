@@ -28,7 +28,7 @@ export class CarentalServiceService {
   }
 
   editCar(carData: Car): Observable<Car> {
-    const url = `${this.apiUrl}/${carData.id}`;
+    const url = `${this.apiUrl}/${carData.Id}`;
     return this.http.put<Car>(url, carData);
   }
 
