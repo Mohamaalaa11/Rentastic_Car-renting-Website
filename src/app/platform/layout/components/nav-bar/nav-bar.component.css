@@ -7,4 +7,5 @@
 .dropdown-menu .dropdown-item:hover {
   background-color: var(--red-color) !important;
   color: white;
+  cursor: pointer;
 }
