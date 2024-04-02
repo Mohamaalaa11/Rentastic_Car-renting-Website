@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from '../../types/car';
 import { CarService } from '../../services/car.service';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarFilter } from '../../types/car-filter';
 
 @Component({
@@ -11,7 +11,11 @@ import { CarFilter } from '../../types/car-filter';
   styleUrls: ['./cars.component.css'],
 })
 export class CarsComponent implements OnInit {
-  constructor(private carServices: CarService, private route: ActivatedRoute) {}
+  constructor(
+    private carServices: CarService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   cars: Car[] = [];
   filteredCars: Car[] = [];
@@ -19,64 +23,57 @@ export class CarsComponent implements OnInit {
   colors: string[] = [];
   carName: string = '';
   carModel = '';
+  sortOrder: string = 'default';
 
   cars$: Observable<Car[]> = this.carServices.cars$;
   carBrand$: Observable<string[]> = this.carServices.carsBrand$;
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe({
-      next: (params) => {
-        if (
-          params.get('brand') &&
-          params.get('startYear') &&
-          params.get('startMonth') &&
-          params.get('startDay') &&
-          params.get('endYear') &&
-          params.get('endMonth') &&
-          params.get('endMonth')
-        ) {
-          const carFilter: CarFilter = {
-            brand: params.get('brand')!,
-            startYear: params.get('startYear')!,
-            startMonth: params.get('startMonth')!,
-            startDay: params.get('startDay')!,
-            endYear: params.get('endYear')!,
-            endMonth: params.get('endMonth')!,
-            endDay: params.get('endMonth')!,
-          };
-
-          this.getFilterdCars(carFilter);
-        } else {
-          this.getCars();
-          this.carServices.getCarsBrand();
-        }
-      },
+    this.route.queryParams.subscribe((params) => {
+      // Fetch filtered cars or all cars based on query parameters
+      if (params['brand'] && params['startYear']) {
+        const carFilter: CarFilter = {
+          brand: params['brand'],
+          startYear: params['startYear'],
+          startMonth: params['startMonth'],
+          startDay: params['startDay'],
+          endYear: params['endYear'],
+          endMonth: params['endMonth'],
+          endDay: params['endMonth'],
+        };
+        this.getFilteredCars(carFilter);
+      } else {
+        this.getCars(); // Fetch all cars
+      }
     });
   }
 
   getCars() {
     this.carServices.getCars().subscribe({
       next: (res) => {
-        this.carServices.cars$.next(res);
+        this.cars = res;
+        this.filteredCars = this.cars;
+        // this.carServices.cars$.next(res);
 
-        // this.cars = res;
         // console.log(res);
-        // this.filteredCars = this.cars;
         // this.getModels();
         // this.getColors();
       },
     });
   }
 
-  getFilterdCars(carFilter: CarFilter) {
+  getFilteredCars(carFilter: CarFilter) {
     this.carServices.getFilterdCarsByDate(carFilter).subscribe({
       next: (res) => {
-        let filterdCars = res;
+        this.filteredCars = res;
         if (carFilter.brand !== '') {
-          filterdCars = res.filter((car) => car.Brand === carFilter.brand);
+          this.filteredCars = res.filter(
+            (car) => car.Brand === carFilter.brand
+          );
         }
-        this.carServices.cars$.next(filterdCars);
-        console.log(res);
+      },
+      error: (err) => {
+        console.error('Error fetching filtered cars:', err);
       },
     });
   }
@@ -103,24 +100,13 @@ export class CarsComponent implements OnInit {
       this.ngOnInit();
     }
   }
-
-  onSort(event: Event) {
-    let value = (event.target as HTMLInputElement).value;
-
-    if (value === 'all') {
-      this.getCars();
-    }
-
-    if (value === 'low') {
-      this.filteredCars = this.cars.sort(
-        // Ascending => 1, 2, 3
-        (a, b) => a.PricePerDay - b.PricePerDay
-      );
-    } else if (value === 'high') {
-      // Descending => 99, 98, 97
-      this.filteredCars = this.cars.sort(
-        (a, b) => b.PricePerDay - a.PricePerDay
-      );
+  onSort() {
+    if (this.sortOrder === 'default') {
+      // No sorting needed, do nothing
+    } else if (this.sortOrder === 'low') {
+      this.filteredCars.sort((a, b) => a.PricePerDay - b.PricePerDay);
+    } else if (this.sortOrder === 'high') {
+      this.filteredCars.sort((a, b) => b.PricePerDay - a.PricePerDay);
     }
   }
 }

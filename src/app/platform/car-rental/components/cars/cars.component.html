@@ -189,8 +189,12 @@
 
       <!-- Sort -->
       <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-        <select class="w-100 form-input" (change)="onSort($event)">
-          <option value="all">All</option>
+        <select
+          class="w-100 form-input"
+          (change)="onSort()"
+          [(ngModel)]="sortOrder"
+        >
+          <option value="default">Default</option>
           <option class="dropdown-item" value="low">Price : Low to High</option>
           <option class="dropdown-item" value="high">
             Price : High to Low
@@ -202,7 +206,7 @@
 
     <!-- Cars -->
     <div class="row gy-5 gx-5 mt-5 mb-5">
-      <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of cars$ | async">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of filteredCars">
         <app-card [car]="car"></app-card>
       </div>
     </div>
