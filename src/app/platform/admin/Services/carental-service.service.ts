@@ -58,11 +58,21 @@ export class CarentalServiceService {
     return this.http.get<Car>(url);
   }
   getReservation(){
-    return this.http.get<any[]>('https://localhost:44348/api/Reservations');
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    console.log('Headers:', headers); 
+    return this.http.get<any[]>('https://localhost:44348/api/Reservations',{headers});
   }
   deleteReseravtion(reservationId: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    console.log('Headers:', headers); 
     const url = `${'https://localhost:44348/api/Reservations'}/${reservationId}`;
-    return this.http.delete(url);
+    return this.http.delete(url ,{headers}) ;
   }
   getCarsAvailability(requestBody: any): Observable<any> {
     const httpOptions = {

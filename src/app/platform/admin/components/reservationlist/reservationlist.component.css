@@ -43,6 +43,32 @@
    color: black;
 
  }
+ .filtter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+label {
+  margin: 10px;
+}
+
+.date-input, .sort-select {
+  border: none; 
+  border-radius: 5px;
+  background-color: #f2f2f2; 
+  padding: 8px;
+  margin: 10px;
+  width: 250px;
+  height: 45px;
+}
+
+.sort-select {
+  color: #9a3333; 
+}
+
  table {
   width: 100%;
   margin: 0 auto;
@@ -140,6 +166,7 @@ h4 {
   color: #6b7280;
   padding-left: 140px;
   padding-top: 30px;
+  margin-bottom: 30px;
 }
 
 
@@ -179,6 +206,26 @@ h4 {
   .pagination {
     text-align: center;
     margin: 20px 0;
+  }
+  .filtter {
+    flex-direction: column;
+    align-items: stretch;
+    margin-right: 20px;
+   
+
+  }
+
+  .date-input, .sort-select {
+    width: 250px;
+  }
+
+  label {
+    margin: 10px 0;
+   
+    
+  }
+  .lab{
+    display: flex;
   }
 }
 

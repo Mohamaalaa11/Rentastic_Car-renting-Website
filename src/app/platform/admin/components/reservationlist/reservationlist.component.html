@@ -1,11 +1,30 @@
 <div class="mb-5">
     <div class="head">
       <h4>Recent Reservations</h4>
+    </div>
      
-  </div>
+
+      
     <div class="dis d-flex flex-column align-items-end justify-content-center">
     
-  
+        <div class="filtter">
+           
+            <label for="fromDate">From:</label>
+            <input type="date" id="fromDate" [(ngModel)]="fromDate" class="date-input" />
+        
+       
+            <label for="toDate">To:</label>
+            <input type="date" id="toDate" [(ngModel)]="toDate" class="date-input" />
+        
+        
+            <label for="sort">Sort By:</label>
+            <select id="sort" [(ngModel)]="selectedSortOrder" class="sort-select" (change)="applySort()">
+              <option>sort</option>
+              <option value="oldest">Oldest</option>
+              <option value="newest">Newest</option>
+            </select>
+       
+          </div>
       <table>
         <tr>
           <th>#</th>
@@ -15,19 +34,21 @@
           <th>End Date</th>
           <th></th>
         </tr>
-        <tr *ngFor="let resrvation of displayedreservation">
-            <td>1</td>
-          <td>{{ resrvation.UserSsn }}</td>
-          <td>{{ resrvation.CarId }}</td>
-          <td>{{ resrvation.StartRentTime }}</td>
-          <td>{{ resrvation.EndRentDate }}</td>
+        <tr *ngFor="let reservation of displayedreservation; let i = index">
+            <td>{{ i + 1 }}</td>
+          <td>{{ reservation.UserSsn }}</td>
+          <td>{{ reservation.CarId }}</td>
+          <td>{{ reservation.StartRentTime | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ reservation.EndRentDate | date: 'dd/MM/yyyy' }}</td>
+          
+          
          
           <td>
             
             <img
               src="assets/imgs/delete.png"
               alt="delete Image"
-              (click)="showDeleteConfirmation(resrvation)"
+              (click)="showDeleteConfirmation(reservation)"
             />
           </td>
         </tr>
@@ -60,10 +81,10 @@
       </div>
     </div>
   </div>
-  <app-delete-confirmation-component
+  <app-dletereservation
     *ngIf="showConfirmation"
-    (deleteCar)="deleteCar(carToDelete!)"
+    (deleteCar)="deletereservation( reservationToDelete!)"
     (cancelDelete)="cancelDelete()"
   >
-  </app-delete-confirmation-component>
+  </app-dletereservation>
   

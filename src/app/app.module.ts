@@ -15,6 +15,7 @@ import { PaymentComponent } from './payMob/payment/payment.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { SharedModule } from './platform/shared/shared.module';
 
+
 @NgModule({
   declarations: [AppComponent, PaymentComponent, PaypalComponent],
 

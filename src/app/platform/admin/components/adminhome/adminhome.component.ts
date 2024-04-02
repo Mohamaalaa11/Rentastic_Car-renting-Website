@@ -12,7 +12,13 @@ export class AdminhomeComponent implements OnInit {
   cars: any[] = [];
   displayedCars: any[] = [];
   showConfirmation = false;
+  reservations: any[] = [];
   carToDelete: Car | null = null;
+ 
+  reservationToDelete: any | null = null;
+ 
+ 
+
   constructor(private carService: CarentalServiceService, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,6 +29,15 @@ export class AdminhomeComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching cars:', error);
+      }
+    });
+
+    this.carService.getReservation().subscribe({
+      next: (reservations) => {
+        this.reservations = reservations;
+      },
+      error: (error) => {
+        console.error('Error fetching reservations:', error);
       }
     });
   }
@@ -46,6 +61,22 @@ export class AdminhomeComponent implements OnInit {
     this.carToDelete = null;
     this.showConfirmation = false;
   }
+  get displayedReservations(): any[] {
+    return this.reservations
+      .sort((a, b) => new Date(b.StartRentTime).getTime() - new Date(a.StartRentTime).getTime())
+      .slice(0, 3);
+  }
+  deletereservation(reservation: any) {
+    this.carService.deleteReseravtion(reservation.Id).subscribe(() => {
+      this.reservations = this.reservations.filter((c) => c !== reservation);
+      this.showConfirmation = false;
+  
+      
+    });
+  }
+  
+  
+  
 
 
  

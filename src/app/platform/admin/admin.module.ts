@@ -11,6 +11,7 @@ import { ReservationlistComponent } from './components/reservationlist/reservati
 import { EditcarComponent } from './components/editcar/editcar.component';
 import { DeletecarComponent } from './components/deletecar/deletecar.component';
 import { DeleteConfirmationComponentComponent } from './components/delete-confirmation-component/delete-confirmation-component.component';
+import { DletereservationComponent } from './components/dletereservation/dletereservation.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DeleteConfirmationComponentComponent } from './components/delete-confir
     EditcarComponent,
     DeletecarComponent,
     DeleteConfirmationComponentComponent,
+    DletereservationComponent,
   ],
   imports: [
     CommonModule,
