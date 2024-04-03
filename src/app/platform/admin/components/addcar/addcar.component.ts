@@ -13,6 +13,7 @@ import { prod } from '../../../../prod';
 })
 export class AddcarComponent {
   car: any = {
+
     Id: 0,
     Name: '',
     Brand: '',

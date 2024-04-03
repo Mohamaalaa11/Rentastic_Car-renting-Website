@@ -22,3 +22,14 @@
   .form-control{
     margin-bottom: 20px;
   }
+
+.userImg{
+border: 5px solid #9a3333 ;
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+}
+
+.text-red{
+  color: #9a3333;
+}

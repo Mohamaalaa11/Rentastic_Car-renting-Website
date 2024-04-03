@@ -91,6 +91,7 @@ export class ListcarComponent implements OnInit {
   addCar() {
     this.router.navigate(['admin', 'add-car']);
   }
+
   openEditCar(car: any) {
     this.router.navigateByUrl(`/editcar/${car.Id}`);
   }
@@ -113,6 +114,7 @@ export class ListcarComponent implements OnInit {
     this.showConfirmation = true;
   }
 
+
   deleteCar(car: any) {
     this.carservices.deleteCar(car.Id).subscribe(() => {
       this.cars = this.cars.filter((c) => c !== car);
@@ -127,7 +129,7 @@ export class ListcarComponent implements OnInit {
 
   filterCars(): Car[] {
     return this.cars.filter((car) =>
-      car.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      car.Name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 }

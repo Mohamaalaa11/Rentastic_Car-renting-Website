@@ -12,12 +12,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 
 import { PaymentComponent } from './payMob/payment/payment.component';
-import { PaypalComponent } from './paypal/paypal.component';
 import { SharedModule } from './platform/shared/shared.module';
 
 
 @NgModule({
-  declarations: [AppComponent, PaymentComponent, PaypalComponent],
+  declarations: [AppComponent, PaymentComponent],
 
   imports: [
     BrowserModule,
