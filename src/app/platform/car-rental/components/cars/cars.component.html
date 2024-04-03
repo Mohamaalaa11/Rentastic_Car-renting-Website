@@ -27,7 +27,7 @@
           <h6 class="d-none d-lg-block fw-bold fs-5">Filters</h6>
           <hr />
 
-          <!-- Model -->
+          <!-- Brand -->
           <div class="mt-2">
             <button
               class="btn-filter-border-none w-100"
@@ -48,9 +48,14 @@
                 <form class="brand">
                   <div
                     class="form-inline d-flex align-items-center py-1"
-                    *ngFor="let brand of carBrand$ | async"
+                    *ngFor="let brand of brands"
                   >
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      name="selectedBrands"
+                      [(ngModel)]="selectedBrands[brand]"
+                      (change)="filter()"
+                    />
                     <label class="ps-3">{{ brand }}</label>
                   </div>
                 </form>
@@ -79,15 +84,21 @@
                   <div class="py-1">
                     <input
                       class="form-input w-100"
-                      type="text"
+                      type="number"
                       placeholder="From"
+                      name="priceFrom"
+                      [(ngModel)]="priceFrom"
+                      (input)="filter()"
                     />
                   </div>
                   <div class="py-1">
                     <input
                       class="form-input w-100"
-                      type="text"
+                      type="number"
                       placeholder="To"
+                      name="priceTo"
+                      [(ngModel)]="priceTo"
+                      (input)="filter()"
                     />
                   </div>
                 </form>
@@ -95,7 +106,7 @@
             </div>
           </div>
 
-          <!-- styleeeeeeeeeeeeeee -->
+          <!-- Category -->
           <div class="mt-4">
             <button
               class="btn-filter-border-none w-100"
@@ -106,7 +117,7 @@
               aria-controls="collapseStyle"
             >
               <div class="d-flex justify-content-between align-items-center">
-                <h5 class="fw-bold">Style</h5>
+                <h5 class="fw-bold">Category</h5>
                 <i class="fa-solid fa-chevron-down"></i>
               </div>
             </button>
@@ -114,23 +125,23 @@
             <div class="collapse show" id="collapseStyle">
               <div class="py-3">
                 <form class="brand">
-                  <div class="form-inline d-flex align-items-center py-1">
-                    <input type="checkbox" />
-                    <label class="ps-3">Economy</label>
-                  </div>
-                  <div class="form-inline d-flex align-items-center py-1">
-                    <input type="checkbox" />
-                    <label class="ps-3">Business</label>
-                  </div>
-                  <div class="form-inline d-flex align-items-center py-1">
-                    <input type="checkbox" />
-                    <label class="ps-3">Luxury</label>
+                  <div
+                    class="form-inline d-flex align-items-center py-1"
+                    *ngFor="let category of categories"
+                  >
+                    <input
+                      type="checkbox"
+                      name="selectedCategories"
+                      [(ngModel)]="selectedCategories[category]"
+                      (change)="filter()"
+                    />
+                    <label class="ps-3">{{ category }}</label>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          <!-- collloooors -->
+          <!-- Colors -->
           <div class="mt-4">
             <button
               class="btn-filter-border-none w-100"
@@ -153,7 +164,12 @@
                     class="form-inline d-flex align-items-center py-1"
                     *ngFor="let color of colors"
                   >
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      name="selectedColors"
+                      [(ngModel)]="selectedColors[color]"
+                      (change)="filter()"
+                    />
                     <label class="ps-3">{{ color }}</label>
                   </div>
                 </form>
@@ -189,8 +205,12 @@
 
       <!-- Sort -->
       <div class="col-12 col-lg-3 mt-2 mt-lg-0">
-        <select class="w-100 form-input" (change)="onSort($event)">
-          <option value="all">All</option>
+        <select
+          class="w-100 form-input"
+          (change)="onSort()"
+          [(ngModel)]="sortOrder"
+        >
+          <option value="default">Default</option>
           <option class="dropdown-item" value="low">Price : Low to High</option>
           <option class="dropdown-item" value="high">
             Price : High to Low
@@ -202,7 +222,7 @@
 
     <!-- Cars -->
     <div class="row gy-5 gx-5 mt-5 mb-5">
-      <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of cars$ | async">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of filteredCars">
         <app-card [car]="car"></app-card>
       </div>
     </div>
