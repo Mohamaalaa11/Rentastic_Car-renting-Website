@@ -123,7 +123,12 @@
                     class="form-inline d-flex align-items-center py-1"
                     *ngFor="let category of categories"
                   >
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      name="selectedCategories"
+                      [(ngModel)]="selectedCategories[category]"
+                      (change)="filter()"
+                    />
                     <label class="ps-3">{{ category }}</label>
                   </div>
                 </form>

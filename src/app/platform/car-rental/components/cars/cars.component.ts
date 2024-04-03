@@ -25,6 +25,7 @@ export class CarsComponent implements OnInit {
   // Filter
   selectedBrands: { [key: string]: boolean } = {};
   selectedColors: { [key: string]: boolean } = {};
+  selectedCategories: { [key: string]: boolean } = {};
   // Sorting
   sortOrder: string = 'default';
   // For Search
@@ -105,6 +106,10 @@ export class CarsComponent implements OnInit {
       (color) => this.selectedColors[color]
     );
 
+    const selectedCategories = Object.keys(this.selectedCategories).filter(
+      (category) => this.selectedCategories[category]
+    );
+
     // Apply brand filter
     if (selectedBrandNames.length > 0) {
       this.filteredCars = this.cars.filter((car) =>
@@ -120,10 +125,13 @@ export class CarsComponent implements OnInit {
         selectedColors.includes(car.Color)
       );
     }
-  }
 
-  getColors() {
-    this.colors = Array.from(new Set(this.cars.map((car) => car.Color)));
+    // Apply Category Filter
+    if (selectedCategories.length > 0) {
+      this.filteredCars = this.filteredCars.filter((car) =>
+        selectedCategories.includes(car.Category)
+      );
+    }
   }
 
   onSearch() {
