@@ -18,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { TablefiltterComponent } from './components/home/tablefiltter/tablefiltter.component';
 import { RouterModule } from '@angular/router';
+import { CardsComponent } from './components/cards/cards.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RouterModule } from '@angular/router';
     HowItWorkComponent,
     AboutUsComponent,
     TablefiltterComponent,
+    CardsComponent,
   ],
   imports: [
     CommonModule,

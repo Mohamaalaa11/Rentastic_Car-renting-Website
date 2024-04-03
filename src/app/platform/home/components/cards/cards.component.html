@@ -1,0 +1,13 @@
+<div
+  class="container-lg d-flex flex-column justify-content-center align-items-center my-5"
+>
+  <div class="row g-5">
+    <div class="col-12 col-sm-6 col-lg-4" *ngFor="let car of cars">
+      <app-card [car]="car"></app-card>
+    </div>
+  </div>
+
+  <a class="btn btn-red mt-5 px-5" [routerLink]="['/car-rental', 'cars']"
+    >See More</a
+  >
+</div>
