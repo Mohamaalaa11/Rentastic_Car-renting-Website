@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { PaymentComponent } from './payMob/payment/payment.component';
 import { SharedModule } from './platform/shared/shared.module';
 
+
 @NgModule({
   declarations: [AppComponent, PaymentComponent],
 

@@ -1,1 +1,90 @@
-<p>reservationlist works!</p>
+<div class="mb-5">
+    <div class="head">
+      <h4>Recent Reservations</h4>
+    </div>
+     
+
+      
+    <div class="dis d-flex flex-column align-items-end justify-content-center">
+    
+        <div class="filtter">
+           
+            <label for="fromDate">From:</label>
+            <input type="date" id="fromDate" [(ngModel)]="fromDate" class="date-input" />
+        
+       
+            <label for="toDate">To:</label>
+            <input type="date" id="toDate" [(ngModel)]="toDate" class="date-input" />
+        
+        
+            <label for="sort">Sort By:</label>
+            <select id="sort" [(ngModel)]="selectedSortOrder" class="sort-select" (change)="applySort()">
+              <option>sort</option>
+              <option value="oldest">Oldest</option>
+              <option value="newest">Newest</option>
+            </select>
+       
+          </div>
+      <table>
+        <tr>
+          <th>#</th>
+          <th>UserId</th>
+          <th>CarId</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let reservation of displayedreservation; let i = index">
+            <td>{{ i + 1 }}</td>
+          <td>{{ reservation.UserSsn }}</td>
+          <td>{{ reservation.CarId }}</td>
+          <td>{{ reservation.StartRentTime | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ reservation.EndRentDate | date: 'dd/MM/yyyy' }}</td>
+          
+          
+         
+          <td>
+            
+            <img
+              src="assets/imgs/delete.png"
+              alt="delete Image"
+              (click)="showDeleteConfirmation(reservation)"
+            />
+          </td>
+        </tr>
+      </table>
+  
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button
+          *ngIf="currentPage > 1"
+          (click)="changePage(currentPage - 1)"
+          class="pagebutton"
+        >
+          <img src="assets/imgs/Vector.png" alt="previous" />
+        </button>
+        <div *ngFor="let page of pages" class="page-number">
+          <button
+            [class.active]="page === currentPage"
+            (click)="changePage(page)"
+            class="pagebutton"
+          >
+            {{ page }}
+          </button>
+        </div>
+        <button
+          *ngIf="currentPage < totalPages"
+          (click)="changePage(currentPage + 1)"
+          class="pagebutton"
+        >
+          <img src="assets/imgs/chevron-right.png" alt="Next" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-dletereservation
+    *ngIf="showConfirmation"
+    (deleteCar)="deletereservation( reservationToDelete!)"
+    (cancelDelete)="cancelDelete()"
+  >
+  </app-dletereservation>
+  
