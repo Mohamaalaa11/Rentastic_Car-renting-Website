@@ -15,7 +15,9 @@
   /* overflow-x: hidden; */
 }
 
+html,
 body {
+  height: 100%;
   overflow-x: hidden;
 }
 
@@ -34,11 +36,6 @@ body {
 .bg-pink {
   background-color: #fff6f6;
 }
-/* .btn:hover {
-  color: var(--red-color) !important;
-  background-color: #fff;
-  border: 1px solid var(--red-color);
-} */
 
 /******************************** Auth Module ********************************/
 .separator {
@@ -87,26 +84,6 @@ body {
   border: none;
 }
 
-.form-input {
-  border-radius: 10px;
-  border: 0.5px solid #e5e5e5;
-  background: #f2f2f2;
-  padding: 18px 16px;
-  display: block;
-  outline: none;
-}
-.form-input:focus {
-border-color: #9a3333 ;
-border: 1px solid #9a3333;
-
-}
-
-.form-label {
-  color: #6b7280 !important;
-  font-size: 14px;
-  font-weight: 400;
-}
-
 .ask {
   color: #aaa9a9;
   text-align: center;
@@ -120,13 +97,18 @@ border: 1px solid #9a3333;
   text-decoration-line: underline !important;
 }
 
-html,
-body {
-  height: 100%;
+/* Global */
+.form-input {
+  border-radius: 10px;
+  border: 0.5px solid #e5e5e5;
+  background: #f2f2f2;
+  padding: 18px 16px;
+  display: block;
+  outline: none;
 }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.form-input:focus {
+  border-color: #9a3333;
+  border: 1px solid #9a3333;
 }
 
 @media (max-width: 992px) {
@@ -151,4 +133,16 @@ body {
     border: 0;
     background: #e5e5e5;
   }
+}
+
+.form-label {
+  color: #6b7280 !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

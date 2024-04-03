@@ -26,11 +26,13 @@ export class CarsComponent implements OnInit {
   selectedBrands: { [key: string]: boolean } = {};
   selectedColors: { [key: string]: boolean } = {};
   selectedCategories: { [key: string]: boolean } = {};
+  priceFrom!: number;
+  priceTo!: number;
   // Sorting
   sortOrder: string = 'default';
   // For Search
   carName: string = '';
-  carModel = '';
+  carModel: string = '';
 
   ngOnInit(): void {
     this.carServices.getBrands().subscribe({
@@ -134,6 +136,38 @@ export class CarsComponent implements OnInit {
     }
   }
 
+  checkPrice() {
+    if (
+      this.priceFrom !== null &&
+      this.priceTo !== null &&
+      this.priceFrom !== undefined &&
+      this.priceTo !== undefined
+    ) {
+      // Filter cars within the specified range
+      this.filteredCars = this.cars.filter((car) => {
+        return (
+          car.PricePerDay >= this.priceFrom && car.PricePerDay <= this.priceTo
+        );
+      });
+
+      this.sortOrder = 'low';
+      this.onSort();
+    } else if (this.priceFrom !== null && this.priceFrom !== undefined) {
+      // Filter cars starting from the specified price
+      this.filteredCars = this.cars.filter((car) => {
+        return car.PricePerDay >= this.priceFrom;
+      });
+
+      this.sortOrder = 'low';
+      this.onSort();
+    } else {
+      // If neither from nor to is specified, show all cars
+      this.filteredCars = this.cars;
+      this.sortOrder = 'default';
+      this.onSort();
+    }
+  }
+
   onSearch() {
     if (this.carName !== '' || this.carModel !== '') {
       this.filteredCars = this.cars.filter((car) => {
@@ -145,9 +179,10 @@ export class CarsComponent implements OnInit {
         );
       });
     } else {
-      this.ngOnInit();
+      this.getCars();
     }
   }
+
   onSort() {
     if (this.sortOrder === 'default') {
       this.getCars();

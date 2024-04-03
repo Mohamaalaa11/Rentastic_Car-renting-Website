@@ -84,15 +84,21 @@
                   <div class="py-1">
                     <input
                       class="form-input w-100"
-                      type="text"
+                      type="number"
                       placeholder="From"
+                      name="priceFrom"
+                      [(ngModel)]="priceFrom"
+                      (input)="checkPrice()"
                     />
                   </div>
                   <div class="py-1">
                     <input
                       class="form-input w-100"
-                      type="text"
+                      type="number"
                       placeholder="To"
+                      name="priceTo"
+                      [(ngModel)]="priceTo"
+                      (input)="checkPrice()"
                     />
                   </div>
                 </form>
