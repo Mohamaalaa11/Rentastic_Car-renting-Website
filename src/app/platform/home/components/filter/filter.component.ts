@@ -15,12 +15,16 @@ import { CarFilter } from '../../../car-rental/types/car-filter';
   styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent implements OnInit {
-  carBrand$: Observable<string[]> = this.carServices.carsBrand$;
+  brands: string[] = [];
 
   constructor(private router: Router, private carServices: CarService) {}
 
   ngOnInit(): void {
-    this.carServices.getCarsBrand();
+    this.carServices.getBrands().subscribe({
+      next: (res) => {
+        this.brands = res;
+      },
+    });
   }
 
   form = new FormGroup({
@@ -44,8 +48,6 @@ export class FilterComponent implements OnInit {
     };
 
     this.router.navigate(['/car-rental', 'cars'], { queryParams: queryParams });
-
-    console.log(queryParams);
 
     return false;
   }

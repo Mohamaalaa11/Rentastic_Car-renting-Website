@@ -48,9 +48,14 @@
                 <form class="brand">
                   <div
                     class="form-inline d-flex align-items-center py-1"
-                    *ngFor="let brand of carBrand$ | async"
+                    *ngFor="let brand of brands"
                   >
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      name="selectedBrands"
+                      [(ngModel)]="selectedBrands[brand]"
+                      (change)="filterCarsByBrand()"
+                    />
                     <label class="ps-3">{{ brand }}</label>
                   </div>
                 </form>

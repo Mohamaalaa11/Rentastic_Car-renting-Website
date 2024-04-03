@@ -19,18 +19,25 @@ export class CarsComponent implements OnInit {
 
   cars: Car[] = [];
   filteredCars: Car[] = [];
-  models: string[] = [];
+  brands: string[] = [];
   colors: string[] = [];
+  // Filter
+  selectedBrands: { [key: string]: boolean } = {};
+  // Sorting
+  sortOrder: string = 'default';
+  // For Search
   carName: string = '';
   carModel = '';
-  sortOrder: string = 'default';
-
-  cars$: Observable<Car[]> = this.carServices.cars$;
-  carBrand$: Observable<string[]> = this.carServices.carsBrand$;
 
   ngOnInit(): void {
+    this.carServices.getBrands().subscribe({
+      next: (res) => {
+        this.brands = res;
+      },
+    });
+
     this.route.queryParams.subscribe((params) => {
-      // Fetch filtered cars or all cars based on query parameters
+      // Fetch filtered cars based on query parameters
       if (params['brand'] && params['startYear']) {
         const carFilter: CarFilter = {
           brand: params['brand'],
@@ -41,7 +48,7 @@ export class CarsComponent implements OnInit {
           endMonth: params['endMonth'],
           endDay: params['endMonth'],
         };
-        this.getFilteredCars(carFilter);
+        this.getFilteredCarsByDate(carFilter);
       } else {
         this.getCars(); // Fetch all cars
       }
@@ -53,16 +60,11 @@ export class CarsComponent implements OnInit {
       next: (res) => {
         this.cars = res;
         this.filteredCars = this.cars;
-        // this.carServices.cars$.next(res);
-
-        // console.log(res);
-        // this.getModels();
-        // this.getColors();
       },
     });
   }
 
-  getFilteredCars(carFilter: CarFilter) {
+  getFilteredCarsByDate(carFilter: CarFilter) {
     this.carServices.getFilterdCarsByDate(carFilter).subscribe({
       next: (res) => {
         this.filteredCars = res;
@@ -78,8 +80,20 @@ export class CarsComponent implements OnInit {
     });
   }
 
-  getModels() {
-    this.models = Array.from(new Set(this.cars.map((car) => car.Brand)));
+  filterCarsByBrand(): void {
+    // Get selected brands
+    const selectedBrandNames = Object.keys(this.selectedBrands).filter(
+      (brand) => this.selectedBrands[brand]
+    );
+
+    // Filter cars based on selected brands
+    if (selectedBrandNames.length > 0) {
+      this.filteredCars = this.cars.filter((car) =>
+        selectedBrandNames.includes(car.Brand)
+      );
+    } else {
+      this.filteredCars = this.cars.slice(); // If no brands selected, show all cars
+    }
   }
 
   getColors() {
@@ -102,7 +116,7 @@ export class CarsComponent implements OnInit {
   }
   onSort() {
     if (this.sortOrder === 'default') {
-      // No sorting needed, do nothing
+      this.getCars();
     } else if (this.sortOrder === 'low') {
       this.filteredCars.sort((a, b) => a.PricePerDay - b.PricePerDay);
     } else if (this.sortOrder === 'high') {
