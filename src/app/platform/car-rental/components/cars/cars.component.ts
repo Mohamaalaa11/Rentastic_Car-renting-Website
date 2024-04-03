@@ -26,8 +26,8 @@ export class CarsComponent implements OnInit {
   selectedBrands: { [key: string]: boolean } = {};
   selectedColors: { [key: string]: boolean } = {};
   selectedCategories: { [key: string]: boolean } = {};
-  priceFrom!: number;
-  priceTo!: number;
+  priceFrom!: number | null;
+  priceTo!: number | null;
   // Sorting
   sortOrder: string = 'default';
   // For Search
@@ -108,6 +108,7 @@ export class CarsComponent implements OnInit {
       (color) => this.selectedColors[color]
     );
 
+    // Get selected categories
     const selectedCategories = Object.keys(this.selectedCategories).filter(
       (category) => this.selectedCategories[category]
     );
@@ -128,11 +129,37 @@ export class CarsComponent implements OnInit {
       );
     }
 
-    // Apply Category Filter
+    // Apply category filter
     if (selectedCategories.length > 0) {
       this.filteredCars = this.filteredCars.filter((car) =>
         selectedCategories.includes(car.Category)
       );
+    }
+
+    // Apply price filter
+    if (
+      this.priceFrom !== null &&
+      this.priceTo !== null &&
+      this.priceFrom !== undefined &&
+      this.priceTo !== undefined
+    ) {
+      // Filter cars within the specified range
+      this.filteredCars = this.filteredCars.filter(
+        (car) =>
+          car.PricePerDay >= this.priceFrom! && car.PricePerDay <= this.priceTo!
+      );
+
+      this.sortOrder = 'low';
+      this.onSort();
+    } else if (this.priceFrom !== null && this.priceFrom !== undefined) {
+      // Filter cars starting from the specified price
+      this.filteredCars = this.filteredCars.filter(
+        (car) => car.PricePerDay >= this.priceFrom!
+      );
+      this.sortOrder = 'low';
+      this.onSort();
+    } else {
+      this.sortOrder = 'default';
     }
   }
 
@@ -146,7 +173,7 @@ export class CarsComponent implements OnInit {
       // Filter cars within the specified range
       this.filteredCars = this.cars.filter((car) => {
         return (
-          car.PricePerDay >= this.priceFrom && car.PricePerDay <= this.priceTo
+          car.PricePerDay >= this.priceFrom! && car.PricePerDay <= this.priceTo!
         );
       });
 
@@ -155,7 +182,7 @@ export class CarsComponent implements OnInit {
     } else if (this.priceFrom !== null && this.priceFrom !== undefined) {
       // Filter cars starting from the specified price
       this.filteredCars = this.cars.filter((car) => {
-        return car.PricePerDay >= this.priceFrom;
+        return car.PricePerDay >= this.priceFrom!;
       });
 
       this.sortOrder = 'low';
@@ -186,6 +213,13 @@ export class CarsComponent implements OnInit {
   onSort() {
     if (this.sortOrder === 'default') {
       this.getCars();
+      this.selectedBrands = {};
+      this.selectedCategories = {};
+      this.selectedColors = {};
+      this.carModel = '';
+      this.carName = '';
+      this.priceFrom = null;
+      this.priceTo = null;
     } else if (this.sortOrder === 'low') {
       this.filteredCars.sort((a, b) => a.PricePerDay - b.PricePerDay);
     } else if (this.sortOrder === 'high') {
