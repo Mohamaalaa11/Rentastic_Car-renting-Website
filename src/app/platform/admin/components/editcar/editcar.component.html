@@ -1,33 +1,33 @@
 
-<h5 class="nameofcar">{{ car.name }}</h5>
+<h5 class="nameofcar">{{ car.Name }}</h5>
 <div class="details">
     <div class="car-details">
-      <img [src]="car.images" alt="Car Image">
+      <img [src]="car.Images" alt="Car Image">
       <div class="details-text">
-        <h2>{{ car.name }}</h2>
-        <p><span style="color: #751f1f; " >{{ car.pricePerDay }} </span> <span style="font-size: 12px;"> EGP</span>/ Day</p>
+        <h2>{{ car.Name }}</h2>
+        <p><span style="color: #751f1f; " >{{ car.PricePerDay }} </span> <span style="font-size: 12px;"> EGP</span>/ Day</p>
 
           
         <p><strong>Description </strong></p>
-        <p class="data">{{ car.description }}</p>
+        <p class="data">{{ car.Description }}</p>
         <p><strong>Category </strong></p>
-        <p class="data">{{ car.category }}</p>
+        <p class="data">{{ car.Category }}</p>
         <div class="otherdetails">
         <div>
             <img src="assets/imgs/colorlogo.png" alt="color logo">
-            <span>{{car.color}}</span>
+            <span>{{car.Color}}</span>
           </div>
           <div>
             <img src="assets/imgs/seatlogo.png" alt="seat logo">
-            <span>{{car.seatCount}} seats </span>
+            <span>{{car.SeatCount}} seats </span>
           </div>
-        <ng-container *ngIf="car.hasAirCondition">
+        <ng-container *ngIf="car.HasAirCondition">
           <div>
             <img src="assets/imgs/aircondition.png" alt="Air Condition Logo">
             <span>Air Condition</span>
           </div>
         </ng-container>
-        <ng-container *ngIf="car.isAutomatic">
+        <ng-container *ngIf="car.IsAutomatic">
           <div>
             <img src="assets/imgs/manual.png" alt="Manual Logo">
             <span>Manual</span>
@@ -42,15 +42,15 @@
     
   
     <label>Brand </label>
-    <input type="text" [(ngModel)]="car.brand" name="brand" required id="brand"> <br>
+    <input type="text" [(ngModel)]="car.Brand" name="brand" required id="brand"> <br>
     <label>Name </label>
-    <input type="text" [(ngModel)]="car.name" name="name" required id ="name"> <br>
+    <input type="text" [(ngModel)]="car.Name" name="name" required id ="name"> <br>
     <label>Model Year </label>
-    <input type="text" [(ngModel)]="car.modelYear" name="modelYear" required id="modelYear"><br>
+    <input type="text" [(ngModel)]="car.ModelYear" name="modelYear" required id="modelYear"><br>
     <label>Color </label>
-    <input type="text" [(ngModel)]="car.color" name="color" required id="color"><br>
+    <input type="text" [(ngModel)]="car.Color" name="color" required id="color"><br>
     <label>Category </label>
-    <select [(ngModel)]="car.category" name="category" required>
+    <select [(ngModel)]="car.Category" name="category" required>
       <option value="">Select Category</option>
       <option value="Economy">Economy</option>
       <option value="Compact">Compact</option>
@@ -64,25 +64,25 @@
       
     </select><br>
     <label>Discription </label>
-    <textarea [(ngModel)]="car.description" name="description" required> </textarea><br>
+    <textarea [(ngModel)]="car.Description" name="description" required> </textarea><br>
     <label>seat Number </label>
-    <input type="number" [(ngModel)]="car.seatCount" name="seatCount" required id="seatCount"><br>
+    <input type="number" [(ngModel)]="car.SeatCount" name="seatCount" required id="seatCount"><br>
    
     <label>price </label>
-    <input type="number" [(ngModel)]="car.pricePerDay" name="pricePerDay" required id="pricePerDay"><br>
+    <input type="number" [(ngModel)]="car.PricePerDay" name="pricePerDay" required id="pricePerDay"><br>
    
     <label >Air Condition:</label>
-    <select id="hasAirCondition" name="hasAirCondition" [(ngModel)]="car.hasAirCondition" required>
+    <select id="hasAirCondition" name="hasAirCondition" [(ngModel)]="car.HasAirCondition" required>
       <option [ngValue]="true">Yes </option>
   <option [ngValue]="false">No </option>
        </select><br>
        <label >Is Automatic:</label>
-       <select id="isAutomatic" name="isAutomatic" [(ngModel)]="car.isAutomatic" required>
+       <select id="isAutomatic" name="isAutomatic" [(ngModel)]="car.IsAutomatic" required>
         <option [ngValue]="true">Yes</option>
          <option [ngValue]="false">No</option>
          </select><br>
     <label>Image URL </label>
-    <input type="text" [(ngModel)]="car.images" name="image" required id="image"><br>
+    <input type="text" [(ngModel)]="car.Images" name="image" required id="image"><br>
     <div class="butt">
     <button class="editbutton"type="submit">Save</button>
     <button type="button" (click)="onDelete()" class="deletebutton">

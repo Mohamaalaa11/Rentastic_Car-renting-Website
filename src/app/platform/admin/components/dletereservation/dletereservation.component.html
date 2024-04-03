@@ -1,0 +1,16 @@
+<div class="modal" >
+    <div class="modal-content">
+        <div class="headpop">
+            <h5 style="margin-top: 5px;">Delete Reservation?</h5>
+          
+        </div>
+        <hr>
+        <p style="color: gray;">Are you sure you want to delete this Reservation?</p>
+        <hr>
+        <div class="buttons">
+           
+            <button class ="cancel"(click)="cancelDelete.emit()">Cancel</button>
+            <button (click)="deleteCar.emit()" class="delete">Delete</button>
+        </div>
+    </div>
+</div>

@@ -2,50 +2,50 @@
   <h3 class="headform">Add Car</h3>
 
   <label>Name <span class="required-indicator"></span></label>
-  <input type="text" formControlName="name" />
+  <input type="text" formControlName="Name" />
   <div
     *ngIf="
-      carForm.get('name')!.invalid &&
-      (carForm.get('name')!.dirty || carForm.get('name')!.touched)
+      carForm.get('Name')!.invalid &&
+      (carForm.get('Name')!.dirty || carForm.get('Name')!.touched)
     "
   >
-    <p class="error-message" *ngIf="carForm.get('name')!.errors?.['required']">
+    <p class="error-message" *ngIf="carForm.get('Name')!.errors?.['required']">
       Name is required
     </p>
   </div>
   <br />
 
   <label>Brand <span class="required-indicator"></span></label>
-  <input type="text" formControlName="brand" />
+  <input type="text" formControlName="Brand" />
   <div
     *ngIf="
-      carForm.get('brand')!.invalid &&
-      (carForm.get('brand')!.dirty || carForm.get('brand')!.touched)
+      carForm.get('Brand')!.invalid &&
+      (carForm.get('Brand')!.dirty || carForm.get('Brand')!.touched)
     "
   >
-    <p class="error-message" *ngIf="carForm.get('brand')!.errors?.['required']">
+    <p class="error-message" *ngIf="carForm.get('Brand')!.errors?.['required']">
       Brand is required
     </p>
   </div>
   <br />
 
   <label>Model Year <span class="required-indicator"></span></label>
-  <input type="text" formControlName="modelYear" />
+  <input type="text" formControlName="ModelYear" />
   <div
     *ngIf="
-      carForm.get('modelYear')!.invalid &&
-      (carForm.get('modelYear')!.dirty || carForm.get('modelYear')!.touched)
+      carForm.get('ModelYear')!.invalid &&
+      (carForm.get('ModelYear')!.dirty || carForm.get('ModelYear')!.touched)
     "
   >
     <p
       class="error-message"
-      *ngIf="carForm.get('modelYear')!.errors?.['required']"
+      *ngIf="carForm.get('ModelYear')!.errors?.['required']"
     >
       Model Year is required
     </p>
     <p
       class="error-message"
-      *ngIf="carForm.get('modelYear')!.errors?.['pattern']"
+      *ngIf="carForm.get('ModelYear')!.errors?.['pattern']"
     >
       Model Year must be between 1900 - 2025
     </p>
@@ -53,21 +53,21 @@
   <br />
 
   <label>Color <span class="required-indicator"></span></label>
-  <input type="text" formControlName="color" />
+  <input type="text" formControlName="Color" />
   <div
     *ngIf="
-      carForm.get('color')!.invalid &&
-      (carForm.get('color')!.dirty || carForm.get('color')!.touched)
+      carForm.get('Color')!.invalid &&
+      (carForm.get('Color')!.dirty || carForm.get('Color')!.touched)
     "
   >
-    <p class="error-message" *ngIf="carForm.get('color')!.errors?.['required']">
+    <p class="error-message" *ngIf="carForm.get('Color')!.errors?.['required']">
       Color is required
     </p>
   </div>
   <br />
 
   <label>Category <span class="required-indicator"></span></label>
-  <select formControlName="category">
+  <select formControlName="Category">
     <option value="">Select Category</option>
     <option value="Economy">Economy</option>
     <option value="Compact">Compact</option>
@@ -81,13 +81,13 @@
   </select>
   <div
     *ngIf="
-      carForm.get('category')!.invalid &&
-      (carForm.get('category')!.dirty || carForm.get('category')!.touched)
+      carForm.get('Category')!.invalid &&
+      (carForm.get('Category')!.dirty || carForm.get('Category')!.touched)
     "
   >
     <p
       class="error-message"
-      *ngIf="carForm.get('category')!.errors?.['required']"
+      *ngIf="carForm.get('Category')!.errors?.['required']"
     >
       Category is required
     </p>
@@ -95,28 +95,28 @@
   <br />
 
   <label>Description <span class="required-indicator"></span></label>
-  <textarea formControlName="description"></textarea>
+  <textarea formControlName="Description"></textarea>
   <div
     *ngIf="
-      carForm.get('description')!.invalid &&
-      (carForm.get('description')!.dirty || carForm.get('description')!.touched)
+      carForm.get('Description')!.invalid &&
+      (carForm.get('Description')!.dirty || carForm.get('Description')!.touched)
     "
   >
     <p
       class="error-message"
-      *ngIf="carForm.get('description')!.errors?.['required']"
+      *ngIf="carForm.get('Description')!.errors?.['required']"
     >
       Description is required
     </p>
     <p
       class="error-message"
-      *ngIf="carForm.get('description')!.errors?.['minlength']"
+      *ngIf="carForm.get('Description')!.errors?.['minlength']"
     >
       Description must be at least 10 characters
     </p>
     <p
       class="error-message"
-      *ngIf="carForm.get('description')!.errors?.['maxlength']"
+      *ngIf="carForm.get('Description')!.errors?.['maxlength']"
     >
       Description must not exceed 500 characters
     </p>
@@ -124,22 +124,22 @@
   <br />
 
   <label>Seat Number <span class="required-indicator"></span></label>
-  <input type="number" formControlName="seatCount" />
+  <input type="number" formControlName="SeatCount" />
   <div
     *ngIf="
-      carForm.get('seatCount')!.invalid &&
-      (carForm.get('seatCount')!.dirty || carForm.get('seatCount')!.touched)
+      carForm.get('SeatCount')!.invalid &&
+      (carForm.get('SeatCount')!.dirty || carForm.get('SeatCount')!.touched)
     "
   >
     <p
       class="error-message"
-      *ngIf="carForm.get('seatCount')!.errors?.['required']"
+      *ngIf="carForm.get('SeatCount')!.errors?.['required']"
     >
       Seat Number is required
     </p>
     <p
       class="error-message"
-      *ngIf="carForm.get('seatCount')!.errors?.['pattern']"
+      *ngIf="carForm.get('SeatCount')!.errors?.['pattern']"
     >
       Seat Number must be 2, 4, or 6
     </p>
@@ -147,22 +147,22 @@
   <br />
 
   <label>Price <span class="required-indicator"></span></label>
-  <input type="number" formControlName="pricePerDay" />
+  <input type="number" formControlName="PricePerDay" />
   <div
     *ngIf="
-      carForm.get('pricePerDay')!.invalid &&
-      (carForm.get('pricePerDay')!.dirty || carForm.get('pricePerDay')!.touched)
+      carForm.get('PricePerDay')!.invalid &&
+      (carForm.get('PricePerDay')!.dirty || carForm.get('PricePerDay')!.touched)
     "
   >
     <p
       class="error-message"
-      *ngIf="carForm.get('pricePerDay')!.errors?.['required']"
+      *ngIf="carForm.get('PricePerDay')!.errors?.['required']"
     >
       Price is required
     </p>
     <p
       class="error-message"
-      *ngIf="carForm.get('pricePerDay')!.errors?.['min']"
+      *ngIf="carForm.get('PricePerDay')!.errors?.['min']"
     >
       Price Per Day must be greater than 0
     </p>
@@ -170,20 +170,20 @@
   <br />
 
   <label for="hasAirCondition">Air Condition:</label>
-  <select id="hasAirCondition" formControlName="hasAirCondition">
+  <select id="hasAirCondition" formControlName="HasAirCondition">
     <option [ngValue]="true">Yes</option>
     <option [ngValue]="false">No</option>
   </select>
   <div
     *ngIf="
-      carForm.get('hasAirCondition')!.invalid &&
-      (carForm.get('hasAirCondition')!.dirty ||
-        carForm.get('hasAirCondition')!.touched)
+      carForm.get('HasAirCondition')!.invalid &&
+      (carForm.get('HasAirCondition')!.dirty ||
+        carForm.get('HasAirCondition')!.touched)
     "
   >
     <p
       class="error-message"
-      *ngIf="carForm.get('hasAirCondition')!.errors?.['required']"
+      *ngIf="carForm.get('HasAirCondition')!.errors?.['required']"
     >
       Air Condition is required
     </p>
@@ -191,19 +191,19 @@
   <br />
 
   <label>Is Automatic:</label>
-  <select id="isAutomatic" formControlName="isAutomatic">
+  <select id="isAutomatic" formControlName="IsAutomatic">
     <option [ngValue]="true">Yes</option>
     <option [ngValue]="false">No</option>
   </select>
   <div
     *ngIf="
-      carForm.get('isAutomatic')!.invalid &&
-      (carForm.get('isAutomatic')!.dirty || carForm.get('isAutomatic')!.touched)
+      carForm.get('IsAutomatic')!.invalid &&
+      (carForm.get('IsAutomatic')!.dirty || carForm.get('IsAutomatic')!.touched)
     "
   >
     <p
       class="error-message"
-      *ngIf="carForm.get('isAutomatic')!.errors?.['required']"
+      *ngIf="carForm.get('IsAutomatic')!.errors?.['required']"
     >
       Is Automatic is required
     </p>
@@ -211,16 +211,16 @@
   <br />
 
   <label>Image URL <span class="required-indicator"></span></label>
-  <input type="text" formControlName="images" />
+  <input type="text" formControlName="Images" />
   <div
     *ngIf="
-      carForm.get('images')!.invalid &&
-      (carForm.get('images')!.dirty || carForm.get('images')!.touched)
+      carForm.get('Images')!.invalid &&
+      (carForm.get('Images')!.dirty || carForm.get('Images')!.touched)
     "
   >
     <p
       class="error-message"
-      *ngIf="carForm.get('images')!.errors?.['required']"
+      *ngIf="carForm.get('Images')!.errors?.['required']"
     >
       Image URL is required
     </p>

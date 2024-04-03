@@ -30,21 +30,21 @@ export class EditcarComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const carId = +params['id'];
+      const carId = +params['Id'];
       this.carService.getCarById(carId).subscribe((car) => {
         this.car = car;
       });
     });
   }
 
-  car: Car = new Car(0, '', '', '', '', '', '', 0, 0, '', false,false);
+  car: any = new Car(0, '', '', '', '', '', '', 0, 0, '', false,false);
   
  
   onSubmit() {
     this.carService.editCar(this.car).subscribe({
       next: () => {
         console.log('Car edited successfully');
-        this.router.navigateByUrl('/car');
+        this.router.navigateByUrl('/admin/cars');
       },
       error: () => {
         console.log('Failed to edit car');
@@ -58,10 +58,10 @@ export class EditcarComponent implements OnInit {
   showDeleteConfirmation = false;
 
   onDeleteConfirmed() {
-    this.carService.deleteCar(this.car.id).subscribe({
+    this.carService.deleteCar(this.car.Id).subscribe({
       next: () => {
         console.log('Car deleted successfully');
-        this.router.navigateByUrl('/car');
+        this.router.navigateByUrl('/admin/cars');
       },
       error: () => {
         console.log('Failed to delete car');

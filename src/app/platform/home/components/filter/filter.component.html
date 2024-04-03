@@ -1,51 +1,77 @@
-<div class="shadow contee bg-white container rounded-3 d-flex justify-content-evenly align-items-center p-4 mt-3">
+<div
+  class="shadow contee bg-white container rounded-3 d-flex justify-content-evenly align-items-center p-4 mt-3"
+>
   <form [formGroup]="form" class="w-100">
-  <div class="row d-flex align-items-center justify-content-between filt">
-    <div class="col-lg-3 col-md-12">
-      <div class="d-flex align-items-center justify-content-center">
-        <i class="fa-solid fa-car m-2 text-red"></i>
-        <div class="btn-group">
-          <mat-form-field>
-            <mat-label>Car type</mat-label>
-            <mat-select formControlName="cartype" >
-              @for (car of cartypes; track car) {
-                <mat-option  [value]="car">{{car}}</mat-option>
-              }
-            </mat-select>
+    <div class="row d-flex align-items-center justify-content-between filt">
+      <!-- Car Brand -->
+      <div class="col-lg-3 col-md-12">
+        <div class="d-flex align-items-center justify-content-center">
+          <i class="fa-solid fa-car m-2 text-red"></i>
+          <div class="btn-group">
+            <mat-form-field>
+              <mat-label>Car Brand</mat-label>
+              <mat-select formControlName="carBrand">
+                <mat-option *ngFor="let car of brands" [value]="car">{{
+                  car
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rent Date -->
+      <div class="col-lg-3 col-md-12">
+        <div class="d-flex align-items-center alo justify-content-center">
+          <i class="fa-solid fa-calendar-days m-2 text-red"></i>
+          <mat-form-field class="example-full-width">
+            <mat-label>Pick-up date</mat-label>
+            <input
+              matInput
+              formControlName="startDate"
+              [matDatepicker]="pickupDatepicker"
+            />
+            <mat-datepicker-toggle matIconSuffix [for]="pickupDatepicker">
+              <mat-icon matDatepickerToggleIcon
+                ><img src="../../../assets/imgs/arrow.png" alt=""
+              /></mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #pickupDatepicker color="accent"></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
-    </div>
-    <div class="col-lg-3 col-md-12">
-      <div class="d-flex align-items-center alo justify-content-center">
-        <i class="fa-solid fa-calendar-days m-2 text-red"></i>
-        <mat-form-field class="example-full-width">
-          <mat-label>Pick-up date</mat-label>
-          <input matInput formControlName="startDate" [matDatepicker]="pickupDatepicker">
-          <mat-datepicker-toggle matIconSuffix [for]="pickupDatepicker">
-            <mat-icon matDatepickerToggleIcon><img src="../../../assets/imgs/arrow.png" alt=""></mat-icon>
-          </mat-datepicker-toggle>
-          <mat-datepicker #pickupDatepicker color="accent"></mat-datepicker>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-12">
-      <div class="d-flex align-items-center justify-content-center">
-        <i class="fa-solid fa-calendar-days m-2 text-red"></i>
-        <mat-form-field class="example-full-width">
-          <mat-label>Return date</mat-label>
-          <input matInput formControlName="endDate" [matDatepicker]="returnDatepicker">
-          <mat-datepicker-toggle matIconSuffix [for]="returnDatepicker">
-            <mat-icon matDatepickerToggleIcon><img src="../../../assets/imgs/arrow.png" alt=""></mat-icon>
-          </mat-datepicker-toggle>
-          <mat-datepicker #returnDatepicker color="accent"></mat-datepicker>
-        </mat-form-field>
-      </div>
-    </div>
-        <div class="col-lg-3 d-flex  align-items-center justify-content-center">
-      <button type="submit" (click)="GetData()" class="btn btn-block btn-red text-white py-2 px-5">Search</button>
-    </div>
-  </div>
 
-</form>
+      <!-- Return Date -->
+      <div class="col-lg-3 col-md-12">
+        <div class="d-flex align-items-center justify-content-center">
+          <i class="fa-solid fa-calendar-days m-2 text-red"></i>
+          <mat-form-field class="example-full-width">
+            <mat-label>Return date</mat-label>
+            <input
+              matInput
+              formControlName="endDate"
+              [matDatepicker]="returnDatepicker"
+            />
+            <mat-datepicker-toggle matIconSuffix [for]="returnDatepicker">
+              <mat-icon matDatepickerToggleIcon
+                ><img src="../../../assets/imgs/arrow.png" alt=""
+              /></mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #returnDatepicker color="accent"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="col-lg-3 d-flex align-items-center justify-content-center">
+        <button
+          type="submit"
+          class="btn btn-block btn-red text-white py-2 px-5"
+          (click)="onFilterByDate()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

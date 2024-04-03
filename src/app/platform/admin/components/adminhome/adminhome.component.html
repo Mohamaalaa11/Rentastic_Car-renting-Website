@@ -1,1 +1,107 @@
-<h1>Admin Home</h1>
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card shadow h-100" style="background-color: #9A3333; color: white;">
+          <div class="card-body d-flex justify-content-between align-items-center" style="height: 80px;">
+            <h5 class="card-title">Total Cars </h5>
+            <p class="card-text"> {{ cars.length }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card shadow h-100" style="background-color: #9A3333; color: white;">
+          <div class="card-body d-flex justify-content-between align-items-center" style="height: 80px;">
+            <h5 class="card-title">Total Reservations Now</h5>
+            <p class="card-text"> {{ reservations.length }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="row">
+  <h3 style="color:#6B7280">Cars</h3>
+</div>
+   <div class="row">
+      <div class="col-md-12">
+        <table class="table mt-3">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Brand</th>
+              <th>Name</th>
+              <th>Model Year</th>
+              <th>Color</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let car of displayedCars.slice(0, 3)">
+              <td>{{ car.Id }}</td>
+              <td>{{ car.Brand }}</td>
+              <td>{{ car.Name }}</td>
+              <td>{{ car.ModelYear }}</td>
+              <td>{{ car.Color }}</td>
+              <td>
+                <img src="assets/imgs/edit.png" alt="edit Image" (click)="openEditCar(car)" />
+                <img src="assets/imgs/delete.png" alt="delete Image" (click)="showDeleteConfirmation(car)" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <div class="row">
+    <h3 style="color:#6B7280 ; margin-top: 50px;">Recent Reservations</h3>  
+</div>
+  <div class="row">
+      <div class="col-md-12">
+        <table class="table mt-3">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>UserId</th>
+              <th>CarId</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of displayedReservations.slice(0, 3); let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ reservation.UserSsn }}</td>
+              <td>{{ reservation.CarId }}</td>
+              <td>{{ reservation.StartRentTime | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ reservation.EndRentDate | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <img src="assets/imgs/delete.png" alt="delete Image" (click)="showDeleteConfirmation(reservation)" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+   
+    
+  
+     
+   
+  
+  
+  
+  <app-delete-confirmation-component
+  *ngIf="showConfirmation"
+  (deleteCar)="deleteCar(carToDelete!)"
+  (cancelDelete)="cancelDelete()"
+>
+</app-delete-confirmation-component>
+<app-dletereservation
+    *ngIf="showConfirmation"
+    (deleteCar)="deletereservation(reservationToDelete!)"
+    (cancelDelete)="cancelDelete()"
+  >
+  </app-dletereservation>
+  
