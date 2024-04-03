@@ -21,8 +21,10 @@ export class CarsComponent implements OnInit {
   filteredCars: Car[] = [];
   brands: string[] = [];
   colors: string[] = [];
+  categories: string[] = [];
   // Filter
   selectedBrands: { [key: string]: boolean } = {};
+  selectedColors: { [key: string]: boolean } = {};
   // Sorting
   sortOrder: string = 'default';
   // For Search
@@ -33,6 +35,18 @@ export class CarsComponent implements OnInit {
     this.carServices.getBrands().subscribe({
       next: (res) => {
         this.brands = res;
+      },
+    });
+
+    this.carServices.getColors().subscribe({
+      next: (res) => {
+        this.colors = res;
+      },
+    });
+
+    this.carServices.getCategories().subscribe({
+      next: (res) => {
+        this.categories = res;
       },
     });
 
@@ -80,19 +94,31 @@ export class CarsComponent implements OnInit {
     });
   }
 
-  filterCarsByBrand(): void {
+  filter() {
     // Get selected brands
     const selectedBrandNames = Object.keys(this.selectedBrands).filter(
       (brand) => this.selectedBrands[brand]
     );
 
-    // Filter cars based on selected brands
+    // Get selected colors
+    const selectedColors = Object.keys(this.selectedColors).filter(
+      (color) => this.selectedColors[color]
+    );
+
+    // Apply brand filter
     if (selectedBrandNames.length > 0) {
       this.filteredCars = this.cars.filter((car) =>
         selectedBrandNames.includes(car.Brand)
       );
     } else {
       this.filteredCars = this.cars.slice(); // If no brands selected, show all cars
+    }
+
+    // Apply color filter
+    if (selectedColors.length > 0) {
+      this.filteredCars = this.filteredCars.filter((car) =>
+        selectedColors.includes(car.Color)
+      );
     }
   }
 

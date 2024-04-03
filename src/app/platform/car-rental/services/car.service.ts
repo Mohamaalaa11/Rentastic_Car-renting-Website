@@ -31,6 +31,26 @@ export class CarService {
     );
   }
 
+  getColors(): Observable<string[]> {
+    return this.getCars().pipe(
+      map((cars: Car[]) => {
+        const colorSet = new Set<string>();
+        cars.forEach((car) => colorSet.add(car.Color));
+        return Array.from(colorSet);
+      })
+    );
+  }
+
+  getCategories(): Observable<string[]> {
+    return this.getCars().pipe(
+      map((cars: Car[]) => {
+        const categoriesSet = new Set<string>();
+        cars.forEach((car) => categoriesSet.add(car.Category));
+        return Array.from(categoriesSet);
+      })
+    );
+  }
+
   getFilterdCarsByDate(model: CarFilter): Observable<Car[]> {
     return this.http.post<Car[]>(
       'https://localhost:7283/api/Cars/AvailabeDate',
