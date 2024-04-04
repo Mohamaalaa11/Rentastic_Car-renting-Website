@@ -11,9 +11,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
 import { PaymentComponent } from './payMob/payment/payment.component';
 import { SharedModule } from './platform/shared/shared.module';
-
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, PaymentComponent],
@@ -30,6 +33,8 @@ import { SharedModule } from './platform/shared/shared.module';
     MatNativeDateModule,
     MatSelectModule,
     SharedModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

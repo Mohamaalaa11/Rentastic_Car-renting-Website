@@ -8,13 +8,15 @@ import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [OrderCardComponent,MyOrdersComponent,ProfileComponent],
+  declarations: [OrderCardComponent, MyOrdersComponent, ProfileComponent],
   imports: [
     CommonModule,
-    UserRoutingModule,SharedModule,FormsModule,ReactiveFormsModule
-  ],exports:[MyOrdersComponent,OrderCardComponent,ProfileComponent]
+    UserRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  exports: [MyOrdersComponent, OrderCardComponent, ProfileComponent],
 })
-export class UserModule { }
+export class UserModule {}
