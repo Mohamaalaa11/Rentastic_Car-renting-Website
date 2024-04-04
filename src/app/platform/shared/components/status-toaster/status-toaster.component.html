@@ -1,0 +1,34 @@
+<div
+  class="toast fade show"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+>
+  <div class="toast-header">
+    <i
+      *ngIf="status"
+      class="fa-solid fa-circle-check fa-beat fa-lg me-2"
+      style="color: #33d7a5"
+    ></i>
+
+    <i
+      *ngIf="!status"
+      class="fa-solid fa-circle-exclamation fa-beat fa-lg me-2"
+      style="color: #9a3333"
+    ></i>
+
+    <strong class="me-auto">{{ header }}</strong>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body">
+    <h3>
+      {{ bodyhead }} <span>{{ bodyheadSpan }}</span>
+    </h3>
+    <p>{{ content }}</p>
+  </div>
+</div>

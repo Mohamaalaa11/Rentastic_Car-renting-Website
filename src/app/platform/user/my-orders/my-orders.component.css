@@ -1,17 +1,5 @@
-.row h2 {
+.popup {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
+  top: 30px;
+  right: 30px;
 }
-.row p {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  text-align: center;
-}
-

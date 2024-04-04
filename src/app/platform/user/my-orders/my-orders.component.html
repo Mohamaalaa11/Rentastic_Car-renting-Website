@@ -1,10 +1,24 @@
 <div class="row mb-5">
-    <div style="position: relative;">
-        <img src="../../../assets/imgs/orders_title.png" class="center" alt="" style="width: 100%;">
-        <h2 class="fw-bold">My <span class="text-red">Orders</span> </h2>
-        <p>Here you can manage your orders</p>
-    </div>
+  <div style="position: relative">
+    <img
+      src="../../../assets/imgs/orders_title.png"
+      class="center"
+      alt=""
+      style="width: 100%"
+    />
+    <h2 class="fw-bold">My <span class="text-red">Orders</span></h2>
+    <p>Here you can manage your orders</p>
+  </div>
 </div>
 
 <app-order-card></app-order-card>
 
+<app-status-toaster
+  class="popup"
+  *ngIf="popupSucces"
+  [status]="false"
+  [header]="'Payment Success'"
+  [bodyhead]="'Thanks For Renting With'"
+  [bodyheadSpan]="'Rentastic'"
+  [content]="'Your payment is succeful you can now check your orders'"
+></app-status-toaster>
