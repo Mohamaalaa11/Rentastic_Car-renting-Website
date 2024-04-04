@@ -19,6 +19,7 @@ import { CarAvailability } from '../../types/carAvailability';
 import { PayDataService } from '../../services/paydata.service';
 import { PaymentData } from '../../types/paymentData';
 import { OrderData } from '../../types/orderData';
+import { ProfileService } from '../../../user/services/profile.service';
 
 @Component({
   selector: 'app-car-rent-details',
@@ -28,9 +29,10 @@ import { OrderData } from '../../types/orderData';
 export class CarRentDetailsComponent implements OnInit {
   car: Car | undefined;
   carAvailabilty: CarAvailability | undefined;
-  endDate!: string;
   startDate!: String;
+  endDate!: string;
   error: any = { isError: false, errorMessage: 'dsad' };
+  total!: number;
 
   apiKey: string =
     'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RZM09EQTBMQ0p1WVcxbElqb2lNVGN4TVRnek5qVXlNaTR3TXpBME1ERWlmUS5OUndiNkZXZ2Mta0dzVk9Uc09ITWNDdzJQb1NONUdmenExTmhBS1ZNOU1CeVhQUXU5VDRVTXBpbjB1eWF2MEptREZaRi1KTGMyTi0zamRtcURDX2NIUQ==';
@@ -40,12 +42,12 @@ export class CarRentDetailsComponent implements OnInit {
   paymentKey!: string;
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private carService: CarService,
     private carRentingService: CarRentingService,
     private payDataService: PayDataService,
-    private http: HttpClient
+    private userService: ProfileService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -62,10 +64,6 @@ export class CarRentDetailsComponent implements OnInit {
     });
   }
 
-  getStartDate(e: any) {
-    this.startDate = this.setDate(e.value).toISOString();
-  }
-
   rentForm = new FormGroup({
     startDate: new FormControl<Date>(new Date(), [
       Validators.required,
@@ -77,6 +75,25 @@ export class CarRentDetailsComponent implements OnInit {
     ]),
   });
 
+  //  Add 5 hrs to Date to solve problem of getting the day before
+  setDate(date: Date) {
+    let d = date;
+    d.setHours(d.getHours() + 5);
+    d.setMinutes(d.getMinutes() + 30);
+    return new Date(d);
+  }
+
+  getStartDate(e: any) {
+    this.startDate = this.setDate(e.value).toISOString();
+    return this.startDate;
+  }
+
+  getEndDate(e: any) {
+    this.endDate = this.setDate(e.value).toISOString();
+    return this.endDate;
+  }
+
+  // Validators
   startDateValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const today = new Date().getTime();
@@ -98,10 +115,8 @@ export class CarRentDetailsComponent implements OnInit {
       let startDate = this.startDate;
       let returnDate = this.setDate(control.value).toISOString();
       if (!(control && control.value)) {
-        // if there's no control or no value, that's ok
         return null;
       }
-
       // return null if there's no errors
       return returnDate < startDate
         ? { invalidDate: 'End date must be after pickup date' }
@@ -109,41 +124,33 @@ export class CarRentDetailsComponent implements OnInit {
     };
   }
 
-  getEndDate(e: any) {
-    this.endDate = this.setDate(e.value).toISOString();
-    return this.endDate;
+  // Reservaion Procces
+  getDays(pickdt: Date, retdt: Date): number {
+    return Math.floor(
+      (retdt.getTime() - pickdt.getTime()) / (24 * 3600 * 1000)
+    );
   }
 
-  // endDateValidator(): boolean {
-  //   if (this.rentForm.controls.startDate.value?.toISOString()! > this.endDate) {
-  //     this.error = {
-  //       isError: true,
-  //       errorMessage: "End Date can't before start date",
-  //     };
-  //     return false; // There is an error
-  //   }
+  calcTotalPrice(): number {
+    const price = this.car?.PricePerDay;
+    const pickDate = new Date(this.startDate.toString());
+    const returnDate = new Date(this.endDate.toString());
 
-  //   this.error = {
-  //     isError: false,
-  //     errorMessage: '',
-  //   };
-  //   return false; // No error
-  // }
+    const days = this.getDays(pickDate, returnDate);
 
-  //  Add 5 hrs to Date to solve problem of getting the day before
-  setDate(date: Date) {
-    let d = date;
-    d.setHours(d.getHours() + 5);
-    d.setMinutes(d.getMinutes() + 30);
-    return new Date(d);
+    this.total = days * price!;
+
+    return this.total;
   }
 
-  async onReserve() {
+  onReserve() {
     // Car Id
     const id = this.activatedRoute.snapshot.paramMap.get('id')!;
 
+    const totalPrice = 100 * this.calcTotalPrice();
+
     if (!this.rentForm.invalid) {
-      // form values
+      // Form Values to Pass it to Api Call
       this.carAvailabilty = {
         carId: id,
         startRentDate: this.setDate(
@@ -158,23 +165,24 @@ export class CarRentDetailsComponent implements OnInit {
       this.carRentingService
         .checkCarAvailability(this.carAvailabilty!)
         .subscribe({
-          next: async (res) => {
+          next: (res) => {
+            // if Return is False Continue the Renting
             if (res !== true) {
+              // Api key Request to Get Auth Token
               const requestBody = {
                 api_key: this.apiKey,
               };
-
               this.payDataService.getAuthToken(requestBody).subscribe({
-                next: (res) => {
-                  const parsedRes = JSON.parse(JSON.stringify(res));
-                  this.authenticationToken = parsedRes['token'];
+                next: async (res) => {
+                  const parsedRes = await JSON.parse(JSON.stringify(res));
+                  this.authenticationToken = await parsedRes['token'];
                   console.log(this.authenticationToken);
 
-                  // Get Order ID
+                  // Order Data to Get Order ID
                   const order: OrderData = {
                     auth_token: this.authenticationToken,
                     delivery_needed: 'false',
-                    amount_cents: '1400',
+                    amount_cents: totalPrice.toString(),
                     currency: 'EGP',
                     items: [],
                   };
@@ -184,22 +192,21 @@ export class CarRentDetailsComponent implements OnInit {
                     'Content-Type': 'application/json',
                   });
 
-                  console.log(order.auth_token);
                   if (this.authenticationToken) {
                     this.payDataService.getOrderId(order, headers).subscribe({
                       next: async (res) => {
                         const parsedRes = await JSON.parse(JSON.stringify(res));
-                        this.orderId = parsedRes['id'];
+                        this.orderId = await parsedRes['id'];
 
-                        // Get Payment Key
+                        // Payment Request Date to  Get Payment Key
                         const paymentData: PaymentData = {
                           expiration: 3600,
 
                           auth_token: this.authenticationToken,
-                          integration_id: this.integrationId,
                           order_id: this.orderId.toString(),
+                          integration_id: this.integrationId,
 
-                          amount_cents: '1400',
+                          amount_cents: totalPrice.toString(),
                           currency: 'EGP',
 
                           billing_data: {
@@ -237,8 +244,7 @@ export class CarRentDetailsComponent implements OnInit {
                               this.payDataService.paymentKey$.next(
                                 this.paymentKey
                               );
-                              // window.location.href = `https://accept.paymob.com/api/acceptance/iframes/834630?payment_token=${this.paymentKey}`;
-                              this.router.navigate(['/payment']);
+                              window.location.href = `https://accept.paymob.com/api/acceptance/iframes/834630?payment_token=${this.paymentKey}`;
                             },
                           });
                       },
@@ -249,6 +255,7 @@ export class CarRentDetailsComponent implements OnInit {
                   console.log(err);
                 },
               });
+            } else {
             }
           },
           error: (err) => {},
@@ -256,85 +263,17 @@ export class CarRentDetailsComponent implements OnInit {
     }
   }
 
-  async getPaymentKey() {
-    // Get Auth Key
-    const requestBody = {
-      api_key: this.apiKey,
-    };
-
-    this.payDataService.getAuthToken(requestBody).subscribe({
-      next: (res) => {
-        const parsedRes = JSON.parse(JSON.stringify(res));
-        this.authenticationToken = parsedRes['token'];
-        console.log(this.authenticationToken);
-
-        // Get Order ID
-        const order: OrderData = {
-          auth_token: this.authenticationToken,
-          delivery_needed: 'false',
-          amount_cents: '1400',
-          currency: 'EGP',
-          items: [],
-        };
-
-        const headers = new HttpHeaders({
-          Authorization: `Bearer ${this.authenticationToken}`,
-          'Content-Type': 'application/json',
-        });
-
-        console.log(order.auth_token);
-        if (this.authenticationToken) {
-          this.payDataService.getOrderId(order, headers).subscribe({
-            next: async (res) => {
-              const parsedRes = await JSON.parse(JSON.stringify(res));
-              this.orderId = parsedRes['id'];
-
-              // Get Payment Key
-              const paymentData: PaymentData = {
-                expiration: 3600,
-
-                auth_token: this.authenticationToken,
-                integration_id: this.integrationId,
-                order_id: this.orderId.toString(),
-
-                amount_cents: '1400',
-                currency: 'EGP',
-
-                billing_data: {
-                  first_name: 'Clifford',
-                  last_name: 'Nicolas',
-                  email: 'claudette09@exa.com',
-                  phone_number: '+86(8)9135210487',
-
-                  apartment: 'NA',
-                  floor: 'NA',
-                  street: 'NA',
-                  building: 'NA',
-                  shipping_method: 'NA',
-                  postal_code: 'NA',
-                  city: 'NA',
-                  country: 'NA',
-                  state: 'NA',
-                },
-
-                lock_order_when_paid: 'false',
-              };
-
-              this.payDataService.getPaymentKey(paymentData).subscribe({
-                next: async (res) => {
-                  const parsedRes = await JSON.parse(JSON.stringify(res));
-                  this.paymentKey = parsedRes['token'];
-                  this.payDataService.paymentKey$.next(this.paymentKey);
-                  console.log(`payment key  =  ${this.paymentKey}`);
-                },
-              });
-            },
-          });
-        }
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+  getUrlParams(url: string): any {
+    const params: any = {};
+    const urlParts = url.split('?');
+    if (urlParts.length > 1) {
+      const paramString = urlParts[1];
+      const paramPairs = paramString.split('&');
+      paramPairs.forEach((pair) => {
+        const [key, value] = pair.split('=');
+        params[key] = decodeURIComponent(value);
+      });
+    }
+    return params;
   }
 }

@@ -1,4 +1,4 @@
-<div class="hero ">
+<div class="hero">
   <div>
     <div class="d-flex">
       <div
@@ -12,9 +12,12 @@
           Get a car whatever and whenever you need it !
         </p>
 
-        <button type="button" class="btn btn-red text-white py-2 px-5 mb-5">
+        <a
+          class="btn btn-red text-white py-2 px-5 mb-5"
+          [routerLink]="['/car-rental', 'cars']"
+        >
           Get Started
-        </button>
+        </a>
       </div>
       <div class="">
         <img

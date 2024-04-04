@@ -12,8 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CardsSliderComponent } from './components/cards-slider/cards-slider.component';
+
 @NgModule({
-  declarations: [ReviewCardComponent, CarsComponent, CarRentDetailsComponent],
+  declarations: [ReviewCardComponent, CarsComponent, CarRentDetailsComponent, CardsSliderComponent],
   imports: [
     CommonModule,
     CarRentalRoutingModule,

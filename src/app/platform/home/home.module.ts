@@ -17,6 +17,8 @@ import { HowItWorkComponent } from './components/how-it-work/how-it-work.compone
 import { SharedModule } from '../shared/shared.module';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { TablefiltterComponent } from './components/home/tablefiltter/tablefiltter.component';
+import { RouterModule } from '@angular/router';
+import { CardsComponent } from './components/cards/cards.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { TablefiltterComponent } from './components/home/tablefiltter/tablefiltt
     HowItWorkComponent,
     AboutUsComponent,
     TablefiltterComponent,
+    CardsComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { TablefiltterComponent } from './components/home/tablefiltter/tablefiltt
     MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
 })
 export class HomeModule {}

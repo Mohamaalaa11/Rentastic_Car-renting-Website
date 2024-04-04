@@ -89,6 +89,7 @@
                   <input
                     matInput
                     formControlName="endDate"
+                    (dateChange)="getEndDate($event)"
                     [matDatepicker]="returnDatepicker"
                   />
                   <mat-datepicker-toggle matIconSuffix [for]="returnDatepicker">
@@ -123,6 +124,8 @@
             </button>
           </div>
         </div>
+
+        <div>Total: {{ total }} EGP</div>
       </form>
     </div>
   </div>
@@ -137,6 +140,8 @@
       <app-review-card class="mx-4"></app-review-card>
     </div>
   </div>
+
+  <app-cards-slider></app-cards-slider>
 
   <!-- Similar Cars -->
   <section class="container mt-5 gapp">
