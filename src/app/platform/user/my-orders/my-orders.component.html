@@ -1,19 +1,110 @@
-<div class="row mb-5">
-  <div style="position: relative">
-    <img
-      src="../../../assets/imgs/orders_title.png"
-      class="center"
-      alt=""
-      style="width: 100%"
-    />
-    <h2 class="fw-bold">My <span class="text-red">Orders</span></h2>
-    <p>Here you can manage your orders</p>
+
+<app-header
+  img="assets/imgs/orders_title.png"
+  beforeSpan="My"
+  contentSpan="Orders"
+  afterSpan=""
+  contentBody="Here you can manage your Reservations"
+></app-header>
+<div class="container">
+  <div *ngFor="let res of user.Reservations" class="row caaard">
+    <div class=" col-12 card ">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 m-0 p-0 img-cont">
+          <img
+            [src]="res.Car.Images"
+            class="img-fluid rounded-start w-100"  />
+        </div>
+        <div class="col-6 d-flex flex-column py-2">
+          <h5 class="card-title fs-3">
+            {{ res.Car.Name + " " + res.Car.Brand + " " + res.Car.ModelYear }}
+          </h5>
+          <div class="mt-3">
+            <p class="">Description</p>
+            <p class="text-secondary">{{ res.Car.Description }}</p>
+          </div>
+          <div>
+            <p class="title-in-card">From</p>
+            <p class="text-secondary">{{ res.StartRentTime | date: 'dd-MM-yyyy' }}</p> 
+          </div>
+          <div>
+            <p class="title-in-card">To</p>
+            <p class="text-secondary">{{ res.EndRentDate | date: 'dd-MM-yyyy' }}</p> 
+
+          </div>
+          <div class="d-flex align-items-end justify-content-between">
+            <div>
+              <p>Total Price</p>
+              <p  style="font-size: 24px;"class="text-red fw-bold">{{ res.TotalPrice }}</p>
+            </div>
+          </div>
+          <div class="d-flex flex-row">
+            <button type="button" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#DeleteCard">
+              Cancel
+            </button>
+            <!-- Modal -->
+              <div class="modal fade" id="DeleteCard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Reservation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are You Sure you want to delete this Reservation ?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" (click)="OnDelete(res.Id)" class="btn btn-red">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          <!-- <button type="button" (click)="OnDelete(res.Id)" class="btn btn-red px-3">Cancel Resrervation</button> -->
+          <button [disabled]="isEndDatePassed(res.EndRentDate)" data-bs-toggle="modal" data-bs-target="#Rate" type="button" class="btn btn-red px-3">Rate</button>
+
+          <div class="modal fade" id="Rate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Rate Your Experience</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="" [formGroup]="rateform" class="d-flex flex-column ">
+                    <app-rate-car
+                    [limit]="5"
+                    [rounded]="rateform.get('rating')!.value!"
+                    (ratingChange)="rateform.get('rating')!.setValue($event)"
+                  ></app-rate-car>                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label">Message:</label>
+                      <textarea class="form-control" [formControlName]="'message'" id="message-text"></textarea>
+                    </div>
+                  </form>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" (click)="onsubmitRating(res.Car.Id,res.Id)" class="btn btn-red">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          
+        </div>
+      
   </div>
 </div>
+</div>
 
-<app-order-card></app-order-card>
-
-<app-status-toaster
+  
+  <app-status-toaster
   class="popup"
   *ngIf="popupSucces"
   [status]="false"
@@ -22,3 +113,4 @@
   [bodyheadSpan]="'Rentastic'"
   [content]="'Your payment is succeful you can now check your orders'"
 ></app-status-toaster>
+

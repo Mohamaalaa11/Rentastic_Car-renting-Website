@@ -6,7 +6,7 @@ export interface UserEdit {
     address: string;
     image: string;
     nationalIdentityNumber: string;
-  
+    
 
   }
   

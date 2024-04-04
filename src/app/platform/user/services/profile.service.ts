@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../Types/user';
 import { jwtDecode } from 'jwt-decode';
 import { UserEdit } from '../Types/UserEdit';
+import { Review } from '../Types/review';
 // import { Logindata } from '../../../auth/components/login/login.component';
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,14 @@ export class ProfileService {
   editUser(model:UserEdit){
     return this.http.put(`https://localhost:7283/api/User/${this.userguid}`,model)
   }
+
+deleteReservation(id:number)
+{
+  return this.http.delete(`https://localhost:7283/api/Reservations/${id}`)
+
+}
+
+addReview(model:Review){
+ return this.http.post("https://localhost:7283/api/Review/AddReview",model)
+}
 }
