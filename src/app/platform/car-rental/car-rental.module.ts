@@ -15,7 +15,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardsSliderComponent } from './components/cards-slider/cards-slider.component';
 
 @NgModule({
-  declarations: [ReviewCardComponent, CarsComponent, CarRentDetailsComponent, CardsSliderComponent],
+  declarations: [
+    ReviewCardComponent,
+    CarsComponent,
+    CarRentDetailsComponent,
+    CardsSliderComponent,
+  ],
   imports: [
     CommonModule,
     CarRentalRoutingModule,

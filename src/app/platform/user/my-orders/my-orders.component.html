@@ -83,6 +83,9 @@
                     </div>
                   </form>
 
+
+
+
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -99,15 +102,15 @@
   </div>
 </div>
 </div>
-<!-- Bootstrap toast markup -->
-<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" [hidden]="!showErrorToast">
-  <div class="toast-header">
-    <strong class="me-auto">Error</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-  <div class="toast-body">
-    You Already Added a Review
-  </div>
-</div>
 
-</div>
+  
+  <app-status-toaster
+  class="popup"
+  *ngIf="popupSucces"
+  [status]="false"
+  [header]="'Payment Success'"
+  [bodyhead]="'Thanks For Renting With'"
+  [bodyheadSpan]="'Rentastic'"
+  [content]="'Your payment is succeful you can now check your orders'"
+></app-status-toaster>
+
