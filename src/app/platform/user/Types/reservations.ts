@@ -3,13 +3,13 @@ import { User } from "./user";
 import { Car } from "../../../Car";
 
 export interface Reservation {
-    id: number;
+    Id: number;
     userSsn: number;
     carId: number;
-    startRentTime: string;
-    endRentDate: string;
-    totalPrice: number;
+    StartRentTime: Date;
+    EndRentDate: Date;
+    TotalPrice: number;
     review: Review;
     user: User;
-    car: Car;
+    Car: Car;
 }
