@@ -35,4 +35,10 @@ export class ProfileService {
   editUser(model:UserEdit){
     return this.http.put(`https://localhost:7283/api/User/${this.userguid}`,model)
   }
+
+deleteReservation(id:number)
+{
+  return this.http.delete(`https://localhost:7283/api/Reservations/${id}`)
+
+}
 }
