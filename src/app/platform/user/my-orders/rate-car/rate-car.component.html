@@ -1,0 +1,11 @@
+<div class="d-flex flex-row">
+  <div *ngFor="let star of [].constructor(limit); let i = index">
+    <i
+      class="fa-solid fa-star fa-xl"
+      [ngClass]="{ 'text-yellow': i < rounded, 'text-grey': i >= rounded }"
+      (mouseover)="onStarHover(i + 1)"
+      (click)="rate(i + 1)"
+    ></i>
+  </div>
+  <p class="mx-2 text-secondary fw-bold"> ({{rounded}}/5)</p>
+</div>
