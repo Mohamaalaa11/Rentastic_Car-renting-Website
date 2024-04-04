@@ -39,9 +39,58 @@
             </div>
           </div>
           <div class="d-flex flex-row">
-          <button type="button" (click)="OnDelete(res.Id)" class="btn btn-red px-3">Cancel Resrervation</button>
-          <button [disabled]="isEndDatePassed(res.EndRentDate)" type="button" class="btn btn-red px-3">Rate</button>
+            <button type="button" class="btn btn-red" data-bs-toggle="modal" data-bs-target="#DeleteCard">
+              Cancel
+            </button>
+            <!-- Modal -->
+              <div class="modal fade" id="DeleteCard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Reservation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are You Sure you want to delete this Reservation ?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" (click)="OnDelete(res.Id)" class="btn btn-red">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          <!-- <button type="button" (click)="OnDelete(res.Id)" class="btn btn-red px-3">Cancel Resrervation</button> -->
+          <button [disabled]="isEndDatePassed(res.EndRentDate)" data-bs-toggle="modal" data-bs-target="#Rate" type="button" class="btn btn-red px-3">Rate</button>
 
+          <div class="modal fade" id="Rate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Rate Your Experience</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="" [formGroup]="rateform" class="d-flex flex-column ">
+                    <app-rate-car
+                    [limit]="5"
+                    [rounded]="rateform.get('rating')!.value!"
+                    (ratingChange)="rateform.get('rating')!.setValue($event)"
+                  ></app-rate-car>                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label">Message:</label>
+                      <textarea class="form-control" [formControlName]="'message'" id="message-text"></textarea>
+                    </div>
+                  </form>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" (click)="onsubmitRating(res.Car.Id,res.Id)" class="btn btn-red">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
           
@@ -50,4 +99,15 @@
   </div>
 </div>
 </div>
+<!-- Bootstrap toast markup -->
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" [hidden]="!showErrorToast">
+  <div class="toast-header">
+    <strong class="me-auto">Error</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    You Already Added a Review
+  </div>
+</div>
+
 </div>

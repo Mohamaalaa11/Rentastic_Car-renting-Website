@@ -2,3 +2,7 @@
 .card{
   margin-top: 20px;
 }
+.toast{
+  position: absolute;
+  top: 30px;
+}
