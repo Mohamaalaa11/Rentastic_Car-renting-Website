@@ -7,6 +7,7 @@ import { UserEdit } from '../Types/UserEdit';
 import { Router } from '@angular/router';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,13 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 })
 export class ProfileComponent implements OnInit {
   user: User = {} as User;
+
+  imgSrc: string = '/assets/imgs/placeholder-image.jpeg';
+  selectedImage: any = null;
+
   userForm = new FormGroup({
+    Image: new FormControl<string>(''),
+
     Name: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(3),
@@ -39,7 +46,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private router: Router,
-    private firestorage: AngularFireStorage
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -47,11 +54,16 @@ export class ProfileComponent implements OnInit {
   }
 
   getUser() {
-    ``;
     this.profileService.getUserData().subscribe({
       next: (res: User) => {
         this.user = res;
-        console.log(this.user);
+        const imageUrl = res['Image'];
+
+        this.userForm.patchValue(res);
+
+        if (this.user.Image !== '') {
+          this.imgSrc = this.user.Image;
+        }
       },
       error: (err) => {
         console.error('Error fetching user data:', err);
@@ -60,15 +72,24 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.selectedImage) {
+      this.uploadImage();
+    } else {
+      this.updateUserWithoutImage();
+    }
+  }
+
+  updateUserWithImage(imageUrl: string) {
     const model: UserEdit = {
       name: this.userForm.value.Name!,
       password: 'Aa12345678',
       email: this.user.Email,
       phoneNumber: this.userForm.value.PhoneNumber!,
       address: this.userForm.value.Address!,
-      image: this.user.Image,
+      image: imageUrl,
       nationalIdentityNumber: this.userForm.value.IdNumber!,
     };
+
     this.profileService.editUser(model).subscribe({
       next: (res) => {
         this.router.navigate(['']);
@@ -79,14 +100,54 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  // async onchange(e: any) {
-  //   const file = e.target.files[0];
-  //   console.log(file);
+  updateUserWithoutImage() {
+    const model: UserEdit = {
+      name: this.userForm.value.Name!,
+      password: 'Aa12345678',
+      email: this.user.Email,
+      phoneNumber: this.userForm.value.PhoneNumber!,
+      address: this.userForm.value.Address!,
+      image: this.user.Image || '', // Use existing image URL if available
+      nationalIdentityNumber: this.userForm.value.IdNumber!,
+    };
 
-  //   if (file) {
-  //     const path = `imgs/${file.name}`;
-  //     const upload = await this.firestorage.upload(path, file);
-  //     const url = await upload.ref.getDownloadURL();
-  //   }
-  // }
+    this.profileService.editUser(model).subscribe({
+      next: (res) => {
+        this.router.navigate(['']);
+      },
+      error: (err) => {
+        console.error('Error updating user:', err);
+      },
+    });
+  }
+
+  uploadImage() {
+    const filePath = `usersImgs/${this.userForm.value.Name}/${
+      this.selectedImage.name
+    }_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, this.selectedImage);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.updateUserWithImage(url);
+          });
+        })
+      )
+      .subscribe();
+  }
+
+  showPreview(e: any) {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => (this.imgSrc = e.target.result);
+      reader.readAsDataURL(e.target.files[0]);
+      this.selectedImage = e.target.files[0];
+    } else {
+      this.imgSrc = this.user.Image;
+      this.selectedImage = null;
+    }
+  }
 }
