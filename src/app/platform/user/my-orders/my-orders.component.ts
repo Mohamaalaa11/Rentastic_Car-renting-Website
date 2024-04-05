@@ -9,8 +9,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RateCarComponent } from './rate-car/rate-car.component';
 import { Review } from '../Types/review';
 import { jwtDecode } from 'jwt-decode';
-import { Reservation } from '../../car-rental/types/reservation';
+// import { Reservation } from '../../../Reservation';
+import { Reservation } from '../Types/reservations';
+
 import { CarRentingService } from '../../car-rental/services/car-renting.service';
+
 
 @Component({
   selector: 'app-my-orders',
@@ -18,8 +21,15 @@ import { CarRentingService } from '../../car-rental/services/car-renting.service
   styleUrls: ['./my-orders.component.css'],
 })
 export class MyOrdersComponent implements OnInit {
+  popupSucces: boolean = false;
+  popupratesuccess : boolean=false;
+  deletepopup : boolean=false;
+  popupratefail : boolean=false;
+  selectedReservationId: number | null = null;
+
   toastSuccess: boolean = false;
   toastFailed: boolean = false;
+
 
   user: User = {} as User;
   token = localStorage.getItem('token');
@@ -35,6 +45,7 @@ export class MyOrdersComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private carRentingService: CarRentingService
+
   ) {}
 
   ngOnInit(): void {
@@ -86,6 +97,14 @@ export class MyOrdersComponent implements OnInit {
     console.log(model);
     this.profileService.addReview(model).subscribe({
       next: () => {
+        this.popupratesuccess=true;
+      },
+      error: (err) => {
+        this.popupratefail=true;
+      },
+    });
+  }
+
         console.log('Review added Successfully !');
       },
       error: (err) => {
@@ -101,21 +120,27 @@ export class MyOrdersComponent implements OnInit {
     }, 5000); // 5000 milliseconds = 5 seconds
   }
 
+
   isEndDatePassed(endDate: Date): boolean {
     const currentDate = new Date();
     const end = new Date(endDate);
     return end.toISOString() > currentDate.toISOString();
   }
 
-  OnDelete(id: number) {
-    console.log(id);
-    this.profileService.deleteReservation(id).subscribe({
+
+  OnDelete(reservationId: number) {
+    console.log('Deleting reservation with ID:', reservationId);
+    this.profileService.deleteReservation(reservationId).subscribe({
       next: () => {
         this.router.navigate(['/userprofile', 'my-orders']);
+        this.deletepopup=true
       },
       error: (err) => {
         console.error('Error deleting reservation:', err);
       },
     });
   }
+
 }
+
+
