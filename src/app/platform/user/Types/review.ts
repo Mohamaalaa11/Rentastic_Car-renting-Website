@@ -5,10 +5,7 @@ import { Reservation } from "./reservations";
 export interface Review {
     reservationId: number;
     carId: number;
-    userSsn: number;
+    userGuid: string;
     message: string;
     rate: number;
-    car: Car;
-    user: User;
-    reservation: Reservation;
 }

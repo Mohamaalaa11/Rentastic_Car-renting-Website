@@ -4,7 +4,6 @@ import { ListcarComponent } from './platform/admin/components/listcar/listcar.co
 import { AddcarComponent } from './platform/admin/components/addcar/addcar.component';
 import { EditcarComponent } from './platform/admin/components/editcar/editcar.component';
 import { DeletecarComponent } from './platform/admin/components/deletecar/deletecar.component';
-import { HeroComponent } from './platform/home/components/hero/hero.component';
 import { AdminhomeComponent } from './platform/admin/components/adminhome/adminhome.component';
 import { ReservationlistComponent } from './platform/admin/components/reservationlist/reservationlist.component';
 import { PaymentComponent } from './payMob/payment/payment.component';
@@ -24,6 +23,7 @@ const routes: Routes = [
     path: 'payment',
     component: PaymentComponent,
   },
+
   // { path: '', component: AdminhomeComponent },
   // { path: 'addcar', component: AddcarComponent },
   { path: 'editcar/:Id', component: EditcarComponent },

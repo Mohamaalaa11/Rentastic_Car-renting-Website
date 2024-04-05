@@ -1,5 +1,5 @@
 export interface Reservation {
-  userSsn: number;
+  userGuid: string;
   carId: number;
   startRentTime: string;
   endRentDate: string;
