@@ -13,10 +13,9 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { PaymentComponent } from './payMob/payment/payment.component';
 import { SharedModule } from './platform/shared/shared.module';
-import { RedirectComponent } from './Components/redirect/redirect.component';
 
 @NgModule({
-  declarations: [AppComponent, PaymentComponent, RedirectComponent],
+  declarations: [AppComponent, PaymentComponent],
 
   imports: [
     BrowserModule,

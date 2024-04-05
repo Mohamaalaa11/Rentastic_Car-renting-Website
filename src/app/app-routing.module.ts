@@ -7,7 +7,6 @@ import { DeletecarComponent } from './platform/admin/components/deletecar/delete
 import { AdminhomeComponent } from './platform/admin/components/adminhome/adminhome.component';
 import { ReservationlistComponent } from './platform/admin/components/reservationlist/reservationlist.component';
 import { PaymentComponent } from './payMob/payment/payment.component';
-import { RedirectComponent } from './Components/redirect/redirect.component';
 
 const routes: Routes = [
   {
@@ -25,10 +24,6 @@ const routes: Routes = [
     component: PaymentComponent,
   },
 
-  {
-    path: 'redirect',
-    component: RedirectComponent,
-  },
   // { path: '', component: AdminhomeComponent },
   // { path: 'addcar', component: AddcarComponent },
   { path: 'editcar/:Id', component: EditcarComponent },

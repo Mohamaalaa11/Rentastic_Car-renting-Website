@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarFilter } from '../../types/car-filter';
 
+import { CarRentingService } from '../../services/car-renting.service';
+import { Reservation } from '../../types/reservation';
+
 @Component({
   selector: 'app-cars',
   templateUrl: './cars.component.html',
@@ -14,7 +17,8 @@ export class CarsComponent implements OnInit {
   constructor(
     private carServices: CarService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private carRentingService: CarRentingService
   ) {}
 
   cars: Car[] = [];

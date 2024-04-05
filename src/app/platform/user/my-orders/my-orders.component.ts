@@ -9,80 +9,90 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RateCarComponent } from './rate-car/rate-car.component';
 import { Review } from '../Types/review';
 import { jwtDecode } from 'jwt-decode';
-
+import { Reservation } from '../../car-rental/types/reservation';
+import { CarRentingService } from '../../car-rental/services/car-renting.service';
 
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
-
-  styleUrl: './my-orders.component.css',
+  styleUrls: ['./my-orders.component.css'],
 })
 export class MyOrdersComponent implements OnInit {
-  popupSucces: boolean = false;
-  constructor(private route: ActivatedRoute) {}
+  toastSuccess: boolean = false;
+  toastFailed: boolean = false;
 
-  ngOnInit(): void {
-    const success = this.route.snapshot.queryParamMap.get('success');
-    if (success === 'true') {
-      this.popupSucces = true;
-    } else if (success === 'false') {
-      this.popupSucces = false;
-    }
-  }
-
-  styleUrls: ['./my-orders.component.css'] // Change styleUrl to styleUrls
-})
-export class MyOrdersComponent implements OnInit {
   user: User = {} as User;
-  token= localStorage.getItem('token'); 
+  token = localStorage.getItem('token');
   userguid: string = '';
-    showErrorToast: boolean = false;
+  showErrorToast: boolean = false;
   rateform = new FormGroup({
     rating: new FormControl<number>(0, [Validators.required]),
-    message: new FormControl<string>('', [Validators.required])
+    message: new FormControl<string>('', [Validators.required]),
   });
-  constructor(private profileService: ProfileService,private router :Router) {}
+
+  constructor(
+    private profileService: ProfileService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private carRentingService: CarRentingService
+  ) {}
+
+  ngOnInit(): void {
+    // Result of Payment
+    const success = this.route.snapshot.queryParamMap.get('success');
+
+    if (success === 'true') {
+      this.toastSuccess = true;
+    } else if (success === 'false') {
+      this.toastFailed = true;
+    } else {
+    }
+
+    this.getuserguid();
+    this.getUser();
+  }
+
   getuserguid() {
     if (this.token) {
-        const decodedToken = jwtDecode(localStorage.getItem('token')!);
-        console.log('Decoded Token:', decodedToken); // Add this line
-        const parsedToken = JSON.parse(JSON.stringify(decodedToken));
-        this.userguid =
-            parsedToken[
-                'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-        console.log('User GUID:', this.userguid);
-        
-
+      const decodedToken = jwtDecode(localStorage.getItem('token')!);
+      console.log('Decoded Token:', decodedToken); // Add this line
+      const parsedToken = JSON.parse(JSON.stringify(decodedToken));
+      this.userguid =
+        parsedToken[
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+        ];
     }
-}
+  }
 
   getUser() {
     this.profileService.getUserData().subscribe({
       next: (res: User) => {
         this.user = res;
-        console.log(this.user);
       },
       error: (err) => {
         console.error('Error fetching user data:', err);
-      }
+      },
     });
   }
   onsubmitRating(carId: number, Id: number) {
-    const model:Review = {
+    const model: Review = {
       reservationId: Id,
       carId: carId,
       userGuid: this.userguid,
       message: this.rateform.value.message!,
-      rate: this.rateform.value.rating!
+      rate: this.rateform.value.rating!,
     };
+
+    console.log(model);
     this.profileService.addReview(model).subscribe({
       next: () => {
-        console.log("Review added Successfully !");
+        console.log('Review added Successfully !');
       },
       error: (err) => {
+        console.log(err);
         this.showErrorToast = true;
-        this.showErrorToastForDuration()
-      }
+        this.showErrorToastForDuration();
+      },
     });
   }
   showErrorToastForDuration() {
@@ -91,28 +101,21 @@ export class MyOrdersComponent implements OnInit {
     }, 5000); // 5000 milliseconds = 5 seconds
   }
 
-  ngOnInit(): void {
-    this.getuserguid();
-    this.getUser();
-   }
-
   isEndDatePassed(endDate: Date): boolean {
     const currentDate = new Date();
-    const end = new Date(endDate)
+    const end = new Date(endDate);
     return end.toISOString() > currentDate.toISOString();
   }
 
   OnDelete(id: number) {
-    console.log(id)
+    console.log(id);
     this.profileService.deleteReservation(id).subscribe({
       next: () => {
-        this.router.navigate(['/userprofile','my-orders'])},
+        this.router.navigate(['/userprofile', 'my-orders']);
+      },
       error: (err) => {
         console.error('Error deleting reservation:', err);
-      }
+      },
     });
   }
-  
-  
-
 }
