@@ -86,8 +86,9 @@ button {
 }
 
 .details-text h2 {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .data {
@@ -195,7 +196,6 @@ hr {
 }
 
 .nameofcar {
-  margin-left: 150px;
   margin-top: 40px;
   margin-bottom: 50px;
   color: #aaa;
@@ -253,5 +253,11 @@ hr {
   }
   .details {
     margin: 10px;
+  }
+
+  .details-text h2 {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
   }
 }
