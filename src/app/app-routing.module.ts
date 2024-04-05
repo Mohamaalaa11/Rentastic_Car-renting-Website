@@ -18,19 +18,6 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
-
-  {
-    path: 'payment',
-    component: PaymentComponent,
-  },
-
-  // { path: '', component: AdminhomeComponent },
-  // { path: 'addcar', component: AddcarComponent },
-  { path: 'editcar/:Id', component: EditcarComponent },
-  // { path: 'deletecar/:id', component: DeletecarComponent },
-  // { path: 'home', component: AdminhomeComponent },
-  // { path: 'car', component: ListcarComponent },
-  // { path: 'reservation', component: ReservationlistComponent },
 ];
 
 @NgModule({
