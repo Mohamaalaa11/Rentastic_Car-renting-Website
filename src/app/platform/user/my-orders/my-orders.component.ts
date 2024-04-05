@@ -12,6 +12,9 @@ import { jwtDecode } from 'jwt-decode';
 // import { Reservation } from '../../../Reservation';
 import { Reservation } from '../Types/reservations';
 
+import { CarRentingService } from '../../car-rental/services/car-renting.service';
+
+
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
@@ -23,6 +26,11 @@ export class MyOrdersComponent implements OnInit {
   deletepopup : boolean=false;
   popupratefail : boolean=false;
   selectedReservationId: number | null = null;
+
+  toastSuccess: boolean = false;
+  toastFailed: boolean = false;
+
+
   user: User = {} as User;
   token = localStorage.getItem('token');
   userguid: string = '';
@@ -35,15 +43,20 @@ export class MyOrdersComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private carRentingService: CarRentingService
+
   ) {}
 
   ngOnInit(): void {
+    // Result of Payment
     const success = this.route.snapshot.queryParamMap.get('success');
+
     if (success === 'true') {
-      this.popupSucces = true;
+      this.toastSuccess = true;
     } else if (success === 'false') {
-      this.popupSucces = false;
+      this.toastFailed = true;
+    } else {
     }
 
     this.getuserguid();
@@ -59,7 +72,6 @@ export class MyOrdersComponent implements OnInit {
         parsedToken[
           'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
         ];
-      console.log('User GUID:', this.userguid);
     }
   }
 
@@ -67,7 +79,6 @@ export class MyOrdersComponent implements OnInit {
     this.profileService.getUserData().subscribe({
       next: (res: User) => {
         this.user = res;
-        console.log(this.user);
       },
       error: (err) => {
         console.error('Error fetching user data:', err);
@@ -94,11 +105,28 @@ export class MyOrdersComponent implements OnInit {
     });
   }
 
+        console.log('Review added Successfully !');
+      },
+      error: (err) => {
+        console.log(err);
+        this.showErrorToast = true;
+        this.showErrorToastForDuration();
+      },
+    });
+  }
+  showErrorToastForDuration() {
+    setTimeout(() => {
+      this.showErrorToast = false; // Hide toast after 5 seconds
+    }, 5000); // 5000 milliseconds = 5 seconds
+  }
+
+
   isEndDatePassed(endDate: Date): boolean {
     const currentDate = new Date();
     const end = new Date(endDate);
     return end.toISOString() > currentDate.toISOString();
   }
+
 
   OnDelete(reservationId: number) {
     console.log('Deleting reservation with ID:', reservationId);
@@ -112,4 +140,7 @@ export class MyOrdersComponent implements OnInit {
       },
     });
   }
+
 }
+
+

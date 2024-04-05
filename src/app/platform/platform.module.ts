@@ -5,9 +5,10 @@ import { PlatformRoutingModule } from './platform-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from './shared/shared.module';
 import { NavBarComponent } from './layout/components/nav-bar/nav-bar.component';
+import { RedirectComponent } from './components/redirect/redirect.component';
 
 @NgModule({
-  declarations: [LayoutComponent, NavBarComponent],
-  imports: [CommonModule, PlatformRoutingModule],
+  declarations: [LayoutComponent, NavBarComponent, RedirectComponent],
+  imports: [CommonModule, PlatformRoutingModule, SharedModule],
 })
 export class PlatformModule {}

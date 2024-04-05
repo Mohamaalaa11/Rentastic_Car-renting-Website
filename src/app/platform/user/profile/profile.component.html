@@ -7,28 +7,77 @@
 ></app-header>
 
 <div class="container">
-  <div class="row">
-    <div class="col d-flex justify-content-center mt-5">
-      <img class="mb-3 userImg" [src]="user.Image" alt="" />
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex justify-content-center mt-5">
+      <img
+        class="mb-3 userImg"
+        [src]="imgSrc"
+        alt=""
+        *ngIf="user.Image !== ''"
+      />
     </div>
   </div>
   <div class="row">
-    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
-      <h3 class="fw-bold">{{user.Name}}</h3>
-      <h5 class="text-red">{{user.Email}}</h5>
+    <div
+      class="col-12 d-flex flex-column justify-content-center align-items-center"
+    >
+      <h3 class="fw-bold">{{ user.Name }}</h3>
+      <h5 class="text-red">{{ user.Email }}</h5>
     </div>
   </div>
   <form [formGroup]="userForm" class="mt-5">
     <div class="row">
-        <div class="col-12">
-            <label class="form-label">Name</label>
-            <input [formControlName]="'Name'"
-            class="form-input w-100 mb-2" 
-            type="text"
-            placeholder="Enter Your Username"
-            [value]="user.Name" required />
-        </div>
-        <!-- <div class="col-6">
+      <!-- IMG UPLOAD -->
+      <div class="my-3 col-12">
+        <input
+          type="file"
+          id="fileInput"
+          accept="image/*"
+          style="display: none"
+          formControlName="Image"
+          (change)="showPreview($event)"
+          #fileUploader
+        />
+
+        <button class="btn-add" (click)="fileUploader.click()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125"
+              stroke="#fffffff"
+              stroke-width="2"
+            ></path>
+            <path
+              d="M17 15V18M17 21V18M17 18H14M17 18H20"
+              stroke="#fffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+          ADD IMAGE
+        </button>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Name</label>
+        <input
+          [formControlName]="'Name'"
+          class="form-input w-100 mb-2"
+          type="text"
+          placeholder="Enter Your Username"
+          [value]="user.Name"
+          required
+        />
+      </div>
+      <!-- <div class="col-6">
             <label class="form-label">Email</label>
             <input [formControlName]="'Email'"
             class="form-input w-100 disabled"
@@ -38,50 +87,64 @@
         </div> -->
     </div>
     <div class="row">
-        <div class="col-6">
-            <label class="form-label">Phone Number</label>
-            <input [formControlName]="'PhoneNumber'"
-            class="form-input w-100 mb-2"
-            type="text"
-            placeholder="Enter Your Phone Number"
-            [value]="user.PhoneNumber" required />
-            <ng-container *ngIf="userForm.controls.PhoneNumber.touched">
-              <label
-                class="text-danger mt-1"
-                style="font-size: 16px"
-                *ngIf="userForm.controls.PhoneNumber.errors?.['required']"
-                >required</label
-              >
-    
-              <label
-                class="text-danger mt-1"
-                style="font-size: 16px"
-                *ngIf="userForm.controls.PhoneNumber.errors?.['pattern']"
-                >Start With 010,011,012 Or 015</label
-              >
-            </ng-container>        </div>
-        <div class="col-6">
-            <label class="form-label">ID Number</label>
-            <input [formControlName]="'IdNumber'"
-            class="form-input w-100 mb-2"
-            type="text"
-            placeholder="Enter Your ID Number"
-            [value]="user.NationalIdentityNumber" required />
-        </div>
+      <div class="col-6">
+        <label class="form-label">Phone Number</label>
+        <input
+          [formControlName]="'PhoneNumber'"
+          class="form-input w-100 mb-2"
+          type="text"
+          placeholder="Enter Your Phone Number"
+          [value]="user.PhoneNumber"
+          required
+        />
+        <ng-container *ngIf="userForm.controls.PhoneNumber.touched">
+          <label
+            class="text-danger mt-1"
+            style="font-size: 16px"
+            *ngIf="userForm.controls.PhoneNumber.errors?.['required']"
+            >required</label
+          >
+
+          <label
+            class="text-danger mt-1"
+            style="font-size: 16px"
+            *ngIf="userForm.controls.PhoneNumber.errors?.['pattern']"
+            >Start With 010,011,012 Or 015</label
+          >
+        </ng-container>
+      </div>
+      <div class="col-6">
+        <label class="form-label">ID Number</label>
+        <input
+          [formControlName]="'IdNumber'"
+          class="form-input w-100 mb-2"
+          type="text"
+          placeholder="Enter Your ID Number"
+          [value]="user.NationalIdentityNumber"
+          required
+        />
+      </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <label class="form-label">Address</label>
-            <input [formControlName]="'Address'"
-            class="form-input w-100" 
-            type="text"
-            placeholder="Enter Your Address"
-            [value]="user.Address" required />
-        </div>
+      <div class="col-12">
+        <label class="form-label">Address</label>
+        <input
+          [formControlName]="'Address'"
+          class="form-input w-100"
+          type="text"
+          placeholder="Enter Your Address"
+          [value]="user.Address"
+          required
+        />
+      </div>
     </div>
     <div class="d-flex justify-content-center mt-5 mb-5">
-        <input type="submit" class="btn btn-red px-5" (click)="onSubmit()" value="submit">
+      <input
+        type="submit"
+        class="btn btn-red px-5"
+        (click)="onSubmit()"
+        value="submit"
+      />
     </div>
-</form>
-
+  </form>
 </div>

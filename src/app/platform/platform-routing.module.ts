@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { adminGuard } from '../guards/admin.guard';
 import { authGuard } from '../guards/auth.guard';
+import { RedirectComponent } from './components/redirect/redirect.component';
 
 const routes: Routes = [
   {
@@ -35,10 +36,12 @@ const routes: Routes = [
       {
         path: 'userprofile',
         loadChildren: () =>
-          import('./user/user.module').then(
-            (m) => m.UserModule
-          ),
-      }
+          import('./user/user.module').then((m) => m.UserModule),
+      },
+      {
+        path: 'redirect',
+        component: RedirectComponent,
+      },
     ],
   },
 ];

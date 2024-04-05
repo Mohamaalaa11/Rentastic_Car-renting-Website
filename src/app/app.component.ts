@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/services/auth.service';
 import { Router } from '@angular/router';
 
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,7 +20,11 @@ export class AppComponent implements OnInit {
   title = 'Rentastic-webApp';
   showAddCarForm: boolean = false;
 
-  constructor(private authServices: AuthService, private route: Router) {}
+  constructor(
+    private authServices: AuthService,
+    private route: Router,
+    private firestorage: AngularFireStorage
+  ) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
@@ -32,5 +38,18 @@ export class AppComponent implements OnInit {
 
   toggleAddCarForm() {
     this.showAddCarForm = !this.showAddCarForm;
+  }
+
+  async fireUpload(file: any) {
+    if (file) {
+      const path = `web/${file.name}`;
+      const upload = await this.firestorage.upload(path, file);
+      const url = await upload.ref.getDownloadURL();
+      console.log(url);
+    }
+  }
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    return file;
   }
 }

@@ -1,4 +1,3 @@
-
 <app-header
   img="assets/imgs/orders_title.png"
   beforeSpan="My"
@@ -7,6 +6,7 @@
   contentBody="Here you can manage your Reservations"
 ></app-header>
 <div class="container">
+
   <div *ngFor="let res of user.Reservations; let i = index" class="row caaard mb-3">
     <div class=" col-12 card ">
       <div class="row">
@@ -14,6 +14,7 @@
           <img
             [src]="res.Car.Images"
             class="img-fluid rounded-start w-100 "  />
+
         </div>
         <div class="col-6 d-flex flex-column py-2">
           <h5 class="card-title fs-3">
@@ -25,38 +26,57 @@
           </div>
           <div>
             <p class="title-in-card">From</p>
-            <p class="text-secondary">{{ res.StartRentTime | date: 'dd-MM-yyyy' }}</p> 
+            <p class="text-secondary">
+              {{ res.StartRentTime | date : "dd-MM-yyyy" }}
+            </p>
           </div>
           <div>
             <p class="title-in-card">To</p>
-            <p class="text-secondary">{{ res.EndRentDate | date: 'dd-MM-yyyy' }} {{res.Id}}</p> 
+
+            <p class="text-secondary">
+              {{ res.EndRentDate | date : "dd-MM-yyyy" }}
+            </p>
 
           </div>
           <div class="d-flex align-items-end justify-content-between">
             <div>
               <p>Total Price</p>
-              <p  style="font-size: 24px;"class="text-red fw-bold">{{ res.TotalPrice }}</p>
+              <p style="font-size: 24px" class="text-red fw-bold">
+                {{ res.TotalPrice }}
+              </p>
             </div>
           </div>
           <div class="d-flex flex-row">
+            
             <button type="button" class="btn btn-red me-2" data-bs-toggle="modal" [attr.data-bs-target]="'#DeleteCard-' + i">
               Cancel
             </button>
   
             <!-- Modal -->
+
             <div class="modal fade" [id]="'DeleteCard-' + i" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Reservation</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      Delete Reservation
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
                   </div>
                   <div class="modal-body">
                     <p>Are You Sure you want to delete this Reservation ?</p>
                   </div>
                   <div class="modal-footer">
+
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" (click)="OnDelete(res.Id)" data-bs-dismiss="modal" class="btn btn-red">Delete</button>
+
                   </div>
                 </div>
               </div>
@@ -88,20 +108,16 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <button type="button" (click)="onsubmitRating(res.Car.Id,res.Id)" data-bs-dismiss="modal" class="btn btn-red">Submit</button>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-          
-        </div>
-      
+      </div>
+    </div>
   </div>
-</div>
-</div>
 
-  
   <app-status-toaster
   class="popup"
   *ngIf="popupSucces"
@@ -111,6 +127,7 @@
   [bodyheadSpan]="'Rentastic'"
   [content]="'Your payment is succeful you can now check your orders'"
 ></app-status-toaster>
+    
   <app-status-toaster
   class="popup"
   *ngIf="popupratesuccess"
@@ -120,6 +137,7 @@
   [bodyheadSpan]="'Rentastic'"
   [content]="'Your Rating was added succefully'"
 ></app-status-toaster>
+    
   <app-status-toaster
   class="popup"
   *ngIf="popupratefail"
@@ -129,6 +147,7 @@
   [bodyheadSpan]="'Rentastic'"
   [content]="'You already added review for this reservation before'"
 ></app-status-toaster>
+    
   <app-status-toaster
   class="popup"
   *ngIf="deletepopup"
@@ -139,3 +158,23 @@
   [content]="''"
 ></app-status-toaster>
 
+    <app-status-toaster
+    class="popup"
+    *ngIf="toastSuccess"
+    [status]="true"
+    [header]="'Payment Success'"
+    [bodyhead]="'Thanks For Renting With'"
+    [bodyheadSpan]="'Rentastic'"
+    [content]="'Your payment is succeful you can now check your orders'"
+  ></app-status-toaster>
+
+  <app-status-toaster
+    class="popup"
+    *ngIf="toastFailed"
+    [status]="false"
+    [header]="'Payment Success'"
+    [bodyhead]="'Thanks For Renting With'"
+    [bodyheadSpan]="'Rentastic'"
+    [content]="'Your payment is succeful you can now check your orders'"
+  ></app-status-toaster>
+</div>
