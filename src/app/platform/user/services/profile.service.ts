@@ -25,12 +25,8 @@ export class ProfileService {
           'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
         ];
       console.log('User GUID:', this.userguid);
-
-    }
-
     }
   }
-
   getuserguidString(): string {
     if (this.token) {
       const decodedToken = jwtDecode(localStorage.getItem('token')!);
@@ -62,9 +58,7 @@ export class ProfileService {
     return this.http.delete(`https://localhost:7283/api/Reservations/${id}`);
   }
 
-
   addReview(model: Review) {
     return this.http.post('https://localhost:7283/api/Review/AddReview', model);
   }
-
 }
