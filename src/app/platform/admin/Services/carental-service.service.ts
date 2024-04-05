@@ -59,10 +59,12 @@ export class CarentalServiceService {
     const url = `${this.apiUrl}/${carId}`;
     return this.http.delete(url, { headers });
   }
+
   getCarById(id: number): Observable<Car> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Car>(url);
   }
+
   getReservation() {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
