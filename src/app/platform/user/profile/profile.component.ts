@@ -57,9 +57,13 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUserData().subscribe({
       next: (res: User) => {
         this.user = res;
-        const imageUrl = res['Image'];
 
-        this.userForm.patchValue(res);
+        this.userForm.patchValue({
+          Name: res.Name,
+          PhoneNumber: res.PhoneNumber,
+          IdNumber: res.NationalIdentityNumber, // Assuming this is the property name in your response object
+          Address: res.Address,
+        });
 
         if (this.user.Image !== '') {
           this.imgSrc = this.user.Image;
