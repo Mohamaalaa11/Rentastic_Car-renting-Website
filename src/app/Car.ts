@@ -1,3 +1,4 @@
+import { Review } from "./platform/car-rental/types/review";
 export class Car {
   Id: number;
   Name: string;
@@ -10,7 +11,8 @@ export class Car {
   PricePerDay: number;
   Images: string;
   HasAirCondition:boolean;
-  
+  reviews? : Review[]
+
   IsAutomatic : boolean ;
   
 
@@ -27,7 +29,8 @@ export class Car {
     Images: string,
     HasAirCondition:boolean,
     IsAutomatic : boolean,
-   
+    reviews? : Review[]
+
    
   ) {
     this.Id = Id;
@@ -41,7 +44,7 @@ export class Car {
     this.PricePerDay = PricePerDay;
     this.Images = Images;
     this.HasAirCondition=HasAirCondition;
-   
+    this.reviews=reviews;
     this.IsAutomatic =IsAutomatic
    
   }

@@ -1,47 +1,48 @@
 <div class="container mt-5">
   <div class="row">
     <!-- IMG -->
+
     <div class="col-12 col-lg-6 img-container">
       <img class="img-fluid w-100 h-100" [src]="car?.Images" alt="" />
     </div>
     <!-- Details -->
     <div class="col-12 col-lg-6 mt-5 mt-lg-0">
       <h2 class="fw-bold">
-        {{ car?.Brand }} {{ car?.Name }} {{ car?.ModelYear }}
+        {{ car.Brand }} {{ car.Name }} {{ car.ModelYear }}
       </h2>
       <p>
         <span class="text-red fw-bold" style="font-size: 24px"
-          >{{ car?.PricePerDay }}
+          >{{ car.PricePerDay }}
         </span>
         <span style="font-size: 12px"> EGP</span>/ Day
       </p>
 
       <div>
         <p class="mb-2"><strong>Description </strong></p>
-        <p class="">{{ car?.Description }}</p>
+        <p class="">{{ car.Description }}</p>
       </div>
 
       <div>
         <p class="mb-2"><strong>Category </strong></p>
-        <p class="">{{ car?.Category }}</p>
+        <p class="">{{ car.Category }}</p>
       </div>
       <!-- Icons -->
       <div class="d-flex flex-row">
         <div class="">
           <img src="assets/imgs/colorlogo.png" alt="color logo" />
-          <span class="mx-2">{{ car?.Color }}</span>
+          <span class="mx-2">{{ car.Color }}</span>
         </div>
         <div class="mx-5">
           <img src="assets/imgs/seatlogo.png" alt="seat logo" />
-          <span class="mx-2">{{ car?.SeatCount }} seats </span>
+          <span class="mx-2">{{ car.SeatCount }} seats </span>
         </div>
-        <ng-container class="mx-5" *ngIf="car?.HasAirCondition">
+        <ng-container class="mx-5" *ngIf="car.HasAirCondition">
           <div>
             <img src="assets/imgs/aircondition.png" alt="Air Condition Logo" />
             <span class="mx-2">Air Condition</span>
           </div>
         </ng-container>
-        <ng-container *ngIf="car?.IsAutomatic">
+        <ng-container *ngIf="car.IsAutomatic">
           <div class="mx-5">
             <img src="assets/imgs/manual.png" alt="Manual Logo" />
             <span class="mx-2">Manual</span>
@@ -135,9 +136,11 @@
   >
     <h2 class="mb-5 fw-bold">Reviews</h2>
     <div class="d-flex flex-row">
-      <app-review-card class="mx-4"></app-review-card>
-      <app-review-card class="mx-4"></app-review-card>
-      <app-review-card class="mx-4"></app-review-card>
+      <!--  -->
+      <div *ngFor="let rev of car.Reviews" class=" mx-4">
+        <app-review-card [review]="rev" class="mx-4"></app-review-card>
+      </div>
+      
     </div>
   </div>
 
@@ -149,6 +152,7 @@
       <h2 class="text-dark fw-bold">Similar Cars</h2>
     </div>
     <div class="row g-5">
+      <!-- the car review -->
       <div class="col-12 col-md-6 col-lg-4"><app-card></app-card></div>
       <div class="col-12 col-md-6 col-lg-4"><app-card></app-card></div>
       <div class="col-12 col-md-6 col-lg-4"><app-card></app-card></div>

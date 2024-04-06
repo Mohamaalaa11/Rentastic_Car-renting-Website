@@ -7,6 +7,10 @@ import { Injectable } from '@angular/core';
 import { Car } from '../../../Car';
 import { Observable, catchError, throwError } from 'rxjs';
 
+import { prod } from '../../../prod';
+import { jwtDecode } from 'jwt-decode';
+import { AddCar } from '../types/add-car';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +21,7 @@ export class CarentalServiceService {
   getCars(): Observable<Car[]> {
     return this.http.get<Car[]>(this.apiUrl);
   }
+
 
   addCar(car: Car): Observable<any> {
     return this.http.post<any>('https://localhost:7283/api/Cars', car).pipe(
@@ -40,6 +45,7 @@ export class CarentalServiceService {
     return this.http.delete(url);
   }
 
+
   getCarById(id: number): Observable<Car> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Car>(url);
@@ -53,6 +59,7 @@ export class CarentalServiceService {
     const url = `${'https://localhost:7283/api/Reservations'}/${reservationId}`;
     return this.http.delete(url);
   }
+  
   getCarsAvailability(requestBody: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

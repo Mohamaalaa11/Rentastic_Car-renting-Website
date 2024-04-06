@@ -18,7 +18,6 @@ export class ListcarComponent implements OnInit {
   searchCategory: string = '';
   itemsPerPage = 10;
   currentPage = 1;
-  
 
   constructor(
     private carservices: CarentalServiceService,
@@ -93,7 +92,7 @@ export class ListcarComponent implements OnInit {
   }
 
   openEditCar(car: any) {
-    this.router.navigateByUrl(`/editcar/${car.Id}`);
+    this.router.navigateByUrl(`/editcar/${car.id}`);
   }
 
   editCar(carId: number) {
@@ -113,7 +112,6 @@ export class ListcarComponent implements OnInit {
     this.carToDelete = car;
     this.showConfirmation = true;
   }
-
 
   deleteCar(car: any) {
     this.carservices.deleteCar(car.Id).subscribe(() => {

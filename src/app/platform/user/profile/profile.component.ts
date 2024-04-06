@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
         this.userForm.patchValue({
           Name: res.Name,
           PhoneNumber: res.PhoneNumber,
-          IdNumber: res.NationalIdentityNumber, // Assuming this is the property name in your response object
+          IdNumber: res.NationalIdentityNumber,
           Address: res.Address,
         });
 

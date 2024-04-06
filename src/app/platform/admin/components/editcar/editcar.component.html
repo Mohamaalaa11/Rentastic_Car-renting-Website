@@ -1,54 +1,86 @@
-
-<h5 class="nameofcar">{{ car.Name }}</h5>
-<div class="details">
+<div class="container">
+  <h5 class="nameofcar">{{ car.Name }}</h5>
+  <div class="details">
     <div class="car-details">
-      <img [src]="car.Images" alt="Car Image">
-      <div class="details-text">
-        <h2>{{ car.Name }}</h2>
-        <p><span style="color: #751f1f; " >{{ car.PricePerDay }} </span> <span style="font-size: 12px;"> EGP</span>/ Day</p>
+      <div class="row">
+        <div class="col-12 col-lg-6 img-container">
+          <img [src]="imgSrc" alt="Car Image" class="img-fluid w-100 h-100" />
+        </div>
 
-          
-        <p><strong>Description </strong></p>
-        <p class="data">{{ car.Description }}</p>
-        <p><strong>Category </strong></p>
-        <p class="data">{{ car.Category }}</p>
-        <div class="otherdetails">
-        <div>
-            <img src="assets/imgs/colorlogo.png" alt="color logo">
-            <span>{{car.Color}}</span>
+        <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+          <div class="details-text">
+            <h2>{{ car.Name }}</h2>
+            <p style="font-size: 16px; color: #751f1f">
+              <span style="font-size: 24px; font-weight: bold"
+                >{{ car.PricePerDay }}
+              </span>
+              <span style="font-size: 16px; color: #751f1f"> EGP</span>/ Day
+            </p>
+
+            <p><strong>Description </strong></p>
+            <p class="data">{{ car.Description }}</p>
+            <p><strong>Category </strong></p>
+            <p class="data">{{ car.Category }}</p>
+            <div class="otherdetails">
+              <div>
+                <img src="assets/imgs/colorlogo.png" alt="color logo" />
+                <span>{{ car.Color }}</span>
+              </div>
+              <div>
+                <img src="assets/imgs/seatlogo.png" alt="seat logo" />
+                <span>{{ car.SeatCount }} seats </span>
+              </div>
+              <ng-container *ngIf="car.HasAirCondition">
+                <div>
+                  <img
+                    src="assets/imgs/aircondition.png"
+                    alt="Air Condition Logo"
+                  />
+                  <span>Air Condition</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="car.IsAutomatic">
+                <div>
+                  <img src="assets/imgs/manual.png" alt="Manual Logo" />
+                  <span>Manual</span>
+                </div>
+              </ng-container>
+            </div>
           </div>
-          <div>
-            <img src="assets/imgs/seatlogo.png" alt="seat logo">
-            <span>{{car.SeatCount}} seats </span>
-          </div>
-        <ng-container *ngIf="car.HasAirCondition">
-          <div>
-            <img src="assets/imgs/aircondition.png" alt="Air Condition Logo">
-            <span>Air Condition</span>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="car.IsAutomatic">
-          <div>
-            <img src="assets/imgs/manual.png" alt="Manual Logo">
-            <span>Manual</span>
-          </div>
-        </ng-container>
-    </div>
+        </div>
       </div>
     </div>
-</div>
+  </div>
 
-<form (ngSubmit)="onSubmit()">
-    
-  
+  <form (ngSubmit)="onSubmit()" class="mt-4">
     <label>Brand </label>
-    <input type="text" [(ngModel)]="car.Brand" name="brand" required id="brand"> <br>
+    <input
+      type="text"
+      [(ngModel)]="car.Brand"
+      name="brand"
+      required
+      id="brand"
+    />
+    <br />
     <label>Name </label>
-    <input type="text" [(ngModel)]="car.Name" name="name" required id ="name"> <br>
+    <input type="text" [(ngModel)]="car.Name" name="name" required id="name" />
+    <br />
     <label>Model Year </label>
-    <input type="text" [(ngModel)]="car.ModelYear" name="modelYear" required id="modelYear"><br>
+    <input
+      type="text"
+      [(ngModel)]="car.ModelYear"
+      name="modelYear"
+      required
+      id="modelYear"
+    /><br />
     <label>Color </label>
-    <input type="text" [(ngModel)]="car.Color" name="color" required id="color"><br>
+    <input
+      type="text"
+      [(ngModel)]="car.Color"
+      name="color"
+      required
+      id="color"
+    /><br />
     <label>Category </label>
     <select [(ngModel)]="car.Category" name="category" required>
       <option value="">Select Category</option>
@@ -60,52 +92,79 @@
       <option value="premime">premime</option>
       <option value="SUV">SUV</option>
       <option value="Van">Van</option>
-      <option value="Truck">Truck</option>
-      
-    </select><br>
+      <option value="Truck">Truck</option></select
+    ><br />
     <label>Discription </label>
-    <textarea [(ngModel)]="car.Description" name="description" required> </textarea><br>
+    <textarea [(ngModel)]="car.Description" name="description" required>
+    </textarea
+    ><br />
     <label>seat Number </label>
-    <input type="number" [(ngModel)]="car.SeatCount" name="seatCount" required id="seatCount"><br>
-   
+    <input
+      type="number"
+      [(ngModel)]="car.SeatCount"
+      name="seatCount"
+      required
+      id="seatCount"
+    /><br />
+
     <label>price </label>
-    <input type="number" [(ngModel)]="car.PricePerDay" name="pricePerDay" required id="pricePerDay"><br>
-   
-    <label >Air Condition:</label>
-    <select id="hasAirCondition" name="hasAirCondition" [(ngModel)]="car.HasAirCondition" required>
-      <option [ngValue]="true">Yes </option>
-  <option [ngValue]="false">No </option>
-       </select><br>
-       <label >Is Automatic:</label>
-       <select id="isAutomatic" name="isAutomatic" [(ngModel)]="car.IsAutomatic" required>
-        <option [ngValue]="true">Yes</option>
-         <option [ngValue]="false">No</option>
-         </select><br>
+    <input
+      type="number"
+      [(ngModel)]="car.PricePerDay"
+      name="pricePerDay"
+      required
+      id="pricePerDay"
+    /><br />
+
+    <label>Air Condition:</label>
+    <select
+      id="hasAirCondition"
+      name="hasAirCondition"
+      [(ngModel)]="car.HasAirCondition"
+      required
+    >
+      <option [ngValue]="true">Yes</option>
+      <option [ngValue]="false">No</option></select
+    ><br />
+    <label>Is Automatic:</label>
+    <select
+      id="isAutomatic"
+      name="isAutomatic"
+      [(ngModel)]="car.IsAutomatic"
+      required
+    >
+      <option [ngValue]="true">Yes</option>
+      <option [ngValue]="false">No</option></select
+    ><br />
     <label>Image URL </label>
-    <input type="text" [(ngModel)]="car.Images" name="image" required id="image"><br>
+    <input
+      type="file"
+      (change)="showPreview($event)"
+      name="image"
+      required
+      id="image"
+    /><br />
     <div class="butt">
-    <button class="editbutton"type="submit">Save</button>
-    <button type="button" (click)="onDelete()" class="deletebutton">
-        <img src="assets/imgs/trush.png" alt="delete Image">
-        Delete</button>
-</div>
-
-
+      <button class="editbutton" type="submit">Save</button>
+      <button type="button" (click)="onDelete()" class="deletebutton">
+        <img src="assets/imgs/trush.png" alt="delete Image" />
+        Delete
+      </button>
+    </div>
   </form>
   <div class="modal" *ngIf="showDeleteConfirmation">
     <div class="modal-content">
-        <div class="headpop">
-            <h5 style="margin-top: 5px;">Delete Car</h5>
-            <span class="close" (click)="closeModal()">&times;</span>
-        </div>
-        <hr>
-        <p style="color: gray;">Are you sure you want to delete this car?</p>
-        <hr>
-        <div class="buttons">
-            <button class="cancel" (click)="closeModal()">Close</button>
-            <button class="delete" (click)="onDeleteConfirmed()">Delete</button>
-        </div>
+      <div class="headpop">
+        <h5 style="margin-top: 5px">Delete Car</h5>
+        <span class="close" (click)="closeModal()">&times;</span>
+      </div>
+      <hr />
+      <p style="color: gray">Are you sure you want to delete this car?</p>
+      <hr />
+      <div class="buttons">
+        <button class="cancel" (click)="closeModal()">Close</button>
+        <button class="delete" (click)="onDeleteConfirmed()">Delete</button>
+      </div>
     </div>
+  </div>
 </div>
-
-  

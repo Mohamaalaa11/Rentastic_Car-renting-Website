@@ -7,6 +7,7 @@ import { AddcarComponent } from './components/addcar/addcar.component';
 import { EditcarComponent } from './components/editcar/editcar.component';
 import { adminGuard } from '../../guards/admin.guard';
 
+
 const routes: Routes = [
   { path: '', component: AdminhomeComponent, canActivate: [adminGuard] },
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
     path: 'editcar/:Id',
     component: EditcarComponent,
     canActivate: [adminGuard],
+  },
+  {
+    path: 'editcar/:Id',
+    component: EditcarComponent,
   },
 ];
 

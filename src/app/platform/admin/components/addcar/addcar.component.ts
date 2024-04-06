@@ -5,6 +5,9 @@ import { Car } from '../../../../Car';
 import { CarentalServiceService } from '../../Services/carental-service.service';
 import { Router } from '@angular/router';
 import { prod } from '../../../../prod';
+import { finalize } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AddCar } from '../../types/add-car';
 
 @Component({
   selector: 'app-addcar',
@@ -12,8 +15,10 @@ import { prod } from '../../../../prod';
   styleUrl: './addcar.component.css',
 })
 export class AddcarComponent {
-  car: any = {
+  // IMG Upload
+  selectedImage: any = null;
 
+  car: Car = {
     Id: 0,
     Name: '',
     Brand: '',
@@ -33,7 +38,8 @@ export class AddcarComponent {
   constructor(
     private formBuilder: FormBuilder,
     private carService: CarentalServiceService,
-    private router: Router
+    private router: Router,
+    private storage: AngularFireStorage
   ) {
     this.carForm = this.formBuilder.group({
       Name: ['', Validators.required],
@@ -64,8 +70,28 @@ export class AddcarComponent {
   }
 
   onSubmit(): void {
+    this.uploadImage();
+  }
+
+  addCar(imgUrl: string) {
+    const model: AddCar = {
+      Name: this.carForm.value.Name,
+      Brand: this.carForm.value.Brand,
+      ModelYear: this.carForm.value.ModelYear,
+      Color: this.carForm.value.Color,
+      Category: this.carForm.value.Category,
+      Description: this.carForm.value.Description,
+      SeatCount: this.carForm.value.SeatCount,
+      PricePerDay: this.carForm.value.PricePerDay,
+      HasAirCondition: this.carForm.value.HasAirCondition,
+      IsAutomatic: this.carForm.value.IsAutomatic,
+      Images: imgUrl,
+    };
+
+    console.log(model);
+
     if (this.carForm.valid) {
-      this.carService.addCar(this.carForm.value).subscribe({
+      this.carService.addCar(model).subscribe({
         next: () => {
           this.router.navigate(['', 'admin', 'cars']);
         },
@@ -78,5 +104,27 @@ export class AddcarComponent {
         },
       });
     }
+  }
+
+  uploadImage() {
+    const filePath = `Car_Imgs/${this.carForm.value.Name}/${
+      this.selectedImage.name
+    }_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, this.selectedImage);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.addCar(url);
+          });
+        })
+      )
+      .subscribe();
+  }
+
+  onChangeImg(e: any) {
+    this.selectedImage = e.target.files[0];
   }
 }
