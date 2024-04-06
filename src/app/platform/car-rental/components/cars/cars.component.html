@@ -221,6 +221,13 @@
     </div>
 
     <!-- Cars -->
+    <div
+      class="d-flex justify-content-center align-items-center w-100 h-100"
+      *ngIf="isLoading"
+    >
+      <app-spinner></app-spinner>
+    </div>
+
     <div class="row gy-5 gx-5 mt-4 mb-5" *ngIf="!isCarsAvaliable">
       <div class="d-flex justify-content-center align-items-center">
         <img
@@ -231,7 +238,7 @@
       </div>
     </div>
 
-    <div class="row gy-5 gx-5 mt-4 mb-5" *ngIf="isCarsAvaliable">
+    <div class="row gy-5 gx-5 mt-4 mb-5" *ngIf="isCarsAvaliable && !isLoading">
       <div class="col-12 col-md-6 col-lg-4" *ngFor="let car of filteredCars">
         <app-card [car]="car"></app-card>
       </div>

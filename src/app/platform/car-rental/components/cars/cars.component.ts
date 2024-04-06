@@ -40,6 +40,7 @@ export class CarsComponent implements OnInit {
   carModel: string = '';
   // No cars
   isCarsAvaliable: boolean = false;
+  isLoading: boolean = true;
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -55,6 +56,7 @@ export class CarsComponent implements OnInit {
           endDay: params['endMonth'],
         };
         this.getFilteredCarsByDate(carFilter);
+        this.isLoading = false;
       } else {
         this.getCars(); // Fetch all cars
       }
@@ -63,6 +65,7 @@ export class CarsComponent implements OnInit {
     this.carServices.getBrands().subscribe({
       next: (res) => {
         this.brands = res;
+        this.isLoading = false;
       },
     });
 
