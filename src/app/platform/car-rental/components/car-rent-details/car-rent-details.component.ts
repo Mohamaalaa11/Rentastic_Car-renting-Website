@@ -47,6 +47,7 @@ export class CarRentDetailsComponent implements OnInit {
   authenticationToken!: string;
   orderId!: number;
   paymentKey!: string;
+  isLoading = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -76,6 +77,7 @@ export class CarRentDetailsComponent implements OnInit {
       },
     });
     console.log(this.car.Reviews);
+    this.isLoading = false;
   }
 
   rentForm = new FormGroup(
@@ -205,6 +207,8 @@ export class CarRentDetailsComponent implements OnInit {
 
     if (this.authService.isLoggedIn$.value) {
       if (!this.rentForm.invalid) {
+        this.isLoading = true;
+
         const totalPrice = 100 * this.calcTotalPrice();
         // Form Values to Pass it to Api Call
         this.carAvailabilty = {

@@ -1,0 +1,30 @@
+.loader {
+  border: 3px solid rgba(204, 204, 204, 0.5);
+  border-left-color: transparent;
+  border-radius: 50%;
+}
+
+.loader {
+  border: 3px solid rgba(224, 224, 224, 0.4);
+  border-left-color: transparent;
+  width: 30px;
+  height: 30px;
+}
+
+.loader {
+  border: 3px solid rgba(209, 209, 209, 0.5);
+  border-left-color: transparent;
+  width: 30px;
+  height: 30px;
+  animation: spin89345 1s linear infinite;
+}
+
+@keyframes spin89345 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

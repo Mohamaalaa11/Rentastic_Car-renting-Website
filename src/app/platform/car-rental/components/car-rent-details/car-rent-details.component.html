@@ -120,8 +120,12 @@
         <!-- Reserve Button -->
         <div class="row">
           <div class="col-12">
-            <button class="btn btn-red w-100 py-3" (click)="onReserve()">
-              Reserve Now
+            <button
+              class="btn btn-red w-100 py-3 d-flex align-items-center justify-content-center"
+              (click)="onReserve()"
+            >
+              <app-white-spinner *ngIf="isLoading"></app-white-spinner>
+              <div *ngIf="!isLoading">Reserve Now</div>
             </button>
           </div>
         </div>

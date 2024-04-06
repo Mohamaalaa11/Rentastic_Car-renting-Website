@@ -52,6 +52,11 @@ input[type="search"]:focus {
   font-size: 16px;
   font-weight: 400;
 }
-.dropdown-item{
+.dropdown-item {
   padding: 20px 20px !important;
+}
+
+.spinner {
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
