@@ -45,10 +45,6 @@ const routes: Routes = [
         path: 'redirect',
         component: RedirectComponent,
       },
-      {
-        path: '**',
-        component: ErrorPageComponent,
-      },
     ],
   },
 ];
