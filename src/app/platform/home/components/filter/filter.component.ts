@@ -27,6 +27,7 @@ export class FilterComponent implements OnInit {
   brands: string[] = [];
   startDate!: String;
   endDate!: string;
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -42,6 +43,8 @@ export class FilterComponent implements OnInit {
         this.brands = res;
       },
     });
+
+    this.isLoading = false;
   }
 
   form = new FormGroup(
@@ -71,6 +74,8 @@ export class FilterComponent implements OnInit {
       this.router.navigate(['/car-rental', 'cars'], {
         queryParams: queryParams,
       });
+
+      this.isLoading = true;
     } else {
       this.toastFailed('Please choose both pick-up date and return date');
     }

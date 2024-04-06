@@ -10,6 +10,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { StatusToasterComponent } from './components/status-toaster/status-toaster.component';
 
 import { ToastModule } from 'primeng/toast';
+import { WhiteSpinnerComponent } from './components/white-spinner/white-spinner.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ToastModule } from 'primeng/toast';
     StarRatingComponent,
     SpinnerComponent,
     StatusToasterComponent,
+    WhiteSpinnerComponent,
   ],
   imports: [CommonModule, SharedRoutingModule, ToastModule],
   exports: [
@@ -28,6 +30,7 @@ import { ToastModule } from 'primeng/toast';
     StarRatingComponent,
     SpinnerComponent,
     StatusToasterComponent,
+    WhiteSpinnerComponent,
   ],
 })
 export class SharedModule {}

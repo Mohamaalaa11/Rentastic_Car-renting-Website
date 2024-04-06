@@ -137,12 +137,15 @@
       </div>
     </div>
     <div class="d-flex justify-content-center mt-5 mb-5">
-      <input
+      <button
         type="submit"
         class="btn btn-red px-5"
         (click)="onSubmit()"
         value="submit"
-      />
+      >
+        <app-white-spinner *ngIf="isLoading"></app-white-spinner>
+        <div *ngIf="!isLoading">Submit</div>
+      </button>
     </div>
   </form>
 </div>

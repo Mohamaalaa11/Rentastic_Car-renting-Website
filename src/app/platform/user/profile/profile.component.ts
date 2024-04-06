@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
 
   imgSrc: string = '/assets/imgs/placeholder-image.jpeg';
   selectedImage: any = null;
+  isLoading = false;
 
   userForm = new FormGroup({
     Image: new FormControl<string>(''),
@@ -53,6 +54,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = false;
     this.getUser();
   }
 
@@ -80,6 +82,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     if (this.selectedImage) {
       this.uploadImage();
     } else {

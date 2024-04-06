@@ -14,6 +14,8 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService],
 })
 export class LoginComponent implements OnInit {
+  isLoading = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -21,7 +23,9 @@ export class LoginComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoading = false;
+  }
 
   ngAfterViewInit(): void {
     const register = this.route.snapshot.queryParamMap.get('register');
@@ -47,6 +51,7 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.value.email!,
       password: this.loginForm.value.password!,
     };
+    this.isLoading = true;
 
     this.authService.login(model).subscribe({
       next: (res: any) => {
@@ -76,6 +81,7 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         this.errors = err.error;
         console.log(err.error);
+        this.isLoading = false;
       },
     });
   }
