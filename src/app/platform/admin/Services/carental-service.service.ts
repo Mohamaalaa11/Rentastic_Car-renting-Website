@@ -22,8 +22,7 @@ export class CarentalServiceService {
     return this.http.get<Car[]>(this.apiUrl);
   }
 
-
-  addCar(car: Car): Observable<any> {
+  addCar(car: AddCar): Observable<any> {
     return this.http.post<any>('https://localhost:7283/api/Cars', car).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 400 && error.error.errors) {
@@ -45,7 +44,6 @@ export class CarentalServiceService {
     return this.http.delete(url);
   }
 
-
   getCarById(id: number): Observable<Car> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Car>(url);
@@ -59,7 +57,7 @@ export class CarentalServiceService {
     const url = `${'https://localhost:7283/api/Reservations'}/${reservationId}`;
     return this.http.delete(url);
   }
-  
+
   getCarsAvailability(requestBody: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
