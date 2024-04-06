@@ -1,0 +1,13 @@
+<div
+  class="container d-flex flex-column justify-content-center align-items-center w-100 h-100"
+>
+  <img src="../../../../assets/imgs/404.png" alt="" class="img-fluid" />
+
+  <ng-container *ngIf="role === 'User'">
+    <a class="btn btn-red mt-5" [routerLink]="['']">Back To Home</a>
+  </ng-container>
+
+  <ng-container *ngIf="role === 'Admin'">
+    <a class="btn btn-red mt-5" [routerLink]="['', 'admin']">Back To Home</a>
+  </ng-container>
+</div>

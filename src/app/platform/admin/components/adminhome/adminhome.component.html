@@ -1,3 +1,4 @@
+
 <div class="container my-5">
   <div class="row">
     <div class="col-md-6 mb-4">
@@ -53,11 +54,11 @@
             <td>{{ car.ModelYear }}</td>
             <td>{{ car.Color }}</td>
             <td>
-              <img
-                src="assets/imgs/edit.png"
-                alt="edit Image"
-                (click)="openEditCar(car)"
-              />
+
+              <a [routerLink]="['editcar', car.Id]">
+                <img src="assets/imgs/edit.png" alt="edit Image" />
+              </a>
+
               <img
                 src="assets/imgs/delete.png"
                 alt="delete Image"

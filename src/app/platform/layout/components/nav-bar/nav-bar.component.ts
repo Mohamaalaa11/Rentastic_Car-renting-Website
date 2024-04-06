@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,7 +12,11 @@ export class NavBarComponent implements OnInit {
   isAdmin = false;
   isLoggedIn = false;
 
-  constructor(private authServices: AuthService, private route: Router) {}
+  constructor(
+    private authServices: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.authServices.isAdmin$.subscribe((isAdmin) => {
@@ -25,8 +30,18 @@ export class NavBarComponent implements OnInit {
 
   onLoggedOut() {
     if (localStorage.getItem('role') === 'Admin') {
-      this.route.navigate(['auth', 'login']);
+      this.router.navigate(['auth', 'login']);
     }
+
+    let activeUrl = this.router.routerState.snapshot['url'];
+
+    if (
+      activeUrl === '/userprofile/profile' ||
+      activeUrl === '/userprofile/my-orders'
+    ) {
+      this.router.navigate(['']);
+    }
+
     this.authServices.logout();
     this.authServices.isLoggedIn$.next(false);
   }
