@@ -3,6 +3,7 @@ import { AuthService } from './auth/services/auth.service';
 import { Router } from '@angular/router';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 
     <app-addcar *ngIf="showAddCarForm"></app-addcar>
   `,
+  providers: [MessageService],
 })
 export class AppComponent implements OnInit {
   title = 'Rentastic-webApp';

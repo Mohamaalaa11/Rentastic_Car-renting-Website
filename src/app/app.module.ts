@@ -18,6 +18,9 @@ import { PaymentComponent } from './payMob/payment/payment.component';
 import { SharedModule } from './platform/shared/shared.module';
 import { environment } from '../environments/environment';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [AppComponent, PaymentComponent],
@@ -28,6 +31,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
@@ -36,6 +40,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
+    ToastModule,
   ],
   providers: [
     provideAnimationsAsync(),

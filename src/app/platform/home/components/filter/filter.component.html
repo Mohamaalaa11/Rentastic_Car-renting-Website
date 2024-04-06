@@ -30,6 +30,8 @@
               matInput
               formControlName="startDate"
               [matDatepicker]="pickupDatepicker"
+              (dateChange)="getStartDate($event)"
+              (dateChange)="endDateValidator()"
             />
             <mat-datepicker-toggle matIconSuffix [for]="pickupDatepicker">
               <mat-icon matDatepickerToggleIcon
@@ -37,6 +39,9 @@
               /></mat-icon>
             </mat-datepicker-toggle>
             <mat-datepicker #pickupDatepicker color="accent"></mat-datepicker>
+            <mat-error *ngIf="form.get('startDate')?.errors">{{
+              (form.get("startDate")?.errors)!["invalidDate"]
+            }}</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -50,6 +55,7 @@
             <input
               matInput
               formControlName="endDate"
+              (dateChange)="getEndDate($event)"
               [matDatepicker]="returnDatepicker"
             />
             <mat-datepicker-toggle matIconSuffix [for]="returnDatepicker">
@@ -58,6 +64,9 @@
               /></mat-icon>
             </mat-datepicker-toggle>
             <mat-datepicker #returnDatepicker color="accent"></mat-datepicker>
+            <mat-error *ngIf="form.get('endDate')?.errors">{{
+              (form.get("endDate")?.errors)!["invalidDate"]
+            }}</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -75,3 +84,5 @@
     </div>
   </form>
 </div>
+
+<p-toast></p-toast>

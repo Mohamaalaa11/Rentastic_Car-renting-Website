@@ -5,6 +5,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
@@ -22,20 +23,23 @@ import { OrderData } from '../../types/orderData';
 import { ProfileService } from '../../../user/services/profile.service';
 import { User } from '../../../user/Types/user';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-car-rent-details',
   templateUrl: './car-rent-details.component.html',
   styleUrl: './car-rent-details.component.css',
+  providers: [MessageService],
 })
 export class CarRentDetailsComponent implements OnInit {
-  car: Car= {} as Car ;
+  car: Car = {} as Car;
   user: User | undefined;
   carAvailabilty: CarAvailability | undefined;
   startDate!: String;
   endDate!: string;
   error: any = { isError: false, errorMessage: 'dsad' };
   total!: number;
+  imgsrc: string = '../../../../../assets/imgs/img-placeholder.jpg';
 
   apiKey: string =
     'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RZM09EQTBMQ0p1WVcxbElqb2lNVGN4TVRnek5qVXlNaTR3TXpBME1ERWlmUS5OUndiNkZXZ2Mta0dzVk9Uc09ITWNDdzJQb1NONUdmenExTmhBS1ZNOU1CeVhQUXU5VDRVTXBpbjB1eWF2MEptREZaRi1KTGMyTi0zamRtcURDX2NIUQ==';
@@ -51,7 +55,8 @@ export class CarRentDetailsComponent implements OnInit {
     private payDataService: PayDataService,
     private userService: ProfileService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -60,26 +65,32 @@ export class CarRentDetailsComponent implements OnInit {
     this.startDate = new Date().toISOString();
     this.carService.getCar(id).subscribe({
       next: (res) => {
+        if (res.Images !== '') {
+          this.imgsrc = res.Images;
+        }
         this.car = res;
-        console.log(this.car)
       },
       error: (err) => {
         console.log(err);
+        this.toastFailed('Error Fetching The Car');
       },
     });
-    console.log(this.car.Reviews)
+    console.log(this.car.Reviews);
   }
 
-  rentForm = new FormGroup({
-    startDate: new FormControl<Date>(new Date(), [
-      Validators.required,
-      this.startDateValidator(),
-    ]),
-    endDate: new FormControl<Date>(new Date(), [
-      Validators.required,
-      this.endDateValidator(),
-    ]),
-  });
+  rentForm = new FormGroup(
+    {
+      startDate: new FormControl<Date>(new Date(), [
+        Validators.required,
+        this.startDateValidator(),
+      ]),
+      endDate: new FormControl<Date>(new Date(), [
+        Validators.required,
+        this.endDateValidator(),
+      ]),
+    },
+    { validators: this.dateRangeValidator() }
+  );
 
   //  Add 5 hrs to Date to solve problem of getting the day before
   setDate(date: Date) {
@@ -128,6 +139,44 @@ export class CarRentDetailsComponent implements OnInit {
       return returnDate < startDate
         ? { invalidDate: 'End date must be after pickup date' }
         : null;
+    };
+  }
+
+  dateRangeValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const formGroup = control as FormGroup;
+
+      const startDateControl = formGroup.get('startDate');
+      const endDateControl = formGroup.get('endDate');
+
+      if (!startDateControl || !endDateControl) {
+        // If either start date or end date control is missing, return null (no error)
+        return null;
+      }
+
+      const startDate = startDateControl.value;
+      const endDate = endDateControl.value;
+
+      if (startDate && endDate && startDate.getTime() > endDate.getTime()) {
+        // If start date is after end date, return an error
+        return { invalidDateRange: 'End date must be after the start date' };
+      }
+
+      const today = new Date().getTime();
+      if (
+        startDate &&
+        endDate &&
+        (startDate.getTime() < today || endDate.getTime() < today)
+      ) {
+        // If either start date or end date is before today, return an error
+        return {
+          invalidDate:
+            'You cannot use previous dates for the start or end date',
+        };
+      }
+
+      // If no errors, return null
+      return null;
     };
   }
 
@@ -181,11 +230,11 @@ export class CarRentDetailsComponent implements OnInit {
                 const requestBody = {
                   api_key: this.apiKey,
                 };
+
                 this.payDataService.getAuthToken(requestBody).subscribe({
                   next: async (res) => {
                     const parsedRes = await JSON.parse(JSON.stringify(res));
                     this.authenticationToken = await parsedRes['token'];
-                    console.log(this.authenticationToken);
 
                     // Order Data to Get Order ID
                     const order: OrderData = {
@@ -298,18 +347,39 @@ export class CarRentDetailsComponent implements OnInit {
                   },
                   error: (err) => {
                     console.log(err);
+                    this.toastFailed('Failed to start payment');
                   },
                 });
               } else {
+                this.toastFailed('That Date is not avaliable');
               }
             },
             error: (err) => {
               console.log(err);
             },
           });
+      } else {
+        this.toastFailed('You Have To Provide a Valid Date Before Renting');
       }
     } else {
       this.router.navigate(['/auth', 'login']);
     }
+  }
+
+  // Toast Functions
+  toastSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  toastFailed(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'error',
+      detail: message,
+    });
   }
 }

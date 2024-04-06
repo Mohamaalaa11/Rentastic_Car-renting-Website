@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardsSliderComponent } from './components/cards-slider/cards-slider.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CardsSliderComponent } from './components/cards-slider/cards-slider.com
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    ToastModule,
   ],
   exports: [CarRentDetailsComponent],
 })

@@ -8,11 +8,13 @@ import { Router } from '@angular/router';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  providers: [MessageService],
 })
 export class ProfileComponent implements OnInit {
   user: User = {} as User;
@@ -46,7 +48,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private router: Router,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +74,7 @@ export class ProfileComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching user data:', err);
+        this.toastFailed('Error fetching user data:');
       },
     });
   }
@@ -96,10 +100,14 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.editUser(model).subscribe({
       next: (res) => {
-        this.router.navigate(['']);
+        const query = {
+          update: 'success',
+        };
+        this.router.navigate([''], { queryParams: query });
       },
       error: (err) => {
         console.error('Error updating user:', err);
+        this.toastFailed('Updating Profile Failed Please Try Again');
       },
     });
   }
@@ -117,10 +125,15 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.editUser(model).subscribe({
       next: (res) => {
+        const query = {
+          update: 'success',
+        };
+        this.router.navigate([''], { queryParams: query });
         this.router.navigate(['']);
       },
       error: (err) => {
         console.error('Error updating user:', err);
+        this.toastFailed('Updating Profile Failed Please Try Again');
       },
     });
   }
@@ -140,7 +153,14 @@ export class ProfileComponent implements OnInit {
           });
         })
       )
-      .subscribe();
+      .subscribe({
+        next: () => {
+          this.toastSuccess('Updating User Profile');
+        },
+        error: () => {
+          this.toastFailed('Failed to Update User Profile');
+        },
+      });
   }
 
   showPreview(e: any) {
@@ -153,5 +173,22 @@ export class ProfileComponent implements OnInit {
       this.imgSrc = this.user.Image;
       this.selectedImage = null;
     }
+  }
+
+  // Toast Functions
+  toastSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  toastFailed(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'error',
+      detail: message,
+    });
   }
 }

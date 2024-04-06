@@ -16,9 +16,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { HowItWorkComponent } from './components/how-it-work/how-it-work.component';
 import { SharedModule } from '../shared/shared.module';
 import { AboutUsComponent } from './components/about-us/about-us.component';
-import { TablefiltterComponent } from './components/home/tablefiltter/tablefiltter.component';
 import { RouterModule } from '@angular/router';
 import { CardsComponent } from './components/cards/cards.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,6 @@ import { CardsComponent } from './components/cards/cards.component';
     SiteInfoComponent,
     HowItWorkComponent,
     AboutUsComponent,
-    TablefiltterComponent,
     CardsComponent,
   ],
   imports: [
@@ -43,6 +42,7 @@ import { CardsComponent } from './components/cards/cards.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    ToastModule,
   ],
 })
 export class HomeModule {}
