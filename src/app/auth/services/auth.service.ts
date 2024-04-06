@@ -28,5 +28,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    this.isAdmin$.next(false);
+    this.isLoggedIn$.next(false);
   }
 }

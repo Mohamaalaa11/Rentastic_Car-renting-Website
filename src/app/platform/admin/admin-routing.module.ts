@@ -5,22 +5,30 @@ import { ReservationlistComponent } from './components/reservationlist/reservati
 import { ListcarComponent } from './components/listcar/listcar.component';
 import { AddcarComponent } from './components/addcar/addcar.component';
 import { EditcarComponent } from './components/editcar/editcar.component';
+import { adminGuard } from '../../guards/admin.guard';
 
 const routes: Routes = [
-  { path: '', component: AdminhomeComponent },
+  { path: '', component: AdminhomeComponent, canActivate: [adminGuard] },
   {
     path: 'reservations',
     component: ReservationlistComponent,
+    canActivate: [adminGuard],
   },
   {
     path: 'cars',
     component: ListcarComponent,
+    canActivate: [adminGuard],
   },
   {
     path: 'add-car',
     component: AddcarComponent,
+    canActivate: [adminGuard],
   },
-  { path: 'editcar/:Id', component: EditcarComponent },
+  {
+    path: 'editcar/:Id',
+    component: EditcarComponent,
+    canActivate: [adminGuard],
+  },
 ];
 
 @NgModule({

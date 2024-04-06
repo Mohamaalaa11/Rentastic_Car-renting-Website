@@ -25,10 +25,10 @@
       <h5 class="text-red">{{ user.Email }}</h5>
     </div>
   </div>
-  <form [formGroup]="userForm" class="mt-5">
-    <div class="row">
-      <!-- IMG UPLOAD -->
-      <div class="my-3 col-12">
+  <form [formGroup]="userForm" class="mt-4">
+    <!-- IMG UPLOAD -->
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="my-3">
         <input
           type="file"
           id="fileInput"
@@ -66,6 +66,9 @@
           ADD IMAGE
         </button>
       </div>
+    </div>
+    <div class="row">
+      <!-- Name -->
       <div class="col-12">
         <label class="form-label">Name</label>
         <input
