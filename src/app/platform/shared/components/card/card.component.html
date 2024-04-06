@@ -6,7 +6,7 @@
     <h4 class="fw-bold card-title">
       {{ car?.Brand + " " + car?.Name + " " + car?.ModelYear }}
     </h4>
-    <app-star-rating></app-star-rating>
+    <app-star-rating [rating]="avgRate"></app-star-rating>
     <!-- <div
       class="row d-flex flex-wrap mt-4 align-items-start justify-content-between"
     >
