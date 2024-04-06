@@ -3,5 +3,11 @@
 >
   <img src="../../../../assets/imgs/404.png" alt="" class="img-fluid" />
 
-  <a class="btn btn-red mt-5" [routerLink]="['']">Back To Home</a>
+  <ng-container *ngIf="role === 'User'">
+    <a class="btn btn-red mt-5" [routerLink]="['']">Back To Home</a>
+  </ng-container>
+
+  <ng-container *ngIf="role === 'Admin'">
+    <a class="btn btn-red mt-5" [routerLink]="['', 'admin']">Back To Home</a>
+  </ng-container>
 </div>
