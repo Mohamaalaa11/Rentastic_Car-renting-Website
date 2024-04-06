@@ -1,3 +1,5 @@
+import { Review } from "../types/review";
+
 export class Car {
   Id: number;
   Name: string;
@@ -11,6 +13,7 @@ export class Car {
   Images: string;
   HasAirCondition: boolean;
   IsAutomatic: boolean;
+  Reviews? : Review[]
 
   constructor(
     id: number,
@@ -24,7 +27,8 @@ export class Car {
     pricePerDay: number,
     images: string,
     hasAirCondition: boolean,
-    isAutomatic: boolean
+    isAutomatic: boolean,
+    Reviews:Review[]
   ) {
     this.Id = id;
     this.Name = name;
@@ -38,5 +42,7 @@ export class Car {
     this.Images = images;
     this.HasAirCondition = hasAirCondition;
     this.IsAutomatic = isAutomatic;
+    this.Reviews=Reviews
+
   }
 }

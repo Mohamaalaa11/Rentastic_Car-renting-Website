@@ -28,7 +28,7 @@ import { User } from '../../../user/Types/user';
   styleUrl: './car-rent-details.component.css',
 })
 export class CarRentDetailsComponent implements OnInit {
-  car: Car | undefined;
+  car: Car= {} as Car ;
   user: User | undefined;
   carAvailabilty: CarAvailability | undefined;
   startDate!: String;
@@ -59,11 +59,13 @@ export class CarRentDetailsComponent implements OnInit {
     this.carService.getCar(id).subscribe({
       next: (res) => {
         this.car = res;
+        console.log(this.car)
       },
       error: (err) => {
         console.log(err);
       },
     });
+    console.log(this.car.Reviews)
   }
 
   rentForm = new FormGroup({
