@@ -180,64 +180,6 @@
       </div>
     </div>
 
-    <app-status-toaster
-      class="popup"
-      *ngIf="popupSucces"
-      [status]="false"
-      [header]="'Payment Success'"
-      [bodyhead]="'Thanks For Renting With'"
-      [bodyheadSpan]="'Rentastic'"
-      [content]="'Your payment is succeful you can now check your orders'"
-    ></app-status-toaster>
-
-    <app-status-toaster
-      class="popup"
-      *ngIf="popupratesuccess"
-      [status]="true"
-      [header]="'Rate Added succefully'"
-      [bodyhead]="'Thanks For Renting With'"
-      [bodyheadSpan]="'Rentastic'"
-      [content]="'Your Rating was added succefully'"
-    ></app-status-toaster>
-
-    <app-status-toaster
-      class="popup"
-      *ngIf="popupratefail"
-      [status]="false"
-      [header]="'Rate Not Added '"
-      [bodyhead]="'You Cant add review twice'"
-      [bodyheadSpan]="'Rentastic'"
-      [content]="'You already added review for this reservation before'"
-    ></app-status-toaster>
-
-    <app-status-toaster
-      class="popup"
-      *ngIf="deletepopup"
-      [status]="true"
-      [header]="'Reservation deleted successfully '"
-      [bodyhead]="'You deleted it'"
-      [bodyheadSpan]="'Rentastic'"
-      [content]="''"
-    ></app-status-toaster>
-
-    <app-status-toaster
-      class="popup"
-      *ngIf="toastSuccess"
-      [status]="true"
-      [header]="'Payment Success'"
-      [bodyhead]="'Thanks For Renting With'"
-      [bodyheadSpan]="'Rentastic'"
-      [content]="'Your payment is succeful you can now check your orders'"
-    ></app-status-toaster>
-
-    <app-status-toaster
-      class="popup"
-      *ngIf="toastFailed"
-      [status]="false"
-      [header]="'Payment Success'"
-      [bodyhead]="'Thanks For Renting With'"
-      [bodyheadSpan]="'Rentastic'"
-      [content]="'Your payment is succeful you can now check your orders'"
-    ></app-status-toaster>
+    <p-toast></p-toast>
   </div>
 </div>

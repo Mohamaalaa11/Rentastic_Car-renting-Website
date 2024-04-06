@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../Types/user';
 import { jwtDecode } from 'jwt-decode';
 import { UserEdit } from '../Types/UserEdit';
@@ -59,6 +59,10 @@ export class ProfileService {
   }
 
   addReview(model: Review) {
-    return this.http.post('https://localhost:7283/api/Review/AddReview', model);
+    return this.http.post(
+      'https://localhost:7283/api/Review/AddReview',
+      model,
+      { observe: 'response', responseType: 'text' }
+    );
   }
 }

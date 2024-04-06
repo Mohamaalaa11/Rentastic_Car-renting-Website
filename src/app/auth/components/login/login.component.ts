@@ -1,19 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Login } from '../../types/login';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { jwtDecode } from 'jwt-decode';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+  providers: [MessageService],
 })
-export class LoginComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+export class LoginComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private messageService: MessageService
+  ) {}
 
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    const register = this.route.snapshot.queryParamMap.get('register');
+    if (register === 'success') {
+      this.toastSuccess(
+        'Thanks to Joining our community now you can login and have the full experience'
+      );
+    }
+  }
   errors: string = '';
 
   loginForm = new FormGroup({
@@ -60,6 +77,23 @@ export class LoginComponent {
         this.errors = err.error;
         console.log(err.error);
       },
+    });
+  }
+
+  // Toast Functions
+  toastSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  toastFailed(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'error',
+      detail: message,
     });
   }
 }

@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthRoutingModule } from './auth-routing.module';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
@@ -14,6 +15,7 @@ import { AuthRoutingModule } from './auth-routing.module';
     HttpClientModule,
     FormsModule,
     AuthRoutingModule,
+    ToastModule,
   ],
 })
 export class AuthModule {}

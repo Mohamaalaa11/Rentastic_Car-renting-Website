@@ -13,6 +13,8 @@ import { min } from 'rxjs';
 export class RegisterComponent {
   constructor(private authServices: AuthService, private router: Router) {}
 
+  errors: string = '';
+
   registerForm = new FormGroup({
     name: new FormControl<string>('', [
       Validators.required,
@@ -50,10 +52,15 @@ export class RegisterComponent {
 
     this.authServices.register(model).subscribe({
       next: (res) => {
-        this.router.navigate(['auth', 'login']);
+        const query = {
+          register: 'success',
+        };
+
+        this.router.navigate(['auth', 'login'], { queryParams: query });
       },
       error: (err) => {
         console.log(err.error);
+        this.errors = err.error;
       },
     });
 

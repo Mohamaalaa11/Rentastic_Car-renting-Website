@@ -9,9 +9,15 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RateCarComponent } from './my-orders/rate-car/rate-car.component';
 
-@NgModule({
+import { ToastModule } from 'primeng/toast';
 
-  declarations: [OrderCardComponent,MyOrdersComponent,ProfileComponent, RateCarComponent],
+@NgModule({
+  declarations: [
+    OrderCardComponent,
+    MyOrdersComponent,
+    ProfileComponent,
+    RateCarComponent,
+  ],
 
   imports: [
     CommonModule,
@@ -19,6 +25,7 @@ import { RateCarComponent } from './my-orders/rate-car/rate-car.component';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastModule,
   ],
   exports: [MyOrdersComponent, OrderCardComponent, ProfileComponent],
 })

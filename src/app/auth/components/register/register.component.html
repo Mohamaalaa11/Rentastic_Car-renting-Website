@@ -54,12 +54,18 @@
       <hr class="line" />
     </div>
 
+    <ng-container *ngIf="errors !== ''">
+      <div class="alert alert-danger d-flex flex-column justify-content-start">
+        <h6 class="mb-0" style="font-size: 12px">Please Enter a Valid Data</h6>
+      </div>
+    </ng-container>
+
     <!-------------------------- Form -------------------------->
     <form class="d-flex flex-column" [formGroup]="registerForm">
       <!-- Name -->
       <div class="row">
         <div class="col-12 col-lg-6">
-          <div class="mb-3 d-flex flex-column">
+          <div class="mb-2 d-flex flex-column">
             <label class="form-label">Name</label>
             <input
               class="form-input"

@@ -7,18 +7,19 @@ import { CarFilter } from '../../types/car-filter';
 
 import { CarRentingService } from '../../services/car-renting.service';
 import { Reservation } from '../../types/reservation';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cars',
   templateUrl: './cars.component.html',
   styleUrls: ['./cars.component.css'],
+  providers: [MessageService],
 })
 export class CarsComponent implements OnInit {
   constructor(
     private carServices: CarService,
     private route: ActivatedRoute,
-    private router: Router,
-    private carRentingService: CarRentingService
+    private messageService: MessageService
   ) {}
 
   cars: Car[] = [];
@@ -37,26 +38,10 @@ export class CarsComponent implements OnInit {
   // For Search
   carName: string = '';
   carModel: string = '';
+  // No cars
+  isCarsAvaliable: boolean = false;
 
   ngOnInit(): void {
-    this.carServices.getBrands().subscribe({
-      next: (res) => {
-        this.brands = res;
-      },
-    });
-
-    this.carServices.getColors().subscribe({
-      next: (res) => {
-        this.colors = res;
-      },
-    });
-
-    this.carServices.getCategories().subscribe({
-      next: (res) => {
-        this.categories = res;
-      },
-    });
-
     this.route.queryParams.subscribe((params) => {
       // Fetch filtered cars based on query parameters
       if (params['brand'] && params['startYear']) {
@@ -74,13 +59,35 @@ export class CarsComponent implements OnInit {
         this.getCars(); // Fetch all cars
       }
     });
+
+    this.carServices.getBrands().subscribe({
+      next: (res) => {
+        this.brands = res;
+      },
+    });
+
+    this.carServices.getColors().subscribe({
+      next: (res) => {
+        this.colors = res;
+      },
+    });
+
+    this.carServices.getCategories().subscribe({
+      next: (res) => {
+        this.categories = res;
+      },
+    });
   }
 
   getCars() {
     this.carServices.getCars().subscribe({
       next: (res) => {
+        this.isCarsAvaliable = true;
         this.cars = res;
         this.filteredCars = this.cars;
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }
@@ -88,11 +95,15 @@ export class CarsComponent implements OnInit {
   getFilteredCarsByDate(carFilter: CarFilter) {
     this.carServices.getFilterdCarsByDate(carFilter).subscribe({
       next: (res) => {
-        this.filteredCars = res;
+        this.cars = res;
+
+        // Apply brand filter only if the brand is specified
         if (carFilter.brand !== '') {
-          this.filteredCars = res.filter(
+          this.filteredCars = this.cars.filter(
             (car) => car.Brand === carFilter.brand
           );
+          this.isCarsAvaliable = true;
+          console.log(this.filteredCars);
         }
       },
       error: (err) => {
@@ -197,5 +208,22 @@ export class CarsComponent implements OnInit {
     } else if (this.sortOrder === 'high') {
       this.filteredCars.sort((a, b) => b.PricePerDay - a.PricePerDay);
     }
+  }
+
+  // Toast Functions
+  toastSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  toastFailed(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'error',
+      detail: message,
+    });
   }
 }

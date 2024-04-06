@@ -13,11 +13,13 @@ import { jwtDecode } from 'jwt-decode';
 import { Reservation } from '../Types/reservations';
 
 import { CarRentingService } from '../../car-rental/services/car-renting.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
   styleUrls: ['./my-orders.component.css'],
+  providers: [MessageService],
 })
 export class MyOrdersComponent implements OnInit {
   popupSucces: boolean = false;
@@ -25,9 +27,6 @@ export class MyOrdersComponent implements OnInit {
   deletepopup: boolean = false;
   popupratefail: boolean = false;
   selectedReservationId: number | null = null;
-
-  toastSuccess: boolean = false;
-  toastFailed: boolean = false;
 
   user: User = {} as User;
   token = localStorage.getItem('token');
@@ -42,22 +41,25 @@ export class MyOrdersComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private route: ActivatedRoute,
-    private carRentingService: CarRentingService
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    // Result of Payment
-    const success = this.route.snapshot.queryParamMap.get('success');
-
-    if (success === 'true') {
-      this.toastSuccess = true;
-    } else if (success === 'false') {
-      this.toastFailed = true;
-    } else {
-    }
-
     this.getuserguid();
     this.getUser();
+  }
+
+  ngAfterViewInit(): void {
+    // Result of Payment
+    const success = this.route.snapshot.queryParamMap.get('success');
+    if (success === 'true') {
+      this.toastSuccess(
+        'Your payment is succeful you can now check your orders'
+      );
+    } else if (success === 'false') {
+      this.toastFailed('Your payment failed please try again later');
+    } else {
+    }
   }
 
   getuserguid() {
@@ -79,37 +81,36 @@ export class MyOrdersComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching user data:', err);
+        this.toastFailed('Error fetching user data');
       },
     });
   }
+
   onsubmitRating(carId: number, Id: number) {
     const model: Review = {
-      reservationId: Id,
-      carId: carId,
-      userGuid: this.userguid,
-      message: this.rateform.value.message!,
-      rate: this.rateform.value.rating!,
+      ReservationId: Id,
+      CarId: carId,
+      UserGuid: this.userguid,
+      Message: this.rateform.value.message!,
+      Rate: this.rateform.value.rating!,
     };
 
     console.log(model);
     this.profileService.addReview(model).subscribe({
-      next: () => {
-        this.popupratesuccess = true;
+      next: (res) => {
+        this.toastSuccess(
+          'Your Rate Added succefully Thanks For Renting With Rentastic'
+        );
 
-        console.log('Review added Successfully !');
+        console.log(res);
       },
       error: (err) => {
-        this.popupratefail = true;
-        this.showErrorToast = true;
-        this.showErrorToastForDuration();
+        this.toastFailed(
+          'You Cant add review twice You already added review for this reservation before'
+        );
+        console.log(err);
       },
     });
-  }
-
-  showErrorToastForDuration() {
-    setTimeout(() => {
-      this.showErrorToast = false; // Hide toast after 5 seconds
-    }, 5000); // 5000 milliseconds = 5 seconds
   }
 
   isEndDatePassed(endDate: Date): boolean {
@@ -123,11 +124,29 @@ export class MyOrdersComponent implements OnInit {
     this.profileService.deleteReservation(reservationId).subscribe({
       next: () => {
         this.router.navigate(['/userprofile', 'my-orders']);
-        this.deletepopup = true;
+        this.toastSuccess('Reservation deleted successfully  ');
       },
       error: (err) => {
         console.error('Error deleting reservation:', err);
+        this.toastFailed(`Error deleting reservation: ${err}`);
       },
+    });
+  }
+
+  // Toast Functions
+  toastSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  toastFailed(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'error',
+      detail: message,
     });
   }
 }

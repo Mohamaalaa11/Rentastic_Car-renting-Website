@@ -9,6 +9,8 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { StatusToasterComponent } from './components/status-toaster/status-toaster.component';
 
+import { ToastModule } from 'primeng/toast';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -18,7 +20,7 @@ import { StatusToasterComponent } from './components/status-toaster/status-toast
     SpinnerComponent,
     StatusToasterComponent,
   ],
-  imports: [CommonModule, SharedRoutingModule],
+  imports: [CommonModule, SharedRoutingModule, ToastModule],
   exports: [
     HeaderComponent,
     CardComponent,
