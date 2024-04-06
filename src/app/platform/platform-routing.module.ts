@@ -19,6 +19,7 @@ const routes: Routes = [
         path: 'user',
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule),
+        canActivate: [authGuard],
       },
       {
         path: 'admin',
@@ -37,6 +38,7 @@ const routes: Routes = [
         path: 'userprofile',
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule),
+        canActivate: [authGuard],
       },
       {
         path: 'redirect',

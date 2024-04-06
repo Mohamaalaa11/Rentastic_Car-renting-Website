@@ -21,6 +21,7 @@ import { PaymentData } from '../../types/paymentData';
 import { OrderData } from '../../types/orderData';
 import { ProfileService } from '../../../user/services/profile.service';
 import { User } from '../../../user/Types/user';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-car-rent-details',
@@ -49,6 +50,7 @@ export class CarRentDetailsComponent implements OnInit {
     private carRentingService: CarRentingService,
     private payDataService: PayDataService,
     private userService: ProfileService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -150,159 +152,162 @@ export class CarRentDetailsComponent implements OnInit {
     // Car Id
     const id = this.activatedRoute.snapshot.paramMap.get('id')!;
 
-    const totalPrice = 100 * this.calcTotalPrice();
+    if (this.authService.isLoggedIn$.value) {
+      if (!this.rentForm.invalid) {
+        const totalPrice = 100 * this.calcTotalPrice();
+        // Form Values to Pass it to Api Call
+        this.carAvailabilty = {
+          carId: id,
+          startRentDate: this.setDate(
+            this.rentForm.controls.startDate.value!
+          ).toISOString(),
+          endRentDate: this.setDate(
+            this.rentForm.controls.endDate.value!
+          ).toISOString(),
+        };
 
-    if (!this.rentForm.invalid) {
-      // Form Values to Pass it to Api Call
-      this.carAvailabilty = {
-        carId: id,
-        startRentDate: this.setDate(
-          this.rentForm.controls.startDate.value!
-        ).toISOString(),
-        endRentDate: this.setDate(
-          this.rentForm.controls.endDate.value!
-        ).toISOString(),
-      };
+        console.log(this.car);
 
-      console.log(this.car);
+        // check car availabilty in time wanted
+        this.carRentingService
+          .checkCarAvailability(this.carAvailabilty!)
+          .subscribe({
+            next: (res) => {
+              // if Return is False Continue the Renting
+              if (res !== true) {
+                // Api key Request to Get Auth Token
+                const requestBody = {
+                  api_key: this.apiKey,
+                };
+                this.payDataService.getAuthToken(requestBody).subscribe({
+                  next: async (res) => {
+                    const parsedRes = await JSON.parse(JSON.stringify(res));
+                    this.authenticationToken = await parsedRes['token'];
+                    console.log(this.authenticationToken);
 
-      // check car availabilty in time wanted
-      this.carRentingService
-        .checkCarAvailability(this.carAvailabilty!)
-        .subscribe({
-          next: (res) => {
-            // if Return is False Continue the Renting
-            if (res !== true) {
-              // Api key Request to Get Auth Token
-              const requestBody = {
-                api_key: this.apiKey,
-              };
-              this.payDataService.getAuthToken(requestBody).subscribe({
-                next: async (res) => {
-                  const parsedRes = await JSON.parse(JSON.stringify(res));
-                  this.authenticationToken = await parsedRes['token'];
-                  console.log(this.authenticationToken);
+                    // Order Data to Get Order ID
+                    const order: OrderData = {
+                      auth_token: this.authenticationToken,
+                      delivery_needed: 'false',
+                      amount_cents: totalPrice.toString(),
+                      currency: 'EGP',
+                      items: [
+                        {
+                          name: this.car?.Name,
+                          amount_cents: totalPrice.toString(),
+                          description: this.car?.Description,
+                          quantity: '1',
+                        },
+                      ],
+                    };
 
-                  // Order Data to Get Order ID
-                  const order: OrderData = {
-                    auth_token: this.authenticationToken,
-                    delivery_needed: 'false',
-                    amount_cents: totalPrice.toString(),
-                    currency: 'EGP',
-                    items: [
-                      {
-                        name: this.car?.Name,
-                        amount_cents: totalPrice.toString(),
-                        description: this.car?.Description,
-                        quantity: '1',
-                      },
-                    ],
-                  };
-
-                  const headers = new HttpHeaders({
-                    Authorization: `Bearer ${this.authenticationToken}`,
-                    'Content-Type': 'application/json',
-                  });
-
-                  if (this.authenticationToken) {
-                    //  Get User Data
-                    this.userService.getUserData().subscribe({
-                      next: (res) => {
-                        this.user = res;
-                        // Send Payment Data
-                        this.payDataService
-                          .getOrderId(order, headers)
-                          .subscribe({
-                            next: async (res) => {
-                              const parsedRes = await JSON.parse(
-                                JSON.stringify(res)
-                              );
-                              this.orderId = await parsedRes['id'];
-
-                              // Payment Request Date to  Get Payment Key
-                              const paymentData: PaymentData = {
-                                expiration: 3600,
-
-                                auth_token: this.authenticationToken,
-                                order_id: this.orderId.toString(),
-                                integration_id: this.integrationId,
-
-                                amount_cents: totalPrice.toString(),
-                                currency: 'EGP',
-
-                                billing_data: {
-                                  first_name: 'this',
-                                  last_name: 'Nicolas',
-                                  email: 'claudette09@exa.com',
-                                  phone_number: '+86(8)9135210487',
-
-                                  apartment: 'NA',
-                                  floor: 'NA',
-                                  street: 'NA',
-                                  building: 'NA',
-                                  shipping_method: 'NA',
-                                  postal_code: 'NA',
-                                  city: 'NA',
-                                  country: 'NA',
-                                  state: 'NA',
-                                },
-
-                                lock_order_when_paid: 'false',
-                              };
-
-                              this.payDataService
-                                .getPaymentKey(paymentData)
-                                .subscribe({
-                                  next: async (res) => {
-                                    const parsedRes = await JSON.parse(
-                                      JSON.stringify(res)
-                                    );
-                                    this.paymentKey = parsedRes['token'];
-                                    this.payDataService.paymentKey$.next(
-                                      this.paymentKey
-                                    );
-                                    console.log(
-                                      `payment key  =  ${this.paymentKey}`
-                                    );
-                                    this.payDataService.paymentKey$.next(
-                                      this.paymentKey
-                                    );
-
-                                    // Save Data To Seecion Storage to use it after payment Success
-                                    const userGuid: string =
-                                      this.userService.getuserguidString();
-
-                                    this.carRentingService.storeRentingData(
-                                      userGuid,
-                                      id,
-                                      this.rentForm.controls.startDate.value!,
-                                      this.rentForm.controls.endDate.value!,
-                                      totalPrice.toString()
-                                    );
-
-                                    window.location.href = `https://accept.paymob.com/api/acceptance/iframes/834630?payment_token=${this.paymentKey}`;
-                                  },
-                                });
-                            },
-                          });
-                      },
-                      error: (err) => {
-                        console.log(err);
-                      },
+                    const headers = new HttpHeaders({
+                      Authorization: `Bearer ${this.authenticationToken}`,
+                      'Content-Type': 'application/json',
                     });
-                  }
-                },
-                error: (err) => {
-                  console.log(err);
-                },
-              });
-            } else {
-            }
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
+
+                    if (this.authenticationToken) {
+                      //  Get User Data
+                      this.userService.getUserData().subscribe({
+                        next: (res) => {
+                          this.user = res;
+                          // Send Payment Data
+                          this.payDataService
+                            .getOrderId(order, headers)
+                            .subscribe({
+                              next: async (res) => {
+                                const parsedRes = await JSON.parse(
+                                  JSON.stringify(res)
+                                );
+                                this.orderId = await parsedRes['id'];
+
+                                // Payment Request Date to  Get Payment Key
+                                const paymentData: PaymentData = {
+                                  expiration: 3600,
+
+                                  auth_token: this.authenticationToken,
+                                  order_id: this.orderId.toString(),
+                                  integration_id: this.integrationId,
+
+                                  amount_cents: totalPrice.toString(),
+                                  currency: 'EGP',
+
+                                  billing_data: {
+                                    first_name: 'this',
+                                    last_name: 'Nicolas',
+                                    email: 'claudette09@exa.com',
+                                    phone_number: '+86(8)9135210487',
+
+                                    apartment: 'NA',
+                                    floor: 'NA',
+                                    street: 'NA',
+                                    building: 'NA',
+                                    shipping_method: 'NA',
+                                    postal_code: 'NA',
+                                    city: 'NA',
+                                    country: 'NA',
+                                    state: 'NA',
+                                  },
+
+                                  lock_order_when_paid: 'false',
+                                };
+
+                                this.payDataService
+                                  .getPaymentKey(paymentData)
+                                  .subscribe({
+                                    next: async (res) => {
+                                      const parsedRes = await JSON.parse(
+                                        JSON.stringify(res)
+                                      );
+                                      this.paymentKey = parsedRes['token'];
+                                      this.payDataService.paymentKey$.next(
+                                        this.paymentKey
+                                      );
+                                      console.log(
+                                        `payment key  =  ${this.paymentKey}`
+                                      );
+                                      this.payDataService.paymentKey$.next(
+                                        this.paymentKey
+                                      );
+
+                                      // Save Data To Seecion Storage to use it after payment Success
+                                      const userGuid: string =
+                                        this.userService.getuserguidString();
+
+                                      this.carRentingService.storeRentingData(
+                                        userGuid,
+                                        id,
+                                        this.rentForm.controls.startDate.value!,
+                                        this.rentForm.controls.endDate.value!,
+                                        totalPrice.toString()
+                                      );
+
+                                      window.location.href = `https://accept.paymob.com/api/acceptance/iframes/834630?payment_token=${this.paymentKey}`;
+                                    },
+                                  });
+                              },
+                            });
+                        },
+                        error: (err) => {
+                          console.log(err);
+                        },
+                      });
+                    }
+                  },
+                  error: (err) => {
+                    console.log(err);
+                  },
+                });
+              } else {
+              }
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+      }
+    } else {
+      this.router.navigate(['/auth', 'login']);
     }
   }
 }
