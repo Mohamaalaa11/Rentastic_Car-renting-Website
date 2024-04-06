@@ -32,11 +32,10 @@
         <td>{{ car.ModelYear }}</td>
         <td>{{ car.Color }}</td>
         <td>
-          <img
-            src="assets/imgs/edit.png"
-            alt="edit Image"
-            (click)="openEditCar(car)"
-          />
+          <a [routerLink]="['/admin', 'editcar', car.Id]">
+            <img src="assets/imgs/edit.png" alt="edit Image"
+          /></a>
+
           <img
             src="assets/imgs/delete.png"
             alt="delete Image"
