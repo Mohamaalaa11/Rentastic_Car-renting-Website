@@ -4,6 +4,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { adminGuard } from '../guards/admin.guard';
 import { authGuard } from '../guards/auth.guard';
 import { RedirectComponent } from './components/redirect/redirect.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'redirect',
         component: RedirectComponent,
+      },
+      {
+        path: '**',
+        component: ErrorPageComponent,
       },
     ],
   },
