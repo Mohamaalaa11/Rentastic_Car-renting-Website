@@ -211,7 +211,12 @@
   <br />
 
   <label>Image URL <span class="required-indicator"></span></label>
-  <input type="text" formControlName="Images" />
+  <input
+    type="file"
+    accept="image/*"
+    formControlName="Images"
+    (change)="onChangeImg($event)"
+  />
   <div
     *ngIf="
       carForm.get('Images')!.invalid &&

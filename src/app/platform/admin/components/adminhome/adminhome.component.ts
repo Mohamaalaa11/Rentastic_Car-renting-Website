@@ -6,7 +6,7 @@ import { Car } from '../../../../Car';
 @Component({
   selector: 'app-adminhome',
   templateUrl: './adminhome.component.html',
-  styleUrl: './adminhome.component.css'
+  styleUrl: './adminhome.component.css',
 })
 export class AdminhomeComponent implements OnInit {
   cars: any[] = [];
@@ -14,12 +14,13 @@ export class AdminhomeComponent implements OnInit {
   showConfirmation = false;
   reservations: any[] = [];
   carToDelete: Car | null = null;
- 
-  reservationToDelete: any | null = null;
- 
- 
 
-  constructor(private carService: CarentalServiceService, private router: Router) { }
+  reservationToDelete: any | null = null;
+
+  constructor(
+    private carService: CarentalServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.carService.getCars().subscribe({
@@ -29,7 +30,7 @@ export class AdminhomeComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching cars:', error);
-      }
+      },
     });
 
     this.carService.getReservation().subscribe({
@@ -38,12 +39,12 @@ export class AdminhomeComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching reservations:', error);
-      }
+      },
     });
   }
 
   openEditCar(car: any) {
-    this.router.navigateByUrl(`/editcar/${car.Id}`);
+    this.router.navigateByUrl(`/admin/editcar/${car.Id}`);
   }
   showDeleteConfirmation(car: Car) {
     this.carToDelete = car;
@@ -52,7 +53,6 @@ export class AdminhomeComponent implements OnInit {
 
   deleteCar(car: any) {
     this.carService.deleteCar(car.Id).subscribe(() => {
-    
       this.showConfirmation = false;
     });
   }
@@ -63,21 +63,17 @@ export class AdminhomeComponent implements OnInit {
   }
   get displayedReservations(): any[] {
     return this.reservations
-      .sort((a, b) => new Date(b.StartRentTime).getTime() - new Date(a.StartRentTime).getTime())
+      .sort(
+        (a, b) =>
+          new Date(b.StartRentTime).getTime() -
+          new Date(a.StartRentTime).getTime()
+      )
       .slice(0, 3);
   }
   deletereservation(reservation: any) {
     this.carService.deleteReseravtion(reservation.Id).subscribe(() => {
       this.reservations = this.reservations.filter((c) => c !== reservation);
       this.showConfirmation = false;
-  
-      
     });
   }
-  
-  
-  
-
-
- 
 }
