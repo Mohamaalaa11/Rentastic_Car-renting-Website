@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Car } from '../../../Car';
 import { Observable, catchError, throwError } from 'rxjs';
@@ -9,20 +13,17 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class CarentalServiceService {
-  private apiUrl = 'https://localhost:44348/api/Cars';
+  private apiUrl = 'https://localhost:7283/api/Cars';
   constructor(private http: HttpClient) {}
- 
+
   getCars(): Observable<Car[]> {
     return this.http.get<Car[]>(this.apiUrl);
   }
 
   addCar(car: Car): Observable<any> {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    console.log('Headers:', headers); 
-    return this.http.post<any>('https://localhost:44348/api/Cars', car, { headers }).pipe(
+
+    return this.http.post<any>('https://localhost:7283/api/Cars', car).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 400 && error.error.errors) {
           return throwError(error.error.errors);
@@ -33,54 +34,59 @@ export class CarentalServiceService {
     );
   }
 
-
   editCar(carData: any): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-    console.log('Headers:', headers); 
+    console.log('Headers:', headers);
     const url = `${this.apiUrl}/${carData.Id}`;
-    return this.http.put<any>(url, carData ,{headers});
+    return this.http.put<any>(url, carData, { headers });
   }
 
   deleteCar(carId: number): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-    console.log('Headers:', headers); 
+    console.log('Headers:', headers);
     const url = `${this.apiUrl}/${carId}`;
-    return this.http.delete(url,{headers});
+    return this.http.delete(url, { headers });
   }
   getCarById(id: number): Observable<Car> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Car>(url);
   }
-  getReservation(){
+  getReservation() {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-    console.log('Headers:', headers); 
-    return this.http.get<any[]>('https://localhost:44348/api/Reservations',{headers});
+    console.log('Headers:', headers);
+    return this.http.get<any[]>('https://localhost:7283/api/Reservations', {
+      headers,
+    });
   }
   deleteReseravtion(reservationId: number): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-    console.log('Headers:', headers); 
-    const url = `${'https://localhost:44348/api/Reservations'}/${reservationId}`;
-    return this.http.delete(url ,{headers}) ;
+    console.log('Headers:', headers);
+    const url = `${'https://localhost:7283/api/Reservations'}/${reservationId}`;
+    return this.http.delete(url, { headers });
   }
   getCarsAvailability(requestBody: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+        'Content-Type': 'application/json',
+      }),
     };
 
-    return this.http.post<any>('https://localhost:44348/api/Cars/AvailabeDate', JSON.stringify(requestBody), httpOptions);
+    return this.http.post<any>(
+      'https://localhost:7283/api/Cars/AvailabeDate',
+      JSON.stringify(requestBody),
+      httpOptions
+    );
   }
 }
