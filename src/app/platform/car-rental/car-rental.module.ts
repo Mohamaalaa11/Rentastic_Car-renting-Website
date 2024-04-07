@@ -14,6 +14,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardsSliderComponent } from './components/cards-slider/cards-slider.component';
 import { ToastModule } from 'primeng/toast';
+import { CarCardComponent } from './components/car-rent-details/car-card/car-card.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ToastModule } from 'primeng/toast';
     CarsComponent,
     CarRentDetailsComponent,
     CardsSliderComponent,
+    CarCardComponent,
   ],
   imports: [
     CommonModule,

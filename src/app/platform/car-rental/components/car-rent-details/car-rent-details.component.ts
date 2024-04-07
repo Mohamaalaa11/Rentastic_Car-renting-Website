@@ -60,6 +60,7 @@ export class CarRentDetailsComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
+  cars: Car[] = [];
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id')!;
 
@@ -78,6 +79,12 @@ export class CarRentDetailsComponent implements OnInit {
     });
     console.log(this.car.Reviews);
     this.isLoading = false;
+
+    this.carService.getCar(id!).subscribe({
+      next: (res) => {
+        const carCategory = res.Category;
+      },
+    });
   }
 
   rentForm = new FormGroup(
