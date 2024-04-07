@@ -1,13 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Car } from '../../../../Car';
 import { CarentalServiceService } from '../../Services/carental-service.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { prod } from '../../../../prod';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-listcar',
   templateUrl: './listcar.component.html',
   styleUrl: './listcar.component.css',
+  providers: [MessageService],
 })
 export class ListcarComponent implements OnInit {
   cars: any[] = [];
@@ -21,7 +23,9 @@ export class ListcarComponent implements OnInit {
 
   constructor(
     private carservices: CarentalServiceService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -34,6 +38,10 @@ export class ListcarComponent implements OnInit {
       },
       error: () => {},
     });
+  }
+
+  ngAfterInit(): void {
+    const carAdded = this.route.snapshot.queryParamMap.get('added');
   }
 
   pages: number[] = [];
@@ -114,9 +122,16 @@ export class ListcarComponent implements OnInit {
   }
 
   deleteCar(car: any) {
-    this.carservices.deleteCar(car.Id).subscribe(() => {
-      this.cars = this.cars.filter((c) => c !== car);
-      this.showConfirmation = false;
+    this.carservices.deleteCar(car.Id).subscribe({
+      next: () => {
+        this.cars = this.cars.filter((c) => c !== car);
+        this.showConfirmation = false;
+
+        this.toastSuccess('Car Deleted Successfully');
+      },
+      error: () => {
+        this.toastFailed("Can't Delete Car");
+      },
     });
   }
 
@@ -129,5 +144,22 @@ export class ListcarComponent implements OnInit {
     return this.cars.filter((car) =>
       car.Name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
+  }
+
+  // Toast Functions
+  toastSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  toastFailed(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'error',
+      detail: message,
+    });
   }
 }
