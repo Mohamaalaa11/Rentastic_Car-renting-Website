@@ -182,7 +182,7 @@
   </div>
 
   <!-- Cars Section -->
-  <div class="col-lg-10">
+  <div class="col-lg-10 my-5">
     <div class="row justify-content-between">
       <!-- Search bar -->
       <div class="col-12 col-lg-8">
@@ -222,13 +222,13 @@
 
     <!-- Cars -->
     <div
-      class="d-flex justify-content-center align-items-center w-100 h-100"
+      class="d-flex justify-content-center align-items-center w-100 h-100 spinner"
       *ngIf="isLoading"
     >
       <app-spinner></app-spinner>
     </div>
 
-    <div class="row gy-5 gx-5 mt-4 mb-5" *ngIf="!isCarsAvaliable">
+    <div class="row gy-5 gx-5 mt-4 mb-5" *ngIf="!isCarsAvaliable && !isLoading">
       <div class="d-flex justify-content-center align-items-center">
         <img
           src="../../../../../assets/imgs/no-data.png"

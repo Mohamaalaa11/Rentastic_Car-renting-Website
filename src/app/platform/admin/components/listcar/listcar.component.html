@@ -33,9 +33,8 @@
         <td>{{ car.Color }}</td>
         <td>
           <a [routerLink]="['/admin', 'editcar', car.Id]">
-
             <img src="assets/imgs/edit.png" alt="edit Image"
-                 /></a>
+          /></a>
 
           <img
             src="assets/imgs/delete.png"
@@ -79,3 +78,4 @@
   (cancelDelete)="cancelDelete()"
 >
 </app-delete-confirmation-component>
+<p-toast></p-toast>

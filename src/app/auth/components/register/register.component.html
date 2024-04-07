@@ -207,8 +207,13 @@
         </ng-container>
       </div>
 
-      <button type="submit" class="btn-auth" (click)="register()">
-        Sign Up
+      <button
+        type="submit"
+        class="btn-auth justify-content-center align-items-center d-flex"
+        (click)="register()"
+      >
+        <app-white-spinner *ngIf="isLoading"></app-white-spinner>
+        <div *ngIf="!isLoading">Sign Up</div>
       </button>
     </form>
 

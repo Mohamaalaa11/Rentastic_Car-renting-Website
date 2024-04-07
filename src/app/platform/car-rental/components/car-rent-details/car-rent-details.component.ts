@@ -47,6 +47,7 @@ export class CarRentDetailsComponent implements OnInit {
   authenticationToken!: string;
   orderId!: number;
   paymentKey!: string;
+  isLoading = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -59,6 +60,7 @@ export class CarRentDetailsComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
+  cars: Car[] = [];
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id')!;
 
@@ -76,6 +78,13 @@ export class CarRentDetailsComponent implements OnInit {
       },
     });
     console.log(this.car.Reviews);
+    this.isLoading = false;
+
+    this.carService.getCar(id!).subscribe({
+      next: (res) => {
+        const carCategory = res.Category;
+      },
+    });
   }
 
   rentForm = new FormGroup(
@@ -205,6 +214,8 @@ export class CarRentDetailsComponent implements OnInit {
 
     if (this.authService.isLoggedIn$.value) {
       if (!this.rentForm.invalid) {
+        this.isLoading = true;
+
         const totalPrice = 100 * this.calcTotalPrice();
         // Form Values to Pass it to Api Call
         this.carAvailabilty = {

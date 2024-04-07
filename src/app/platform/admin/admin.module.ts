@@ -12,6 +12,7 @@ import { EditcarComponent } from './components/editcar/editcar.component';
 import { DeletecarComponent } from './components/deletecar/deletecar.component';
 import { DeleteConfirmationComponentComponent } from './components/delete-confirmation-component/delete-confirmation-component.component';
 import { DletereservationComponent } from './components/dletereservation/dletereservation.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DletereservationComponent } from './components/dletereservation/dletere
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastModule,
   ],
 })
 export class AdminModule {}

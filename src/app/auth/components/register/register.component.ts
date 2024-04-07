@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,10 +10,15 @@ import { min } from 'rxjs';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   constructor(private authServices: AuthService, private router: Router) {}
 
   errors: string = '';
+  isLoading = false;
+
+  ngOnInit(): void {
+    this.isLoading = false;
+  }
 
   registerForm = new FormGroup({
     name: new FormControl<string>('', [
@@ -50,17 +55,19 @@ export class RegisterComponent {
       address: '',
     };
 
+    this.isLoading = true;
+
     this.authServices.register(model).subscribe({
       next: (res) => {
         const query = {
           register: 'success',
         };
-
         this.router.navigate(['auth', 'login'], { queryParams: query });
       },
       error: (err) => {
         console.log(err.error);
         this.errors = err.error;
+        this.isLoading = false;
       },
     });
 

@@ -78,7 +78,8 @@
           class="btn btn-block btn-red text-white py-2 px-5"
           (click)="onFilterByDate()"
         >
-          Search
+          <app-white-spinner *ngIf="isLoading"></app-white-spinner>
+          <div *ngIf="!isLoading">Search</div>
         </button>
       </div>
     </div>
